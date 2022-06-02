@@ -1,0 +1,59 @@
+#Hexa_Project(Database structures)
+
+To run this project
+
+(1)Need to create project' database
+
+CREATE DATABASE IF NOT EXISTS news_project;
+
+-----------------------------------------------
+
+(2)Need to create required tables 
+
+    (i)user_roles
+        CREATE TABLE IF NOT EXISTS user_role(
+            user_role_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            user_role_name VARCHAR(100) NOT NULL
+        )
+
+    (ii)user_accounts
+        CREATE TABLE IF NOT EXISTS user_account(
+            user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            user_name VARCHAR(100),
+            user_role INT,
+            FOREIGN KEY(user_role) REFERENCES user_role(user_role_id) ON DELETE SET null,
+            user_email VARCHAR(100) UNIQUE,
+            user_password VARCHAR(100)
+        )
+    
+    (iii)news_category
+        CREATE TABLE IF NOT EXISTS news_category(
+            news_category_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            news_category_name VARCHAR(200) NOT NULL
+        )
+
+    (iv)news
+        CREATE TABLE IF NOT EXISTS news(
+            news_id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            news_name VARCHAR(200),
+            descriptions VARCHAR(8000),
+            news_img VARCHAR(200),
+            news_location VARCHAR(200),
+            news_status VARCHAR(200),
+            news_category INT NOT NULL,
+            FOREIGN KEY (news_category) REFERENCES news_category (news_category_id),
+            created_date DATETIME DEFAULT NOW(),
+            updated_date DATETIME DEFAULT NOW() ON UPDATE NOW()
+        )
+    
+    (v)intersection
+        CREATE TABLE IF NOT EXISTS intersection(
+            news_id BIGINT NOT NULL,
+            user_id INT NOT NULL,
+            comments VARCHAR(800),
+            likes INT DEFAULT 0,
+            FOREIGN KEY (news_id) REFERENCES news(news_id) ON DELETE CASCADE ON UPDATE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES user_account(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+        )
+
+    
