@@ -53,7 +53,7 @@
 			<div class="form-group">
 				<input class="w-100 btn btn-primary" type="submit" value="Login" />
  				<div class="w-100 d-flex justify-content-between my-1">
-					 <a href="/hexa/showRegister">Create?</a>
+					 <a href="/hexa/register">Create?</a>
 				</div> 
 			</div>
 		</form:form>

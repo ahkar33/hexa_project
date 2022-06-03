@@ -1,7 +1,7 @@
 //custom js
 $(document).ready(() => {
     $("#btn-menu").click(handleShowMenu);
-    // $("#navbar-nav").click(handleCloseMenu);
+    $("#navbar-nav").click(handleCloseMenu);
     $("#menu-layer").click(handleCloseMenu);
 });
 

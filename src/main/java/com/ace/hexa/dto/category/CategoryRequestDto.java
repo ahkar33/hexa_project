@@ -1,4 +1,4 @@
-package com.ace.hexa.dto;
+package com.ace.hexa.dto.category;
 
 import lombok.Data;
 

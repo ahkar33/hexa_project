@@ -1,4 +1,6 @@
-package com.ace.hexa.dto;
+package com.ace.hexa.dto.interaction;
+
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -8,4 +10,5 @@ public class InteractionResponseDto {
 	private long user_id;
 	private String comments;
 	private String user_name;
+	private LocalDate commented_date;
 }

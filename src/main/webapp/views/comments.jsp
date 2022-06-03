@@ -1,24 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.ace.hexa.dto.user.UserResponseDto"%>
 <%@ page import="com.ace.hexa.dto.user.UserRequestDto"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!-- comments page from sidebar of admin dashboard  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Home</title>
+    <title>Users</title>
      <!-- bootstrap -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" type="text/css">
 
      <!-- fontawesome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" type="text/css">
+     
  
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+
      <!-- custom css -->
      <link rel="stylesheet" href="/css/admin_home.css" type="text/css">
+     <link rel="stylesheet" href="/css/user_role.css" type="text/css">
 </head>
 <body>
 	<%
@@ -37,14 +40,17 @@
         <main class="container px-2">
             <h3 class="navbar-brand" style="color:rgba(0,0,0,0.75);">Hexa</h3>
             <ul class="navbar-nav d-flex gap-3 align-items-center">
-                <li class="nav-item">
+                <!-- 
+                    can remove below search 
+                 -->
+                <!-- <li class="nav-item">
                     <form action="" class="form  p-0 m-0">
                         <div class="form-group d-flex align-items-center gap-2">
                             <input type="search" class="form-control p-1 px-1" placeholder="Search you want...">
                             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </form>
-                </li>
+                </li> -->
                 <li class="nav-item" style="color:rgba(0,0,0,0.75);">
                     <!-- for user account info -->
                     <div class="dropdown" id="user-info"> 
@@ -74,22 +80,22 @@
 
             <h3 class="h6 text-center text m-0">Actions</h3>
             <ul id="sidebar-list" class="list-group  gap-2 w-100">
-                <!-- သွားချင်တဲ့ route ကို a tagထဲမှာ ထည့်ရုံပဲ -->
+               <!-- သွားချင်တဲ့ route ကို a tagထဲမှာ ထည့်ရုံပဲ -->
                <li id="sidebar-item" class="list-item p-2 px-3 m-0 text"><a href="/hexa/admin/users" class="w-100"><i class="fa-solid fa-users"></i><span class="mx-2">Users</span></a></li>
                <li id="sidebar-item" class="list-item p-2 px-3 m-0" ><a href="/hexa/admin/news"  class="w-100"><i class="fa-brands fa-neos"></i><span class="mx-2">News</span></a></li>
                <!-- ဒီအောက်က ကောင်က သတင်း ပေ့ချ်ကိုမ‌ေရာက်ပဲ တန်း အသစ် လုပ်တဲ့ ပေ့ချ် ကို ရောက်သွားမှာ  -->
                <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/create_news"  class="w-100"><i class="fa-solid fa-circle-plus"></i><span class="mx-2">Create News</span></a></li>
                <!-- for categories -->
                <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/categories"  class="w-100"><i class="fa-solid fa-layer-group"></i><span class="mx-2">Categories</span></a></li>
-               <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/comments"  class="w-100"><i class="fa-solid fa-comments"></i><span class="mx-2">Comments</span></a></li>
+               <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/comments"  class="w-100"><i class="fa-solid fa-comments"></i><span class="mx-2">Comments</span></a></li> 
             </ul>
             <h3 class="h6 text-center text mx-5 py-3">Page Settings</h3>
 
             <ul id="sidebar-list" class="list-group  gap-2 w-100">
                <!-- user home page ကို သွားဖို့။ -->
-               <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/home"  class="w-100"><i class="fa-solid fa-globe"></i><span class="mx-2">Public Panel</span></a></li>
+               <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/home"><i class="fa-solid fa-globe"></i><span class="mx-2">Public Panel</span></a></li>
                <!-- for logout -->
-               <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/logout" class="text-danger w-100" onclick="return confirm('Are you sure to logout?');"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Logout</span></a></li>
+               <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/logout" class="text-danger" onclick="return confirm('Are you sure to logout?');"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Logout</span></a></li>
             </ul>
 
             <span id="sidebar-tail" class="position-absolute bottom-0 mx-2">
@@ -99,33 +105,120 @@
 
         <!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
         <section id="main-data" class="w-85 position-relative">
-    
-            <main id="main-contents" class="my-5">
-                <!-- name from session   -->
-                <div class="fw-bold d-flex justify-content-between align-items-center alert-success py-2 px-5 my-3 mx-5">
-                    <span class="h3 ">Welcome Name!</span>
-                    <span class="h6"><span id="year" class="mx-1"></span><span id="day-name"  class="mx-1"></span>,<span id="day"  class="mx-1"></span></span>
-                </div>
-                <div class="container row gap-2 d-flex justify-content-center my-2">
-                    <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
-                        <span class="h3 fw-bold text-light">Reporters</span>
-                        <i class="fa-solid fa-bullhorn text-light" style="font-size:20px !important;"></i>
-                        <span class="h6 text" id="count">10</span>
-                    </div>
-                    <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
-                        <span class="h3 fw-bold text-light">Users</span>
-                        <i class="fa-solid fa-users text-light" style="font-size:20px !important;"></i>
-                        <span class="h6 text" id="count">100</span>
-                    </div>
-                    <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
-                        <span class="h3 fw-bold text-light">Total News</span>
-                        <i class="fa-solid fa-newspaper text-light" style="font-size:20px !important;"></i>
-                        <span class="h6 text" id="count">1000</span>
-                    </div>
-                </div>
-            </main>
-            
+            <div class="table-title my-3">
+                <h3>User Information</h3>
+            </div>
+                <!-- edited here -->
+               <div id="table-wrapper">
+                    <table class="table-fill table table-striped" id="table">
+                        <thead class="sticky-top fw-bold ">
+                            <tr class="fw-bold">
+                              <th>Id</th>
+                              <th>Comment</th>
+                              <th>Commented User</th>
+                              <th>Commented Date</th>
+                              <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-hover">
+                            <tr>
+                                <td>1</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
 
+                            <tr>
+                                <td>2</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>3</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>3</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-success" id="btn-ban">Unban</a>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>4</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>5</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>6</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>7</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>8</td>
+                                <td>Wow</td>
+                                <td>John</td>
+                                <td>2022-05-01</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" id="btn-ban">Ban</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+               </div>
             <!-- for footer -->
                 <footer id="footer" class="d-flex justify-content-between align-items-center p-2 px-4 dark w-100 position-absolute bottom-0">
                     <span class="text-light">Created By Hexa_Group(Ace Inspiration)</span>
@@ -143,9 +236,14 @@
      <!-- bootstrap -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
 
-      <!-- jquery -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript"></script>
+     <!-- jquery -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript"></script>
 
-     <script src="../assets/js/admin-home.js" type="text/javascript"></script>
+     <!-- datatable -->
+     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+
+     <script src="/js/admin-table.js"></script>
+
+     <script src="/js/common.js"></script>
 </body>
 </html>

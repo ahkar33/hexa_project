@@ -17,17 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ace.hexa.dao.NewsDao;
 import com.ace.hexa.dao.UserDao;
-import com.ace.hexa.dto.InteractionRequestDto;
-import com.ace.hexa.dto.InteractionResponseDto;
-import com.ace.hexa.dto.NewsResponseDto;
-import com.ace.hexa.dto.UserRequestDto;
-import com.ace.hexa.dto.UserResponseDto;
+import com.ace.hexa.dto.interaction.InteractionRequestDto;
+import com.ace.hexa.dto.interaction.InteractionResponseDto;
+import com.ace.hexa.dto.news.NewsResponseDto;
+import com.ace.hexa.dto.user.UserRequestDto;
+import com.ace.hexa.dto.user.UserResponseDto;
 import com.ace.hexa.model.InteractionBean;
 import com.ace.hexa.model.UserBean;
 
 @Controller
 @RequestMapping("/hexa")
-public class LoggingController {
+public class MainController {
 
 	@Autowired
 	private UserDao userDao;
@@ -35,26 +35,25 @@ public class LoggingController {
 	@Autowired
 	private NewsDao newsDao;
 
-	@GetMapping("/showLogin")
+	@GetMapping("/login")
 	public ModelAndView showLogin() {
 		return new ModelAndView("login", "bean", new UserBean());
 	}
 
 	@PostMapping("/login")
-	public String login(@ModelAttribute("bean") UserBean user, HttpSession session, HttpServletRequest request) {
+	public String showLogin(@ModelAttribute("bean") UserBean user, HttpSession session, HttpServletRequest request) {
 		if (userDao.check(user.getUser_email(), user.getUser_password())) {
 			UserResponseDto dto = userDao.selectByEmail(user.getUser_email());
 			session.setAttribute("userInfo", dto);
 			if (dto.getUser_role() == 1) {
-				return "redirect:dashboard";
+				return "redirect:/hexa/admin/home";
 			} else if (dto.getUser_role() == 2) {
-				return "redirect:dashboard";
+				return "redirect:/hexa/admin/home";
 			} else {
 				return "home";
 			}
 		}
 		request.setAttribute("error", "<h3>email and password do not match !!</h3>");
-//		model.addAttribute("error", "<h3>email and password do not match !!</h3>");
 		return "login";
 	}
 
@@ -62,10 +61,10 @@ public class LoggingController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("userInfo");
 		session.invalidate();
-		return "redirect:/hexa/showLogin";
+		return "redirect:/hexa/login";
 	}
 
-	@GetMapping("/showRegister")
+	@GetMapping("/register")
 	public ModelAndView showRegister() {
 		return new ModelAndView("register", "bean", new UserBean());
 	}
@@ -78,42 +77,37 @@ public class LoggingController {
 			dto.setUser_email(user.getUser_email());
 			dto.setUser_password(user.getUser_password());
 			userDao.insertUser(dto);
-			return "redirect:/hexa/showLogin";
+			return "redirect:/hexa/login";
 		}
 		request.setAttribute("error", "<h3>A user with that email already exists !!</h3>");
 //		model.addAttribute("error", "<h3>A user with that email already exists !!</h3>");
 		return "register";
 	}
 
-	@GetMapping("/allNews")
+	@GetMapping("/home")
 	public String showNews(ModelMap model) {
 		ArrayList<NewsResponseDto> newsDto = newsDao.selectAllNews();
 		model.addAttribute("newsList", newsDto);
-		return "allNews";
+		return "home";
 	}
 
-	@GetMapping("/allNews/{id}")
+	@GetMapping("/details/{id}")
 	public ModelAndView showDetails(@PathVariable long id, ModelMap model) {
 		ArrayList<InteractionResponseDto> interactionDto = newsDao.selectInteractionByNewsId(id);
 		NewsResponseDto dto = newsDao.selectNewsById(id);
 		model.addAttribute("interactions", interactionDto);
 		model.addAttribute("newsDetails", dto);
-		return new ModelAndView("newsDetails", "bean", new InteractionBean());
+		return new ModelAndView("details", "bean", new InteractionBean());
 	}
 
-	@PostMapping("/allNews/addComment/{news_id}")
+	@PostMapping("/details/addComment/{news_id}")
 	public String addComment(@PathVariable long news_id, @ModelAttribute("bean") InteractionBean bean) {
 		InteractionRequestDto dto = new InteractionRequestDto();
 		dto.setNews_id(news_id);
 		dto.setUser_id(bean.getUser_id());
 		dto.setComments(bean.getComments());
 		newsDao.insertComment(dto);
-		return "redirect:/hexa/allNews/" + news_id;
-	}
-
-	@GetMapping("/home")
-	public String showHome() {
-		return "home";
+		return "redirect:/hexa/details/" + news_id;
 	}
 
 	@GetMapping("/dashboard")

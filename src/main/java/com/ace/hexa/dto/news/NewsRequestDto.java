@@ -1,4 +1,4 @@
-package com.ace.hexa.dto;
+package com.ace.hexa.dto.news;
 
 import java.time.LocalDate;
 
@@ -11,6 +11,7 @@ public class NewsRequestDto {
 	private String news_img;
 	private String news_location;
 	private String news_status;
+	private long creator_id;
 	private long news_category;
 	private LocalDate created_date;
 	private LocalDate updated_date;

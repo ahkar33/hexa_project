@@ -1,15 +1,13 @@
 package com.ace.hexa;
 
 import com.ace.hexa.dao.NewsDao;
-import com.ace.hexa.dto.InteractionRequestDto;
+import com.ace.hexa.dto.category.CategoryRequestDto;
 
 public class Main {
 	public static void main(String[] args) {
 		NewsDao dao = new NewsDao();
-		InteractionRequestDto dto = new InteractionRequestDto();
-		dto.setNews_id(12);
-		dto.setUser_id(2);
-		dto.setComments("Bazinga");
-		dao.insertComment(dto);
+		CategoryRequestDto dto = new CategoryRequestDto();
+		dto.setNews_category_name("Covid");
+		System.out.println(dao.checkCategory(dto.getNews_category_name()));
 	}
 }

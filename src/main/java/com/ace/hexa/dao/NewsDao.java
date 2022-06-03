@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.ace.hexa.dto.CategoryResponseDto;
-import com.ace.hexa.dto.InteractionRequestDto;
-import com.ace.hexa.dto.InteractionResponseDto;
-import com.ace.hexa.dto.NewsRequestDto;
-import com.ace.hexa.dto.NewsResponseDto;
+import com.ace.hexa.dto.category.CategoryRequestDto;
+import com.ace.hexa.dto.category.CategoryResponseDto;
+import com.ace.hexa.dto.interaction.InteractionRequestDto;
+import com.ace.hexa.dto.interaction.InteractionResponseDto;
+import com.ace.hexa.dto.news.NewsRequestDto;
+import com.ace.hexa.dto.news.NewsResponseDto;
 
 @Service
 public class NewsDao {
@@ -27,7 +28,7 @@ public class NewsDao {
 
 	public ArrayList<NewsResponseDto> selectAllNews() {
 		ArrayList<NewsResponseDto> list = new ArrayList<>();
-		String sql = "select * from news";
+		String sql = "select * from news_project.news JOIN user_account on news.creator_id = user_account.user_id JOIN news_category on news.news_category = news_category.news_category_id";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -39,7 +40,8 @@ public class NewsDao {
 				res.setNews_img(rs.getString("news_img"));
 				res.setNews_location(rs.getString("news_location"));
 				res.setNews_status(rs.getString("news_status"));
-				res.setNews_category(rs.getLong("news_category"));
+				res.setCreator_name(rs.getString("user_name"));
+				res.setNews_category_name(rs.getString("news_category_name"));
 				res.setCreated_date(rs.getDate("created_date").toLocalDate());
 				res.setUpdated_date(rs.getDate("updated_date").toLocalDate());
 				list.add(res);
@@ -89,26 +91,8 @@ public class NewsDao {
 		return list;
 	}
 
-//	public ArrayList<CategoryResponseDto> selectAllNews() {
-//		ArrayList<CategoryResponseDto> list = new ArrayList<>();
-//		String sql = "select * from news";
-//		try {
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ResultSet rs = ps.executeQuery();
-//			while (rs.next()) {
-//				CategoryResponseDto res = new CategoryResponseDto();
-//				res.setNews_category_id(rs.getLong("news_category_id"));
-//				res.setNews_category_name(rs.getString("news_category_name"));
-//				list.add(res);
-//			}
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//		return list;
-//	}
-
 	public int insertNews(NewsRequestDto dto) {
-		String sql = "insert into news (news_name, descriptions, news_img, news_location, news_category) values(?, ?, ?, ?, ?)";
+		String sql = "insert into news (news_name, descriptions, news_img, news_location, news_category, creator_id) values(?, ?, ?, ?, ?, ?)";
 		int i = 0;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -117,6 +101,7 @@ public class NewsDao {
 			ps.setString(3, dto.getNews_img());
 			ps.setString(4, dto.getNews_location());
 			ps.setLong(5, dto.getNews_category());
+			ps.setLong(6, dto.getCreator_id());
 
 			i = ps.executeUpdate();
 		} catch (Exception e) {
@@ -127,7 +112,7 @@ public class NewsDao {
 
 	public ArrayList<InteractionResponseDto> selectInteractionByNewsId(long id) {
 		ArrayList<InteractionResponseDto> list = new ArrayList<>();
-		String sql = "select interaction.news_id, interaction.user_id, interaction.comments, user_account.user_name from interaction join user_account on interaction.user_id = user_account.user_id where interaction.news_id = ?";
+		String sql = "select interaction.news_id, interaction.user_id, interaction.comments, interaction.commented_date, user_account.user_name from interaction join user_account on interaction.user_id = user_account.user_id where interaction.news_id = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setLong(1, id);
@@ -138,6 +123,7 @@ public class NewsDao {
 				res.setUser_id(rs.getLong("user_id"));
 				res.setComments(rs.getString("comments"));
 				res.setUser_name(rs.getString("user_name"));
+				res.setCommented_date(rs.getDate("commented_date").toLocalDate());
 				list.add(res);
 			}
 		} catch (Exception e) {
@@ -159,6 +145,35 @@ public class NewsDao {
 			System.out.println(e);
 		}
 		return i;
+	}
+
+	public int insertCategory(CategoryRequestDto dto) {
+		String sql = "insert into news_category (news_category_name) values(?)";
+		int i = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getNews_category_name());
+			i = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return i;
+	}
+
+	public boolean checkCategory(String category) {
+		String sql = "select * from news_category where news_category_name = ?";
+		try {
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, category);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return false;
 	}
 
 }

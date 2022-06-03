@@ -13,7 +13,7 @@
 				class="mx-2">News</span></a></li>
 		<!-- ဒီအောက်က ကောင်က သတင်း ပေ့ချ်ကိုမ‌ေရာက်ပဲ တန်း အသစ် လုပ်တဲ့ ပေ့ချ် ကို ရောက်သွားမှာ  -->
 		<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a
-			href="/hexa/dashboard/setupCreateNews"><i class="fa-solid fa-circle-plus"></i><span
+			href="/hexa/dashboard/createNews"><i class="fa-solid fa-circle-plus"></i><span
 				class="mx-2">Create News</span></a></li>
 		<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href=""><i
 				class="fa-solid fa-comments"></i><span class="mx-2">Comments</span></a></li>

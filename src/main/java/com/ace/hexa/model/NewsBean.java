@@ -14,6 +14,7 @@ public class NewsBean {
 	private MultipartFile news_img;
 	private String news_location;
 	private String news_status;
+	private long creator_id;
 	private long news_category;
 	private LocalDate created_date;
 	private LocalDate updated_date;

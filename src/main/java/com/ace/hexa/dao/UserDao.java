@@ -3,11 +3,12 @@ package com.ace.hexa.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.ace.hexa.dto.UserRequestDto;
-import com.ace.hexa.dto.UserResponseDto;
+import com.ace.hexa.dto.user.UserRequestDto;
+import com.ace.hexa.dto.user.UserResponseDto;
 
 @Service
 public class UserDao {
@@ -22,8 +23,7 @@ public class UserDao {
 	}
 
 	public boolean check(String email, String password) {
-
-		String sql = "select * from user_account where user_email=? && user_password=?";
+		String sql = "select * from user_account where binary user_email=? && binary user_password=?";
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, email);
@@ -94,6 +94,26 @@ public class UserDao {
 			System.out.println(e);
 		}
 		return res;
+	}
+
+	public ArrayList<UserResponseDto> selectAllUsers() {
+		ArrayList<UserResponseDto> list = new ArrayList<>();
+		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id order by user_account.user_id";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				UserResponseDto res = new UserResponseDto();
+				res.setUser_id(rs.getLong("user_id"));
+				res.setUser_name(rs.getString("user_name"));
+				res.setUser_email(rs.getNString("user_email"));
+				res.setUser_role_name(rs.getString("user_role_name"));
+				list.add(res);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return list;
 	}
 
 	public int insertUser(UserRequestDto dto) {
