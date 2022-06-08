@@ -69,6 +69,7 @@ public class UserDao {
 				res.setUser_role(rs.getInt("user_role"));
 				res.setUser_email(rs.getString("user_email"));
 				res.setUser_password(rs.getString("user_password"));
+				res.setUser_status(rs.getInt("user_status"));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -89,6 +90,7 @@ public class UserDao {
 				res.setUser_role(rs.getInt("user_role"));
 				res.setUser_email(rs.getString("user_email"));
 				res.setUser_password(rs.getString("user_password"));
+				res.setUser_status(rs.getInt("user_status"));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -98,7 +100,7 @@ public class UserDao {
 
 	public ArrayList<UserResponseDto> selectAllUsers() {
 		ArrayList<UserResponseDto> list = new ArrayList<>();
-		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id order by user_account.user_id";
+		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_account.user_status, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id order by user_account.user_id";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -108,6 +110,7 @@ public class UserDao {
 				res.setUser_name(rs.getString("user_name"));
 				res.setUser_email(rs.getNString("user_email"));
 				res.setUser_role_name(rs.getString("user_role_name"));
+				res.setUser_status(rs.getInt("user_status"));
 				list.add(res);
 			}
 		} catch (Exception e) {
@@ -117,7 +120,7 @@ public class UserDao {
 	}
 
 	public int insertUser(UserRequestDto dto) {
-		String sql = "insert into user_account (user_name, user_role, user_email, user_password) values(?, ?, ?, ?)";
+		String sql = "insert into user_account (user_name, user_role, user_email, user_password, user_status) values(?, ?, ?, ?, ?)";
 		int i = 0;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -125,6 +128,21 @@ public class UserDao {
 			ps.setInt(2, 3);
 			ps.setString(3, dto.getUser_email());
 			ps.setString(4, dto.getUser_password());
+			ps.setInt(5, 0);
+			i = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return i;
+	}
+
+	public int updateUserStatusById(int user_status, long user_id) {
+		String sql = "update user_account set user_status = ? where user_id = ?";
+		int i = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, user_status);
+			ps.setLong(2, user_id);
 			i = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);

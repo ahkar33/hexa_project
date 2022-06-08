@@ -161,7 +161,15 @@
 								<td>${user.user_name}</td>
 								<td>${user.user_name}</td>
 								<td>${user.user_role_name}</td>
-								<td><a href="" class="btn btn-sm btn-danger" id="btn-ban">Ban</a>
+								<td>
+									<c:choose>
+										<c:when test="${user.user_status == 0}">
+											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-danger">Ban</a>
+										</c:when>	
+										<c:otherwise>
+											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-danger">Unban</a>
+										</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 						</c:forEach>
