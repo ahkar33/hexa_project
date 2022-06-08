@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `news_project` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `news_project`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: news_project
@@ -119,6 +117,7 @@ CREATE TABLE `user_account` (
   `user_role` int DEFAULT NULL,
   `user_email` varchar(100) DEFAULT NULL,
   `user_password` varchar(100) DEFAULT NULL,
+  `user_status` int DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `user_role` (`user_role`),
   CONSTRAINT `user_account_ibfk_1` FOREIGN KEY (`user_role`) REFERENCES `user_role` (`user_role_id`) ON DELETE SET NULL
@@ -131,7 +130,7 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (1,'joey',3,'joey@gmail.com','iLovePizza'),(2,'sheldon',1,'sheldon@gmail.com','iLovePhysics'),(3,'leonard',3,'leonard@gmail.com','iLovePenny'),(4,'ahkar',2,'ahkar@gmail.com','ahkar'),(10,'gollum',3,'gollum@gmail.com','gollum'),(11,'zoey',3,'zoey@gmail.com','hello'),(12,'toe',3,'toe@gmail.com','toe'),(13,'theingi',3,'theingi@gmail.com','theingi'),(14,'maw',3,'maw@gmail.com','maw'),(16,'asdf',1,'asdf@gmail.com','asdf');
+INSERT INTO `user_account` VALUES (1,'joey',3,'joey@gmail.com','iLovePizza',0),(2,'sheldon',1,'sheldon@gmail.com','iLovePhysics',0),(3,'leonard',3,'leonard@gmail.com','iLovePenny',1),(4,'ahkar',2,'ahkar@gmail.com','ahkar',0),(10,'gollum',3,'gollum@gmail.com','gollum',1),(11,'zoey',3,'zoey@gmail.com','hello',1),(12,'toe',3,'toe@gmail.com','toe',0),(13,'theingi',3,'theingi@gmail.com','theingi',0),(14,'maw',3,'maw@gmail.com','maw',0),(16,'asdf',1,'asdf@gmail.com','asdf',0);
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-04  2:38:05
+-- Dump completed on 2022-06-08 15:49:49

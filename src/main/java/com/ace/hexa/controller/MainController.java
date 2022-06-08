@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ace.hexa.dao.NewsDao;
 import com.ace.hexa.dao.UserDao;
+import com.ace.hexa.dto.category.CategoryResponseDto;
 import com.ace.hexa.dto.interaction.InteractionRequestDto;
 import com.ace.hexa.dto.interaction.InteractionResponseDto;
 import com.ace.hexa.dto.news.NewsResponseDto;
@@ -48,6 +49,10 @@ public class MainController {
 	public String showLogin(@ModelAttribute("bean") UserBean user, HttpSession session, HttpServletRequest request) {
 		if (userDao.check(user.getUser_email(), user.getUser_password())) {
 			UserResponseDto dto = userDao.selectByEmail(user.getUser_email());
+			if (dto.getUser_status() == 1) {
+				request.setAttribute("error", "<h3>You have been banned !!</h3>");
+				return "login";
+			}
 			session.setAttribute("userInfo", dto);
 			if (dto.getUser_role() == 1) {
 				return "redirect:/hexa/admin/home";
@@ -92,6 +97,8 @@ public class MainController {
 	public String showNews(ModelMap model) {
 		ArrayList<NewsResponseDto> newsDto = newsDao.selectAllNews();
 		ArrayList<NewsResponseDto> todayNews = todayNewsService.getTodayNews(newsDto);
+		ArrayList<CategoryResponseDto> categories = newsDao.selectAllNewsCategory();
+		model.addAttribute("categories", categories);
 		model.addAttribute("newsList", newsDto);
 		model.addAttribute("todayNews", todayNews);
 		return "home";
@@ -114,6 +121,15 @@ public class MainController {
 		dto.setComments(bean.getComments());
 		newsDao.insertComment(dto);
 		return "redirect:/hexa/details/" + news_id;
+	}
+
+	@GetMapping("/searchByCategory/{news_category_id}")
+	public String searchByCategory(@PathVariable int news_category_id, ModelMap model) {
+		ArrayList<NewsResponseDto> searchNews = newsDao.selectNewsByCategoryId(news_category_id);
+		ArrayList<CategoryResponseDto> categories = newsDao.selectAllNewsCategory();
+		model.addAttribute("categories", categories);
+		model.addAttribute("newsLists", searchNews);
+		return "searchNews";
 	}
 
 	@GetMapping("/dashboard")

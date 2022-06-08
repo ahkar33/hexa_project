@@ -28,7 +28,7 @@
 	<section id="navbar" class="navbar navbar-expand sticky-top">
 		<div class="container">
 			<div class="navbar-brand fw-bold h2">
-				<a href="./home.html">Hexa</a>
+				<a href="/hexa/home">Hexa</a>
 			</div>
 			<ul class="navbar-nav gap-4 d-flex align-items-center"
 				id="navbar-nav">
@@ -73,49 +73,12 @@
 		</div>
 	</section>
 
-
-	<!-- today news -->
-	<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
-		News</p>
-	<div id="welcome" class="container w-75 my-3 gap-3">
-		<div class="col gap-2" id="right">
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img1.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem ipsum dolor sit amet
-						consectetur, adipisicing elit. ....</span> <span class="new-location">|Global</span>
-				</div>
-			</div>
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img2.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem, ipsum dolor sit amet
-						consectetur adipisicing elit...</span> <span class="new-location">|Myanmar</span>
-				</div>
-			</div>
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img3.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit...</span> <span class="new-location">|USA</span>
-				</div>
-			</div>
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img4.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit....</span> <span class="new-location">|Myanmar</span>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<!-- news -->
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
 		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
 		<div id="news-wrapper"
 			class="w-100 row d-flex justify-content-around flew-wrap">
-			<c:forEach var="news" items="${newsList}">
+			<c:forEach var="news" items="${newsLists}">
 				<div
 					class="new-box my-1 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
 					id="news">

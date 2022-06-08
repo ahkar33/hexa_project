@@ -91,6 +91,31 @@ public class NewsDao {
 		return list;
 	}
 
+//	public ArrayList<NewsResponseDto> selectNewsByCategoryId(int id) {
+//		ArrayList<NewsResponseDto> list = new ArrayList<>();
+//		String sql = "select * from news where news_category = ?";
+//		try {
+//			NewsResponseDto res = new NewsResponseDto();
+//			PreparedStatement ps = con.prepareStatement(sql);
+//			ps.setInt(1, id);
+//			ResultSet rs = ps.executeQuery();
+//			while (rs.next()) {
+//				res.setNews_id(id);
+//				res.setNews_name(rs.getString("news_name"));
+//				res.setDescriptions(rs.getString("descriptions"));
+//				res.setNews_location(rs.getString("news_location"));
+//				res.setNews_img(rs.getString("news_img"));
+//				res.setNews_category(rs.getInt("news_category"));
+//				res.setCreated_date(rs.getDate("created_date").toLocalDate());
+//				res.setUpdated_date(rs.getDate("updated_date").toLocalDate());
+//				list.add(res);
+//			}
+//		} catch (Exception e) {
+//			System.out.println(e);
+//		}
+//		return list;
+//	}
+
 	public int insertNews(NewsRequestDto dto) {
 		String sql = "insert into news (news_name, descriptions, news_img, news_location, news_category, creator_id) values(?, ?, ?, ?, ?, ?)";
 		int i = 0;
@@ -174,6 +199,31 @@ public class NewsDao {
 		}
 
 		return false;
+	}
+
+	public ArrayList<NewsResponseDto> selectNewsByCategoryId(int id) {
+		ArrayList<NewsResponseDto> list = new ArrayList<>();
+		String sql = "select * from news where news_category=?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				NewsResponseDto res = new NewsResponseDto();
+				res.setNews_id(rs.getLong("news_id"));
+				res.setNews_name(rs.getString("news_name"));
+				res.setDescriptions(rs.getString("descriptions"));
+				res.setNews_img(rs.getString("news_img"));
+				res.setNews_location(rs.getString("news_location"));
+				res.setNews_category(rs.getInt("news_category"));
+				res.setCreated_date(rs.getDate("created_date").toLocalDate());
+				res.setUpdated_date(rs.getDate("updated_date").toLocalDate());
+				list.add(res);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return list;
 	}
 
 }
