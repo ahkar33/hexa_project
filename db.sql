@@ -27,11 +27,13 @@ CREATE TABLE `interaction` (
   `user_id` bigint DEFAULT NULL,
   `comments` varchar(800) DEFAULT NULL,
   `commented_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `comment_id` bigint NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`comment_id`),
   KEY `news_id` (`news_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `interaction_ibfk_1` FOREIGN KEY (`news_id`) REFERENCES `news` (`news_id`) ON DELETE SET NULL,
   CONSTRAINT `interaction_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`user_id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +42,7 @@ CREATE TABLE `interaction` (
 
 LOCK TABLES `interaction` WRITE;
 /*!40000 ALTER TABLE `interaction` DISABLE KEYS */;
-INSERT INTO `interaction` VALUES (14,1,'hello','2022-06-04 01:25:04'),(12,1,'helloasdfasdf','2022-06-04 01:25:04'),(12,2,'Bazinga','2022-06-04 01:25:04'),(12,2,'Bazinga','2022-06-04 01:25:04'),(12,2,'hello','2022-06-04 01:25:04'),(NULL,2,'comment testing\r\n','2022-06-04 01:25:04'),(12,2,'asdfasdf\r\n','2022-06-04 01:25:04'),(14,2,'ssdffdw','2022-06-04 01:25:04'),(20,16,'nice post','2022-06-04 01:40:07'),(20,16,'test','2022-06-04 01:51:41'),(27,16,'testing ','2022-06-04 02:23:45'),(30,16,'asdf','2022-06-04 02:29:08');
+INSERT INTO `interaction` VALUES (12,16,'Nice Sand Worm','2022-06-08 19:27:54',13),(14,16,'Lady Jessica right there','2022-06-08 19:28:23',14),(20,4,'spice mutant !!','2022-06-08 19:28:55',15),(28,4,'dogs of the world unite','2022-06-08 19:29:31',16),(12,12,'Shai Hulud','2022-06-08 19:36:30',17),(27,12,'confused Limmy','2022-06-08 19:36:40',18);
 /*!40000 ALTER TABLE `interaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-08 15:49:49
+-- Dump completed on 2022-06-08 21:36:10

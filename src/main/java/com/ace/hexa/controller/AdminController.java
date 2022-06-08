@@ -3,6 +3,8 @@ package com.ace.hexa.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,19 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ace.hexa.dao.InteractionDao;
 import com.ace.hexa.dao.NewsDao;
 import com.ace.hexa.dao.UserDao;
 import com.ace.hexa.dto.category.CategoryRequestDto;
 import com.ace.hexa.dto.category.CategoryResponseDto;
+import com.ace.hexa.dto.interaction.InteractionResponseDto;
 import com.ace.hexa.dto.news.NewsRequestDto;
 import com.ace.hexa.dto.news.NewsResponseDto;
 import com.ace.hexa.dto.user.UserResponseDto;
 import com.ace.hexa.model.NewsBean;
+import com.ace.hexa.model.TempNewsBean;
 import com.ace.hexa.service.FileUploadService;
 
 @Controller
 @RequestMapping("/hexa/admin")
 public class AdminController {
+
+	@Autowired
+	private InteractionDao interactionDao;
 
 	@Autowired
 	private NewsDao newsDao;
@@ -63,10 +71,10 @@ public class AdminController {
 		return "categories";
 	}
 
-	@GetMapping("/comments")
-	public String showComments(ModelMap model) {
-		return "comments";
-	}
+	/*
+	 * @GetMapping("/comments") public String showComments(ModelMap model) { return
+	 * "comments"; }
+	 */
 
 	@GetMapping("/create_news")
 	public ModelAndView setupCreateNews(ModelMap model) {
@@ -110,6 +118,57 @@ public class AdminController {
 			userDao.updateUserStatusById(1, user_id);
 		}
 		return "redirect:/hexa/admin/users";
+	}
+
+	@GetMapping("/selectPost")
+	public String setupShowComments(ModelMap model, HttpSession ses) {
+
+		ArrayList<TempNewsBean> bean = new ArrayList<TempNewsBean>();
+		long comments_count = 0;
+		long commenters_count = 0;
+		String news_title = null;
+		ArrayList<Long> lists = interactionDao.selectCommentedNewsId();
+
+		for (long list : lists) {
+			TempNewsBean newsBean = new TempNewsBean();
+			comments_count = interactionDao.selectCommentCountByNewsId(list);
+			commenters_count = interactionDao.selectCommentersByNewsId(list);
+			news_title = newsDao.selectNewsNameByNewsId(list);
+			newsBean.setId(list);
+			newsBean.setTitle(news_title);
+			newsBean.setCommenters_count(commenters_count);
+			newsBean.setComments_count(comments_count);
+			bean.add(newsBean);
+		}
+
+		model.addAttribute("news", bean);
+		return "setup-comments";
+	}
+
+	@GetMapping("/comments/{newsId}")
+	public String showComments(@PathVariable long newsId, ModelMap model) {
+		ArrayList<String> commenters = new ArrayList<String>();
+		ArrayList<InteractionResponseDto> interactionDto = interactionDao.selectInteractionByNewsId(newsId);
+		for (InteractionResponseDto tmp : interactionDto) {
+			commenters.add(userDao.selectById(tmp.getUser_id()).getUser_name());
+		}
+		model.addAttribute("interactions", interactionDto);
+		model.addAttribute("commenters", commenters);
+		return "comments";
+	}
+
+	@GetMapping("/delete/{cmtId}")
+	public String delComments(@PathVariable long cmtId, ModelMap model) {
+		long newsId = interactionDao.selectInteractionById(cmtId).getNews_id();
+		int i = interactionDao.deleteComment(cmtId);
+		if (i > 0) {
+			model.addAttribute("err", "Successfully Deleted.");
+			System.out.println("successfully deleted");
+		} else {
+			model.addAttribute("err", "Delete Failed!");
+			System.out.println("deleting fail!!!");
+		}
+		return "redirect:/hexa/admin/comments/" + newsId;
 	}
 
 }

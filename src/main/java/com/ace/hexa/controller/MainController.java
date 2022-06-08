@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ace.hexa.dao.InteractionDao;
 import com.ace.hexa.dao.NewsDao;
 import com.ace.hexa.dao.UserDao;
 import com.ace.hexa.dto.category.CategoryResponseDto;
@@ -40,6 +41,9 @@ public class MainController {
 	@Autowired
 	private TodayNewsService todayNewsService;
 
+	@Autowired
+	private InteractionDao interactionDao;
+
 	@GetMapping("/login")
 	public ModelAndView showLogin() {
 		return new ModelAndView("login", "bean", new UserBean());
@@ -59,7 +63,7 @@ public class MainController {
 			} else if (dto.getUser_role() == 2) {
 				return "redirect:/hexa/admin/home";
 			} else {
-				return "home";
+				return "redirect:/hexa/home";
 			}
 		}
 		request.setAttribute("error", "<h3>email and password do not match !!</h3>");
@@ -106,7 +110,7 @@ public class MainController {
 
 	@GetMapping("/details/{id}")
 	public ModelAndView showDetails(@PathVariable long id, ModelMap model) {
-		ArrayList<InteractionResponseDto> interactionDto = newsDao.selectInteractionByNewsId(id);
+		ArrayList<InteractionResponseDto> interactionDto = interactionDao.selectInteractionByNewsId(id);
 		NewsResponseDto dto = newsDao.selectNewsById(id);
 		model.addAttribute("interactions", interactionDto);
 		model.addAttribute("newsDetails", dto);
@@ -119,7 +123,7 @@ public class MainController {
 		dto.setNews_id(news_id);
 		dto.setUser_id(bean.getUser_id());
 		dto.setComments(bean.getComments());
-		newsDao.insertComment(dto);
+		interactionDao.insertComment(dto);
 		return "redirect:/hexa/details/" + news_id;
 	}
 

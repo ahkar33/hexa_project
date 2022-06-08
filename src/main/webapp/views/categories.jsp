@@ -92,7 +92,7 @@
 		<!-- ဒါက ဘေးဘားအတွက် အလျား ၁၅ ရာခိုင်နှုန်းယူထားတယ် -->
 		<section id="sidebar" class="dark-bg p-0 m-0 position-relative">
 			<h3 class="h5 text-center text-light py-3" id="dash-title">
-				<a href="./home.html">Admin Dashboard</a>
+				<a href="/hexa/admin/home">Admin Dashboard</a>
 			</h3>
 
 			<h3 class="h6 text-center text m-0">Actions</h3>
@@ -114,7 +114,7 @@
 					href="/hexa/admin/categories" class="w-100"><i
 						class="fa-solid fa-layer-group"></i><span class="mx-2">Categories</span></a></li>
 				<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a
-					href="/hexa/admin/comments" class="w-100"><i
+					href="/hexa/admin/selectPost" class="w-100"><i
 						class="fa-solid fa-comments"></i><span class="mx-2">Comments</span></a></li>
 			</ul>
 			<h3 class="h6 text-center text mx-5 py-3">Page Settings</h3>
