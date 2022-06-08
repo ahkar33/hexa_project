@@ -1,16 +1,17 @@
-package com.ace.hexa;
+package com.ace.hexa.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.ace.hexa.dao.NewsDao;
+import org.springframework.stereotype.Service;
+
 import com.ace.hexa.dto.news.NewsResponseDto;
 
-public class Main {
-	public static void main(String[] args) {
-		NewsDao dao = new NewsDao();
-		ArrayList<NewsResponseDto> list = dao.selectAllNews();
+@Service
+public class TodayNewsService {
+
+	public ArrayList<NewsResponseDto> getTodayNews(ArrayList<NewsResponseDto> list) {
 		ArrayList<NewsResponseDto> todayNews = new ArrayList<NewsResponseDto>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date(System.currentTimeMillis());
@@ -21,5 +22,7 @@ public class Main {
 				todayNews.add(news);
 			}
 		}
+		return todayNews;
 	}
+
 }

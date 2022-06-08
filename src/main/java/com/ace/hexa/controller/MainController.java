@@ -24,6 +24,7 @@ import com.ace.hexa.dto.user.UserRequestDto;
 import com.ace.hexa.dto.user.UserResponseDto;
 import com.ace.hexa.model.InteractionBean;
 import com.ace.hexa.model.UserBean;
+import com.ace.hexa.service.TodayNewsService;
 
 @Controller
 @RequestMapping("/hexa")
@@ -34,6 +35,9 @@ public class MainController {
 
 	@Autowired
 	private NewsDao newsDao;
+
+	@Autowired
+	private TodayNewsService todayNewsService;
 
 	@GetMapping("/login")
 	public ModelAndView showLogin() {
@@ -87,7 +91,9 @@ public class MainController {
 	@GetMapping("/home")
 	public String showNews(ModelMap model) {
 		ArrayList<NewsResponseDto> newsDto = newsDao.selectAllNews();
+		ArrayList<NewsResponseDto> todayNews = todayNewsService.getTodayNews(newsDto);
 		model.addAttribute("newsList", newsDto);
+		model.addAttribute("todayNews", todayNews);
 		return "home";
 	}
 

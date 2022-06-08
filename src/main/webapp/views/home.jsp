@@ -77,17 +77,6 @@
 	<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
 		News</p>
 	<div id="welcome" class="container w-75 my-3 gap-3">
-		<div class="col" id="left">
-			<div class="welcome-box my-3" id="news">
-				<img src="../assets//img/main.jpg" alt="image" id="welcome-img">
-				<div class="welcome-layer">
-					<span class="welcome-title">Lorem ipsum dolor sit amet
-						consectetur, adipisicing elit. Id atque animi ea possimus. Aut
-						maxime, quos nam cum illo rerum nulla explicabo quis ipsa, neque
-						vitae eligendi saepe sint eaque...</span> <span class="welcome-location">|Global</span>
-				</div>
-			</div>
-		</div>
 		<div class="col gap-2" id="right">
 			<div class="new-box my-1" id="news">
 				<img src="../assets/img/img1.jpg" class="new-img" alt="image" />

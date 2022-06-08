@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class UserBean {
-
 	private long user_id;
 	private String user_name;
 	private int user_role;
