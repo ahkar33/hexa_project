@@ -23,7 +23,8 @@ CREATE DATABASE IF NOT EXISTS news_project;
             user_role INT,
             FOREIGN KEY(user_role) REFERENCES user_role(user_role_id) ON DELETE SET null,
             user_email VARCHAR(100) UNIQUE,
-            user_password VARCHAR(100)
+            user_password VARCHAR(100),
+            user_status int default null
         )
     
     (iii)news_category
@@ -43,7 +44,9 @@ CREATE DATABASE IF NOT EXISTS news_project;
             news_category INT NOT NULL,
             FOREIGN KEY (news_category) REFERENCES news_category (news_category_id),
             created_date DATETIME DEFAULT NOW(),
-            updated_date DATETIME DEFAULT NOW() ON UPDATE NOW()
+            updated_date DATETIME DEFAULT NOW() ON UPDATE NOW(),
+            creator_id int,
+            foreign key (creator_id) references user_account(user_id) on delete set null
         )
     
     (v)intersection
@@ -53,7 +56,9 @@ CREATE DATABASE IF NOT EXISTS news_project;
             comments VARCHAR(800),
             likes INT DEFAULT 0,
             FOREIGN KEY (news_id) REFERENCES news(news_id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (user_id) REFERENCES user_account(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+            FOREIGN KEY (user_id) REFERENCES user_account(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+            commented_date datetime default now(),
+            comment_id bigint primary key auto_increment
         )
 
     

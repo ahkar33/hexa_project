@@ -158,11 +158,13 @@
 						</tr>
 					</thead>
 					<tbody class="table-hover">
+						<% int id = 1; %>
 						<c:forEach var="category" items="${categories}">
 							<tr>
-								<td>${category.news_category_id}</td>
-								<td>${category.news_category_name}</td>
+								<td><%= id %></td>
+								<td class="text-capitalize">${category.news_category_name}</td>
 							</tr>
+							<% id++; %>
 						</c:forEach>
 					</tbody>
 				</table>

@@ -103,7 +103,7 @@
             <main id="main-contents" class="my-5">
                 <!-- name from session   -->
                 <div class="fw-bold d-flex justify-content-between align-items-center alert-success py-2 px-5 my-3 mx-5">
-                    <span class="h3 ">Welcome Name!</span>
+                    <span class="h3 ">Welcome ${sessionScope.userInfo.user_name}!</span>
                     <span class="h6"><span id="year" class="mx-1"></span><span id="day-name"  class="mx-1"></span>,<span id="day"  class="mx-1"></span></span>
                 </div>
                 <div class="container row gap-2 d-flex justify-content-center my-2">

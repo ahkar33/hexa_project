@@ -17,10 +17,10 @@
 
                         <ul class="dropdown-menu p-0 m-0" style="transform:translate(-18%)">
                             <!-- လိုချင်သလို မီနူးကို ထပ်တိုး ထပ်လျော့ လုပ်ရုံပဲ။ ‌ယေဘုယျ ‌တော့ထားပေးထားတယ်။ -->
-                            <li class="dropdown-item">Username <!-- name--></li>
+                            <li class="dropdown-item">${sessionScope.userInfo.user_name} <!-- name--></li>
                             <li class="dropdown-item">Admin <!-- role --></li>
                             <li class="dropdown-item "><a href=""><i class="fa-solid fa-user-pen"></i><span class="mx-2">Edit</span></a></li><!-- edit တွေဘာတွေ လုပ်ဖို့အတွက် -->
-                            <li class="dropdown-item bg-danger"><a href="" onclick="return confirm('Are you sure to logout?');"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Logout</span></a></li>
+                            <li class="dropdown-item bg-danger"><a href="/hexa/logout" onclick="return confirm('Are you sure to logout?');"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Logout</span></a></li>
                         </ul>
                     </div>
                 </li>

@@ -44,8 +44,9 @@ public class MainController {
 	@Autowired
 	private InteractionDao interactionDao;
 
+
 	@GetMapping("/login")
-	public ModelAndView showLogin() {
+	public ModelAndView showLogin(HttpServletRequest request) {
 		return new ModelAndView("login", "bean", new UserBean());
 	}
 

@@ -158,16 +158,16 @@
 						<c:forEach var="user" items="${users}">
 							<tr>
 								<td>${user.user_id}</td>
-								<td>${user.user_name}</td>
-								<td>${user.user_name}</td>
-								<td>${user.user_role_name}</td>
+								<td class="text-capitalize">${user.user_name}</td>
+								<td>${user.user_email}</td>
+								<td class="text-capitalize">${user.user_role_name}</td>
 								<td>
 									<c:choose>
 										<c:when test="${user.user_status == 0}">
-											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-danger">Ban</a>
+											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-danger text-dark" onclick="return confirm('Are you sure to ban?');">Ban</a>
 										</c:when>	
 										<c:otherwise>
-											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-danger">Unban</a>
+											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-warning text-dark" onclick="return confirm('Are you sure to unban?');">Unban</a>
 										</c:otherwise>
 									</c:choose>
 								</td>
@@ -212,8 +212,8 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 
-	<script src="../assets/js/admin-table.js"></script>
+	<script src="/js/admin-table.js"></script>
 
-	<script src="../assets/js/common.js"></script>
+	<script src="/js/common.js"></script>
 </body>
 </html>

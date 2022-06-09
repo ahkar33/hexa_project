@@ -141,7 +141,7 @@
 			class="w-85 position-relative d-flex justify-content-center align-items-center">
 
 			<main id="form-wrapper" class="w-100  d-flex justify-content-center">
-				<div class="card w-75 p-3">
+				<div class="w-75 ">
 					<h3 class="h2 card-title text-center">CREATE NEWS</h3>
 					<div class="text-center text-success">
 						<h4>${post_msg}</h4>
@@ -152,9 +152,9 @@
 					<form:form action="/hexa/admin/create_news" method="post"
 						class="card-body form" modelAttribute="newsBean"
 						enctype="multipart/form-data">
-						<div class="w-100 text-end">
+						<!-- <div class="w-100 text-end">
 							<button class="btn btn-danger text-end" type="reset">Clear</button>
-						</div>
+						</div> -->
 						<div class="form-group my-2">
 							<label for="" class="form-label my-1 fw-bold">News Title</label>
 							<form:input type="text" class="form-control" path="news_name"
@@ -186,7 +186,7 @@
 						<div class="form-group my-2" data-editor="ClassicEditor">
 							<label for="" class="form-label my-1 fw-bold">News
 								Content</label>
-							<form:textarea name="" cols="30" rows="8" class="form-control"
+							<form:textarea name="" cols="30" rows="4" class="form-control"
 								id="editor" placeholder="e.g details about something happened"
 								path="descriptions" required="required"></form:textarea>
 						</div>
