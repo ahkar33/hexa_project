@@ -3,12 +3,14 @@ package com.ace.hexa.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
 import com.ace.hexa.dto.user.UserRequestDto;
 import com.ace.hexa.dto.user.UserResponseDto;
+import com.ace.hexa.dto.user.UserRoleResponseDto;
 
 @Service
 public class UserDao {
@@ -142,6 +144,39 @@ public class UserDao {
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, user_status);
+			ps.setLong(2, user_id);
+			i = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return i;
+	}
+
+	public ArrayList<UserRoleResponseDto> selectAllRole() {
+		ArrayList<UserRoleResponseDto> list = new ArrayList<>();
+		String sql = "SELECT * FROM user_role;";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				UserRoleResponseDto res = new UserRoleResponseDto();
+				res.setId(rs.getInt("user_role_id"));
+				res.setName(rs.getString("user_role_name"));
+				list.add(res);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public int updateUserRoleById(int user_role, long user_id) {
+		String sql = "update user_account set user_role = ? where user_id = ?";
+		int i = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, user_role);
 			ps.setLong(2, user_id);
 			i = ps.executeUpdate();
 		} catch (Exception e) {

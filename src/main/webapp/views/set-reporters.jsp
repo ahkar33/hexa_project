@@ -4,9 +4,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page import="com.ace.hexa.dto.user.UserResponseDto"%>
 <%@ page import="com.ace.hexa.dto.user.UserRequestDto"%>
-<!-- categories page from sidebar of admin dashboard  -->
+<!-- users page from sidebar of admin dashboard  -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +30,13 @@
 <!-- custom css -->
 <link rel="stylesheet" href="/css/admin_home.css" type="text/css">
 <link rel="stylesheet" href="/css/user_role.css" type="text/css">
+<script type="text/javascript">
+	function handleSelect(elm) {
+		window.location = "/hexa/admin/role/" + elm.value;
+	}
+</script>
 </head>
+
 <body>
 	<%
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -68,8 +75,10 @@
 						<ul class="dropdown-menu p-0 m-0"
 							style="transform: translate(-18%)">
 							<!-- လိုချင်သလို မီနူးကို ထပ်တိုး ထပ်လျော့ လုပ်ရုံပဲ။ ‌ယေဘုယျ ‌တော့ထားပေးထားတယ်။ -->
-							<li class="dropdown-item">Username <!-- name--></li>
-							<li class="dropdown-item">Admin <!-- role --></li>
+							<li class="dropdown-item">Username <!-- name-->
+							</li>
+							<li class="dropdown-item">Admin <!-- role -->
+							</li>
 							<li class="dropdown-item "><a href=""><i
 									class="fa-solid fa-user-pen"></i><span class="mx-2">Edit</span></a></li>
 							<!-- edit တွေဘာတွေ လုပ်ဖို့အတွက် -->
@@ -112,7 +121,8 @@
 				<!-- for categories -->
 				<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a
 					href="/hexa/admin/categories" class="w-100"><i
-						class="fa-solid fa-layer-group"></i><span class="mx-2">Categories</span></a></li>
+						class="fa-solid fa-layer-group"></i><span class="mx-2">Categories</span></a>
+				</li>
 				<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a
 					href="/hexa/admin/selectPost" class="w-100"><i
 						class="fa-solid fa-comments"></i><span class="mx-2">Comments</span></a></li>
@@ -139,32 +149,49 @@
 		<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
 		<section id="main-data" class="w-85 position-relative">
 			<div class="table-title my-3">
-				<h3 class="h2">Categories</h3>
-			</div>
-
-			<div class="w-100 text-end">
-				<button class="btn btn-success my-2" data-bs-toggle="modal"
-					data-bs-target="#modal" style="transform: translate(-150%)">
-					<i class="fa-solid fa-circle-plus mx-1"></i>Create
-				</button>
+				<h3>User Information</h3>
 			</div>
 			<!-- edited here -->
 			<div id="table-wrapper">
 				<table class="table-fill table table-striped" id="table">
 					<thead class="sticky-top fw-bold ">
 						<tr class="fw-bold">
-							<th>Id</th>
-							<th>Category Name</th>
+							<th>User ID</th>
+							<th>Username</th>
+							<th>Email Address</th>
+							<th>Role</th>
+							<!-- status ka ban tr twt role user ko pl ban loh ya ml -->
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody class="table-hover">
-						<% int id = 1; %>
-						<c:forEach var="category" items="${categories}">
+						<c:forEach var="user" items="${users}">
 							<tr>
-								<td><%= id %></td>
-								<td class="text-capitalize">${category.news_category_name}</td>
+								<td>${user.user_id}</td>
+								<td>${user.user_name}</td>
+								<td>${user.user_name}</td>
+								<td><select onchange="javascript:handleSelect(this)">
+										<option value="${user.user_id}/${user.user_role}">
+											${user.user_role_name}</option>
+										<c:forEach var="roles" items="${roles}">
+											<c:if test="${roles.name != user.user_role_name}">
+												<option value="${user.user_id}/${roles.id}">
+													${roles.name}
+												</option>
+											</c:if>
+										</c:forEach>
+								</select></td>
+								<td><c:choose>
+										<c:when test="${user.user_status == 0}">
+											<a href="/hexa/admin/status/${user.user_id}"
+												class="btn btn-sm btn-danger">Ban</a>
+										</c:when>
+										<c:otherwise>
+											<a href="/hexa/admin/status/${user.user_id}"
+												class="btn btn-sm btn-success">Unban</a>
+										</c:otherwise>
+									</c:choose></td>
 							</tr>
-							<% id++; %>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -192,36 +219,6 @@
 	</main>
 	<!-- main body end here -->
 
-
-	<!-- modal box -->
-	<section id="modal" class="modal fade">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content p-2">
-				<div class="modal-header">
-					<div class="modal-title w-100 text-end">
-						<span class="btn btn-close" data-bs-dismiss="modal"
-							data-bs-target="#modal"></span>
-					</div>
-				</div>
-				<form action="/hexa/admin/add_category" method="POST"
-					class="modal-body">
-					<div class="form-group">
-						<label for="" class="form-label my-1 fw-bold">Category
-							Name</label>
-						<!-- should be unique from this input value -->
-						<input type="text" class="form-control" name="category"
-							placeholder="e.g Sports" required autofocus>
-					</div>
-					<div class="form-group my-2 d-flex justify-content-end gap-2">
-						<button class="btn btn-warning" data-bs-dismiss="modal"
-							data-bs-target="#modal">Cancel</button>
-						<button class="btn btn-success" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</section>
-
 	<!-- bootstrap -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -235,6 +232,9 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 
-	<script src="/js/admin-table.js"></script>
+	<script src="../assets/js/admin-table.js"></script>
+
+	<script src="../assets/js/common.js"></script>
 </body>
+
 </html>

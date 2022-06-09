@@ -28,7 +28,7 @@
 	<section id="navbar" class="navbar navbar-expand sticky-top">
 		<div class="container">
 			<div class="navbar-brand fw-bold h2">
-				<a href="./home.html">Hexa</a>
+				<a href="/hexa/home">Hexa</a>
 			</div>
 			<ul class="navbar-nav gap-4 d-flex align-items-center"
 				id="navbar-nav">
@@ -39,8 +39,9 @@
 					data-bs-target="#categories">Categories</span>
 					<ul class="dropdown-menu p-0 my-3">
 						<c:forEach var="category" items="${categories}">
-							<li class="dropdown-item ">
-							<a href="/hexa/searchByCategory/${category.news_category_id}">${category.news_category_name} </a></li>
+							<li class="dropdown-item "><a
+								href="/hexa/searchByCategory/${category.news_category_id}">${category.news_category_name}
+							</a></li>
 						</c:forEach>
 					</ul></li>
 				<li class="nav-item">About</li>
@@ -75,40 +76,27 @@
 
 
 	<!-- today news -->
-	<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
-		News</p>
-	<div id="welcome" class="container w-75 my-3 gap-3">
-		<div class="col gap-2" id="right">
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img1.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem ipsum dolor sit amet
-						consectetur, adipisicing elit. ....</span> <span class="new-location">|Global</span>
-				</div>
-			</div>
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img2.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem, ipsum dolor sit amet
-						consectetur adipisicing elit...</span> <span class="new-location">|Myanmar</span>
-				</div>
-			</div>
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img3.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit...</span> <span class="new-location">|USA</span>
-				</div>
-			</div>
-			<div class="new-box my-1" id="news">
-				<img src="../assets/img/img4.jpg" class="new-img" alt="image" />
-				<div class="new-layer">
-					<span class="new-title">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit....</span> <span class="new-location">|Myanmar</span>
-				</div>
+	<c:if test="${todayNews.size() > 0 }">
+		<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
+			News</p>
+		<div id="welcome" class="container w-75 my-3 gap-3 mx-auto">
+			<div class="gap-2 container-fluid row mx-auto">
+
+				<c:forEach var="news" items="${todayNews}">
+					<div class="new-box my-1 col-lg-5 col-none-12" id="news">
+						<a href="/hexa/details/${news.news_id}"> <img
+							src="/img/${news.news_img}" class="new-img" alt="image" />
+							<div class="new-layer">
+								<span class="new-title"> ${news.news_name} </span> <span
+									class="new-location">|${news.news_location}</span>
+							</div>
+						</a>
+					</div>
+				</c:forEach>
+
 			</div>
 		</div>
-	</div>
+	</c:if>
 
 	<!-- news -->
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
@@ -133,52 +121,8 @@
 	</div>
 
 
-	<footer id="footer" class="w-100 p-5 ">
-		<div
-			class="container d-flex justify-content between align-items-center row">
-			<div
-				class="col-3 d-flex justify-content-between align-items-start flex-column gap-2">
-				<h3 class="h3 fw-bold text-center text-light">Short Links</h3>
-				<a href="#navbar"><i class="fa-solid fa-house mx-1"></i>Home</a> <a
-					href=""><i class="fa-brands fa-neos mx-1"></i>Today's News</a> <a
-					href="./login.html"><i
-					class="fa-solid fa-right-to-bracket mx-1"></i>Sign In</a> <a
-					href="./register.html"><i class="fa-solid fa-user-plus mx-1"></i>Sign
-					Up</a>
-			</div>
-
-			<div
-				class="col-3 d-flex justify-content-between align-items-start flex-column gap-2">
-				<h3 class="h3 fw-bold text-center text-light">Contact Infos</h3>
-				<a href="mailto:hexa@gmail.com"><i class="fa-solid fa-envelope"></i>
-					- hexa@gmail.com</a> <a href="tel:0912345"><i
-					class="fa-solid fa-mobile "></i> - 09 12345</a> <a href=""><i
-					class="fa-solid fa-map-location-dot"></i> - No.(100),Baker
-					Street,London.</a> <a href=""></a>
-			</div>
-
-			<div
-				class="col-3 d-flex justify-content-between align-items-start flex-column gap-2">
-				<iframe
-					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.6015410613113!2d96.12325231469516!3d16.84611208840508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c194e97475a301%3A0x82c1943b3489933!2sACE%20Inspiration%20Professional%20Development%20Center!5e0!3m2!1sen!2smm!4v1654156664402!5m2!1sen!2smm"
-					allowfullscreen="" loading="lazy"
-					referrerpolicy="no-referrer-when-downgrade"></iframe>
-			</div>
-
-			<div
-				class="col-3 d-flex justify-content-between align-items-start flex-column gap-2">
-				<h3 class="h3 fw-bold text-center text-light">Other Medias</h3>
-				<div class="d-flex gap-2">
-					<a href=""><i class="fa-brands fa-facebook"></i></a> <a href=""><i
-						class="fa-brands fa-github"></i></a> <a href=""><i
-						class="fa-brands fa-discord"></i></a>
-				</div>
-				<span class="h-6 text-center text-light">Created By
-					Hexa_Group(Ace Inspiration)</span>
-			</div>
-		</div>
-	</footer>
-
+	<!-- footer -->
+	<jsp:include page="./layout/footer.jsp" />
 
 
 	<!-- bootstrap -->
@@ -190,8 +134,8 @@
 		type="text/javascript"></script>
 
 	<!-- custom js -->
-	<script src="../assets/js/home.js" type="text/javascript" defer></script>
+	<script src="/js/home.js" type="text/javascript" defer></script>
 
-	<script src="../assets/js/view-detail.js" type="text/javascript"></script>
+	<script src="/js/view-detail.js" type="text/javascript"></script>
 </body>
 </html>

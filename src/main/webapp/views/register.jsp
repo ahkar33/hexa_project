@@ -37,7 +37,7 @@
 			<div class="form-group my-3">
 				<label for="username" class="form-label fw-bold text">Username</label>
 				<form:input type="text" class="input" id="username"
-					path="user_name" required="required" placeholder="Your Name" />
+					path="user_name" required="required" placeholder="Your Name" autofocus="true"/>
 				<i class="fa-solid fa-user"></i>
 			</div>
 			<div class="form-group my-3">
@@ -57,7 +57,7 @@
 			<div class="form-group">
 				<input class="w-100 btn btn-primary" type="submit" value="Register" />
 				<div class="w-100 d-flex justify-content-between my-1">
-					<a href="/hexa/showLogin">Already had?</a>
+					<a href="/hexa/login">Already had?</a>
 				</div>
 			</div>
 		</form:form>

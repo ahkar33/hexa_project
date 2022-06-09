@@ -51,10 +51,22 @@ public class AdminController {
 	}
 
 	@GetMapping("/users")
-	public String showUsers(ModelMap model) {
+	public String showUsers(ModelMap model, HttpSession ses) {
 		ArrayList<UserResponseDto> users = userDao.selectAllUsers();
 		model.addAttribute("users", users);
+		if (((UserResponseDto) ses.getAttribute("userInfo")).getUser_role() == 1) {
+			model.addAttribute("roles", userDao.selectAllRole());
+			return "set-reporters";
+		}
 		return "users";
+	}
+
+	@GetMapping("/role/{user_id}/{user_role}")
+	public String setUserRole(@PathVariable long user_id, @PathVariable int user_role) {
+		if (userDao.updateUserRoleById(user_role, user_id) > 0) {
+			System.out.println("sus");
+		}
+		return "redirect:/hexa/admin/users";
 	}
 
 	@GetMapping("/news")
@@ -70,11 +82,6 @@ public class AdminController {
 		model.addAttribute("categories", categories);
 		return "categories";
 	}
-
-	/*
-	 * @GetMapping("/comments") public String showComments(ModelMap model) { return
-	 * "comments"; }
-	 */
 
 	@GetMapping("/create_news")
 	public ModelAndView setupCreateNews(ModelMap model) {

@@ -45,7 +45,7 @@ public class MainController {
 	private InteractionDao interactionDao;
 
 	@GetMapping("/login")
-	public ModelAndView showLogin() {
+	public ModelAndView showLogin(HttpServletRequest request) {
 		return new ModelAndView("login", "bean", new UserBean());
 	}
 
@@ -112,8 +112,11 @@ public class MainController {
 	public ModelAndView showDetails(@PathVariable long id, ModelMap model) {
 		ArrayList<InteractionResponseDto> interactionDto = interactionDao.selectInteractionByNewsId(id);
 		NewsResponseDto dto = newsDao.selectNewsById(id);
+		ArrayList<NewsResponseDto> newsDto = newsDao.selectAllNews();
+		ArrayList<NewsResponseDto> todayNews = todayNewsService.getTodayNews(newsDto);
 		model.addAttribute("interactions", interactionDto);
 		model.addAttribute("newsDetails", dto);
+		model.addAttribute("todayNews", todayNews);
 		return new ModelAndView("details", "bean", new InteractionBean());
 	}
 

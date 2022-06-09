@@ -41,8 +41,8 @@
 			<div class="form-group my-3">
 				<label for="email" class="form-label fw-bold text">Email
 					Address</label>
-				<form:input type="email" class="input" id="email" path="user_email" required="required"
-					placeholder="Your Email Address" />
+				<form:input type="email"  id="email" class="input" path="user_email" required="required"
+					placeholder="Your Email Address" autofocus="true" />
 				<i class="fa-solid fa-envelope text"></i>
 			</div>
 			<div class="form-group my-3">
