@@ -222,4 +222,18 @@ public class NewsDao {
 		return list;
 	}
 
+	public long getNewsCount() {
+		String sql = "select count(news_id) as news from news";
+		long res = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				res = rs.getInt("news");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}
 }

@@ -46,7 +46,10 @@ public class AdminController {
 	private FileUploadService fileUploadService;
 
 	@GetMapping("/home")
-	public String showDashboard() {
+	public String showDashboard(ModelMap model) {
+		model.addAttribute("reportersCount", userDao.getReportersCount());
+		model.addAttribute("usersCount", userDao.getUsersCount());
+		model.addAttribute("newsCount", newsDao.getNewsCount());
 		return "adminDashboard";
 	}
 
@@ -127,14 +130,42 @@ public class AdminController {
 		return "redirect:/hexa/admin/users";
 	}
 
-	@GetMapping("/selectPost")
-	public String setupShowComments(ModelMap model, HttpSession ses) {
+	// old selectPost Mapping
+	@GetMapping("/allPost")
+	public String setupShowComments(ModelMap model) {
 
 		ArrayList<TempNewsBean> bean = new ArrayList<TempNewsBean>();
 		long comments_count = 0;
 		long commenters_count = 0;
 		String news_title = null;
 		ArrayList<Long> lists = interactionDao.selectCommentedNewsId();
+
+		for (long list : lists) {
+			TempNewsBean newsBean = new TempNewsBean();
+			comments_count = interactionDao.selectCommentCountByNewsId(list);
+			commenters_count = interactionDao.selectCommentersByNewsId(list);
+			news_title = newsDao.selectNewsNameByNewsId(list);
+			newsBean.setId(list);
+			newsBean.setTitle(news_title);
+			newsBean.setCommenters_count(commenters_count);
+			newsBean.setComments_count(comments_count);
+			bean.add(newsBean);
+		}
+
+		model.addAttribute("news", bean);
+		return "setup-comments";
+	}
+
+	// new mapping & method.
+	@GetMapping("/selectPost")
+	public String setupShowComments4Reporter(ModelMap model, HttpSession ses) {
+
+		ArrayList<TempNewsBean> bean = new ArrayList<TempNewsBean>();
+		long comments_count = 0;
+		long commenters_count = 0;
+		String news_title = null;
+		ArrayList<Long> lists = interactionDao
+				.selectCommentedNewsIdByCreatorId(((UserResponseDto) ses.getAttribute("userInfo")).getUser_id());
 
 		for (long list : lists) {
 			TempNewsBean newsBean = new TempNewsBean();

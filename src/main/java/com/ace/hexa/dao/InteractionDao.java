@@ -160,4 +160,19 @@ public class InteractionDao {
 		return result;
 	}
 
+	public ArrayList<Long> selectCommentedNewsIdByCreatorId(long id) {
+		ArrayList<Long> list = new ArrayList<>();
+		String sql = "select distinct i.news_id from interaction as i inner join news as n on i.news_id = n.news_id and n.creator_id=?;";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(rs.getLong("news_id"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return list;
+	}
 }

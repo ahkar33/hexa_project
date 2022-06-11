@@ -185,4 +185,33 @@ public class UserDao {
 		return i;
 	}
 
+	public long getReportersCount() {
+		String sql = "select count(user_id) as repoters from user_account where user_role= 2";
+		long res = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				res = rs.getInt("repoters");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}
+
+	public long getUsersCount() {
+		String sql = "select count(user_id) as users from user_account";
+		long res = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				res = rs.getInt("users");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}
 }
