@@ -3,6 +3,7 @@ package com.ace.hexa.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
@@ -105,31 +106,6 @@ public class NewsDao {
 		return list;
 	}
 
-//	public ArrayList<NewsResponseDto> selectNewsByCategoryId(int id) {
-//		ArrayList<NewsResponseDto> list = new ArrayList<>();
-//		String sql = "select * from news where news_category = ?";
-//		try {
-//			NewsResponseDto res = new NewsResponseDto();
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ps.setInt(1, id);
-//			ResultSet rs = ps.executeQuery();
-//			while (rs.next()) {
-//				res.setNews_id(id);
-//				res.setNews_name(rs.getString("news_name"));
-//				res.setDescriptions(rs.getString("descriptions"));
-//				res.setNews_location(rs.getString("news_location"));
-//				res.setNews_img(rs.getString("news_img"));
-//				res.setNews_category(rs.getInt("news_category"));
-//				res.setCreated_date(rs.getDate("created_date").toLocalDate());
-//				res.setUpdated_date(rs.getDate("updated_date").toLocalDate());
-//				list.add(res);
-//			}
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//		return list;
-//	}
-
 	public int insertNews(NewsRequestDto dto) {
 		String sql = "insert into news (news_name, descriptions, news_img, news_location, news_category, creator_id) values(?, ?, ?, ?, ?, ?)";
 		int i = 0;
@@ -177,13 +153,26 @@ public class NewsDao {
 
 		return false;
 	}
+	
+	public int deleteCategory(long id) {
+		int result = 0;
+		String sql = "DELETE FROM `news_project`.`news_category` WHERE (`news_category_id` = ?);";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, id);
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Database Error!!!");
+		}
+		return result;
+	}
 
-	public ArrayList<NewsResponseDto> selectNewsByCategoryId(int id) {
+	public ArrayList<NewsResponseDto> selectNewsByCategoryId(long id) {
 		ArrayList<NewsResponseDto> list = new ArrayList<>();
 		String sql = "select * from news where news_category=?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				NewsResponseDto res = new NewsResponseDto();
@@ -227,6 +216,22 @@ public class NewsDao {
 		long res = 0;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				res = rs.getInt("news");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
+	}
+	
+	public long getNewsCountByCatId(long id) {
+		String sql = "select count(news_id) as news from news where news_category=?";
+		long res = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				res = rs.getInt("news");

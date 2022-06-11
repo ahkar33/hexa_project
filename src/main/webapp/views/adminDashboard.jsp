@@ -55,17 +55,17 @@
                     <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
                         <span class="h3 fw-bold text-light">Reporters</span>
                         <i class="fa-solid fa-bullhorn text-light" style="font-size:20px !important;"></i>
-                        <span class="h6 text" id="count">10</span>
+                        <span class="h6 text" id="count">${reportersCount}</span>
                     </div>
                     <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
                         <span class="h3 fw-bold text-light">Users</span>
                         <i class="fa-solid fa-users text-light" style="font-size:20px !important;"></i>
-                        <span class="h6 text" id="count">100</span>
+                        <span class="h6 text" id="count">${usersCount}</span>
                     </div>
                     <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
                         <span class="h3 fw-bold text-light">Total News</span>
                         <i class="fa-solid fa-newspaper text-light" style="font-size:20px !important;"></i>
-                        <span class="h6 text" id="count">1000</span>
+                        <span class="h6 text" id="count">${newsCount}</span>
                     </div>
                 </div>
             </main>

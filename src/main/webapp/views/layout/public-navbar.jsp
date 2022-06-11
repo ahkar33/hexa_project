@@ -2,7 +2,7 @@
 <section id="navbar" class="navbar navbar-expand sticky-top">
 		<div class="container">
 			<div class="navbar-brand fw-bold h2">
-				<a href="./home.html">Hexa</a>
+				<a href="/hexa/home">Hexa</a>
 			</div>
 			<ul class="navbar-nav gap-4 d-flex align-items-center"
 				id="navbar-nav">
@@ -24,7 +24,7 @@
 
 
 				<c:if test="${sessionScope.userInfo != null}">
-					<li class="nav-item text-capitalize fw-bold">${sessionScope.userInfo.user_name}</li>
+					<li class="nav-item text-capitalize fw-bold"><a href="/hexa/admin/home">${sessionScope.userInfo.user_name}</a></li>
 					<li class="nav-item"><a href="/hexa/logout" class="text-danger p-1 shadow-sm  fw-bold">Logout</a></li>
 				</c:if>
 				<li class="nav-item"><i
