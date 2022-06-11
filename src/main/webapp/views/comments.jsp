@@ -31,14 +31,14 @@
 		response.sendRedirect("/hexa/home");
 	} else {
 		UserResponseDto dto = (UserResponseDto) session.getAttribute("userInfo");
-		if (dto.getUser_role() == 3) {
+		if (dto.getUser_role() != 1) {
 			response.sendRedirect("/hexa/home");
 		}
 	}
 	%>
 
-	    <!-- navbar -->
-		<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
+	<!-- navbar -->
+	<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
 	
 	
     <!-- main-body start here -->
@@ -79,7 +79,8 @@
                         </tbody>
                     </table>
                </div>
-                       <!-- footer -->
+                
+               <!-- footer -->
  				<jsp:include page="/views/layout/admin-footer.jsp"></jsp:include>
         </section>
     </main>

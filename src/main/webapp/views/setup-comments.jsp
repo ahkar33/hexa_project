@@ -36,7 +36,7 @@
 		response.sendRedirect("/hexa/home");
 	} else {
 		UserResponseDto dto = (UserResponseDto) session.getAttribute("userInfo");
-		if (dto.getUser_role() == 3) {
+		if (dto.getUser_role() != 1) {
 			response.sendRedirect("/hexa/home");
 		}
 	}
