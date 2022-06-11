@@ -61,4 +61,5 @@ CREATE DATABASE IF NOT EXISTS news_project;
             comment_id bigint primary key auto_increment
         )
 
+
     

@@ -187,13 +187,24 @@ body {
     -webkit-box-align: start !important;
         -ms-flex-align: start !important;
             align-items: flex-start !important;
-    background: #f5c57f;
+    background:rgba(0, 0, 0, 0.95);
     text-align: start;
     z-index: 100;
     margin-left: -350px;
     -webkit-transition: 0.5s all;
     transition: 0.5s all;
+    text-align: left;
   }
+
+  #navbar-nav .nav-item{
+    color:rgba(255,255,255,0.75);
+  }
+
+  #navbar-nav i{
+    color:rgba(255,255,255,0.75);
+  }
+
+
   #welcome {
     width: 98% !important;
     margin: 50px 0;

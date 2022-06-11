@@ -25,60 +25,13 @@
 </head>
 <body>
 	<!-- navbar -->
-	<section id="navbar" class="navbar navbar-expand sticky-top">
-		<div class="container">
-			<div class="navbar-brand fw-bold h2">
-				<a href="./home.html">Hexa</a>
-			</div>
-			<ul class="navbar-nav gap-4 d-flex align-items-center"
-				id="navbar-nav">
-				<li class="nav-item active fw-bold"><a href="/hexa/home">Home</a></li>
-				<li class="nav-item"><a href="#news">News</a></li>
-				<li class="nav-item dropdown" id="Categories"><span
-					class="dropdown-toggle" data-bs-toggle="dropdown"
-					data-bs-target="#categories">Categories</span>
-					<ul class="dropdown-menu p-0 my-3">
-						<c:forEach var="category" items="${categories}">
-							<li class="dropdown-item ">
-							<a href="/hexa/searchByCategory/${category.news_category_id}">${category.news_category_name} </a></li>
-						</c:forEach>
-					</ul></li>
-				<li class="nav-item">About</li>
-				<li class="nav-item"><a href="#footer">Contacts</a></li>
-				<li class="nav-item"><i
-					class="fa-solid fa-magnifying-glass btn" id="btn-search"
-					data-bs-target="#search" data-bs-toggle="modal"></i></li>
-
-			</ul>
-			<i class="fa-solid fa-bars" id="btn-menu"></i>
-		</div>
-		<div id="menu-layer" class=""></div>
-	</section>
-
-	<!-- model for search -->
-	<section class="modal fade" id="search">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<span class="btn-close" data-bs-dismiss="modal"></span>
-				</div>
-				<form class="modal-body form">
-					<div class="form-group">
-						<input type="search" class="form-control" name="search"
-							placeholder="Type to search..." autofocus />
-						<button type="submit" class="d-none"></button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</section>
-
+	<jsp:include page="./layout/public-navbar.jsp" />
 
 	<!-- today news -->
 	<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
 		News</p>
 	<div id="welcome" class="container w-75 my-3 gap-3 mx-auto">
-		<div class="gap-2 container-fluid row mx-auto">
+		<div class="gap-2 container-fluid row mx-auto d-flex justify-content-center gap-1 flex-wrap">
 			<div class="new-box my-1 col-lg-5 col-none-12" id="news">
 				<img src="../assets/img/img1.jpg" class="new-img" alt="image" />
 				<div class="new-layer">
@@ -111,13 +64,13 @@
 	</div>
 
 	<!-- news -->
-	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
+	<div class="container w-75 my-5 mx-auto gap-2 row text-start d-flex justify-content-start flex-wrap">
 		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
 		<div id="news-wrapper"
 			class="w-100 row d-flex justify-content-around flew-wrap">
 			<c:forEach var="news" items="${newsList}">
 				<div
-					class="new-box my-1 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
+					class="new-box my-4 col-xl-4 col-lg-5 col-sm-12 text-light fw-bold"
 					id="news">
 					<a href="/hexa/details/${news.news_id}"> <img
 						src="/img/${news.news_img}" class="new-img" alt="image" />
@@ -134,7 +87,7 @@
 
 
 	<!-- footer -->
-	<jsp:include page="./layout/footer.jsp"/>
+	<jsp:include page="./layout/public-footer.jsp"/>
 
 
 	<!-- bootstrap -->

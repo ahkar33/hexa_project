@@ -37,8 +37,8 @@
 	}
 	%>
 
-	    <!-- navbar -->
-		<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
+	<!-- navbar -->
+	<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
 	
 	
     <!-- main-body start here -->
@@ -79,7 +79,8 @@
                         </tbody>
                     </table>
                </div>
-                       <!-- footer -->
+                
+               <!-- footer -->
  				<jsp:include page="/views/layout/admin-footer.jsp"></jsp:include>
         </section>
     </main>

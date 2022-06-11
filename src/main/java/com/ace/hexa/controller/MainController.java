@@ -59,6 +59,8 @@ public class MainController {
 				return "login";
 			}
 			session.setAttribute("userInfo", dto);
+
+
 			if (dto.getUser_role() == 1) {
 				return "redirect:/hexa/admin/home";
 			} else if (dto.getUser_role() == 2) {

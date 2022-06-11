@@ -28,58 +28,14 @@
 </head>
 <body>
 	<!-- navbar -->
-	<section id="navbar" class="navbar navbar-expand sticky-top">
-		<div class="container">
-			<div class="navbar-brand fw-bold h2">
-				<a href="./home.html">Hexa</a>
-			</div>
-			<ul class="navbar-nav gap-4 d-flex align-items-center"
-				id="navbar-nav">
-				<li class="nav-item active fw-bold"><a href="/hexa/home">Home</a></li>
-				<li class="nav-item"><a href="./home.html#news">News</a></li>
-				<li class="nav-item dropdown" id="Categories"><span
-					class="dropdown-toggle" data-bs-toggle="dropdown"
-					data-bs-target="#categories">Categories</span>
-					<ul class="dropdown-menu p-0 my-3">
-						<li class="dropdown-item ">Global</li>
-						<li class="dropdown-item">Local</lsi>
-						<li class="dropdown-item ">Hot News</li>
-					</ul></li>
-				<li class="nav-item">About</li>
-				<li class="nav-item"><a href="#footer">Contacts</a></li>
-				<li class="nav-item"><i
-					class="fa-solid fa-magnifying-glass btn" id="btn-search"
-					data-bs-target="#search" data-bs-toggle="modal"></i></li>
-			</ul>
-			<i class="fa-solid fa-bars" id="btn-menu"></i>
-		</div>
-		<div id="menu-layer" class=""></div>
-	</section>
-
-	<!-- model for search -->
-	<section class="modal fade" id="search">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<span class="btn-close" data-bs-dismiss="modal"></span>
-				</div>
-				<form class="modal-body form">
-					<div class="form-group">
-						<input type="search" class="form-control" name="search"
-							placeholder="Type to search..." autofocus />
-						<button type="submit" class="d-none"></button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</section>
+	<jsp:include page="./layout/public-navbar.jsp" />
 
 	<div class="container">
 		<div id="news-wrapper"
-			class="d-flex justify-content-between align-items-center gap-5">
-			<div id="news" class="my-5 w-75">
-				<h3 class="h3 text-dark fw-bold my-2" id="news-title">
-					${newsDetails.news_name}</h3>
+			class="d-flex justify-content-between align-items-center gap-3 row mx-auto">
+			<div id="news" class="my-5 col-xl-7   col-md-12 d-flex flex-column ">
+				<h3 class="h3 text-warning fw-bold text-warning mx-auto " id="news-title">
+					"${newsDetails.news_name}"</h3>
 				<div id="news-image" class="my-3 w-100">
 					<img src="/img/${newsDetails.news_img}">
 					<div id="layer" class="d-flex justify-content-end align-items-start flex-column p-3">
@@ -95,7 +51,7 @@
 					<p class="w-100">${newsDetails.descriptions}</p>
 				</div>
 			</div>
-			<div id="others" class="my-5 d-flex flex-column gap-3">
+			<div id="others" class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
 				<div id="other-news">
 					<img src="../assets/img/main.jpg" alt="">
 					<div id="layer"
@@ -139,27 +95,10 @@
 				</div>
 			</div>
 		</div>
-		<div id="comments-wrapper" class="my-5 d-flex justify-content-center">
+		<div id="comments-wrapper" class="my-5 d-flex justify-content-center row flex-wrap">
 		
-			
-		<%
-			if (session.getAttribute("userInfo") != null) {
-		%>	
-
-			<form:form action="/hexa/details/addComment/${newsDetails.news_id}"
-				method="post" class="form w-50" modelAttribute="bean">
-				<form:input type="hidden" path="user_id" value="${userInfo.user_id}" />
-				<form:textarea name="" id="" cols="30" rows="10"
-					class="form-control my-1" placeholder="Comment here"
-					path="comments"></form:textarea>
-				<button type="submit" class="btn btn-primary w-100">Comment</button>
-			</form:form>
-
-		<%
-			}	
-		%>	
 			<c:if test="${interactions.size() > 0}">	
-			<div id="comments" class="w-50 p-3">
+			<div id="comments" class="p-3 col-xl-6 col-md-12 my-3">
 				<c:forEach var="interaction" items="${interactions}">
 					<div id="comment" class="my-2">
 						<div id="info" class="d-flex gap-2 align-items-center">
@@ -176,13 +115,27 @@
 				</c:forEach>
 			</div>
 			</c:if>
+
+			<%
+			if (session.getAttribute("userInfo") != null) {
+		%>	
+
+			<form:form action="/hexa/details/addComment/${newsDetails.news_id}"
+				method="post" class="form col-xl-6 col-md-12" modelAttribute="bean">
+				<form:input type="hidden" path="user_id" value="${userInfo.user_id}" />
+				<form:textarea path="comments" id="" cols="30" rows="10" class="form-control my-1" placeholder="Comment here"></form:textarea>
+				<button type="submit" class="btn btn-primary w-100">Comment</button>
+			</form:form>
+
+		<%
+			}	
+		%>	
 		</div>
 	</div>
 
 
-
 	<!-- footer -->
-	<jsp:include page="./layout/footer.jsp" />
+	<jsp:include page="./layout/public-footer.jsp" />
 
 
 
