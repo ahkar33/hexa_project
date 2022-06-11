@@ -22,15 +22,15 @@
 </head>
 <body>
 	<%
-	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-	if(session.getAttribute("userInfo") == null) {
-		response.sendRedirect("/hexa/home");
-	} else {
-		UserResponseDto dto = (UserResponseDto) session.getAttribute("userInfo");
-		if (dto.getUser_role() != 1) {
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		if(session.getAttribute("userInfo") == null) {
 			response.sendRedirect("/hexa/home");
+		} else {
+			UserResponseDto dto = (UserResponseDto) session.getAttribute("userInfo");
+			if (dto.getUser_role() ==3 ) {
+		response.sendRedirect("/hexa/home");
+			}
 		}
-	}
 	%>
     <!-- top navbar start here -->
     <section id="navbar" class="navbar navbar-expand fw-bold text shadow-sm sticy-top">
