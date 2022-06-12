@@ -25,58 +25,10 @@
 </head>
 <body>
 	<!-- navbar -->
-	<section id="navbar" class="navbar navbar-expand sticky-top">
-		<div class="container">
-			<div class="navbar-brand fw-bold h2">
-				<a href="/hexa/home">Hexa</a>
-			</div>
-			<ul class="navbar-nav gap-4 d-flex align-items-center"
-				id="navbar-nav">
-				<li class="nav-item active fw-bold"><a href="/hexa/home">Home</a></li>
-				<li class="nav-item"><a href="#news">News</a></li>
-				<li class="nav-item dropdown" id="Categories"><span
-					class="dropdown-toggle" data-bs-toggle="dropdown"
-					data-bs-target="#categories">Categories</span>
-					<ul class="dropdown-menu p-0 my-3">
-						<c:forEach var="category" items="${categories}">
-							<li class="dropdown-item "><a
-								href="/hexa/searchByCategory/${category.news_category_id}">${category.news_category_name}
-							</a></li>
-						</c:forEach>
-					</ul></li>
-				<li class="nav-item">About</li>
-				<li class="nav-item"><a href="#footer">Contacts</a></li>
-				<li class="nav-item"><i
-					class="fa-solid fa-magnifying-glass btn" id="btn-search"
-					data-bs-target="#search" data-bs-toggle="modal"></i></li>
-
-			</ul>
-			<i class="fa-solid fa-bars" id="btn-menu"></i>
-		</div>
-		<div id="menu-layer" class=""></div>
-	</section>
-
-	<!-- model for search -->
-	<section class="modal fade" id="search">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<span class="btn-close" data-bs-dismiss="modal"></span>
-				</div>
-				<form class="modal-body form">
-					<div class="form-group">
-						<input type="search" class="form-control" name="search"
-							placeholder="Type to search..." autofocus />
-						<button type="submit" class="d-none"></button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</section>
-
+	<jsp:include page="./layout/public-navbar.jsp" />
 
 	<!-- today news -->
-	<c:if test="${todayNews.size() > 0 }">
+		<c:if test="${todayNews.size() > 0 }">
 		<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
 			News</p>
 		<div id="welcome" class="container w-75 my-3 gap-3 mx-auto">
@@ -122,7 +74,7 @@
 
 
 	<!-- footer -->
-	<jsp:include page="./layout/footer.jsp" />
+	<jsp:include page="./layout/public-footer.jsp"/>
 
 
 	<!-- bootstrap -->

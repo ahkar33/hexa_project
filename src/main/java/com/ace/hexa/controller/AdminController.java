@@ -85,6 +85,39 @@ public class AdminController {
 		model.addAttribute("categories", categories);
 		return "categories";
 	}
+	
+	//for admin.
+	@GetMapping("/manageCategories")
+	public String manageCategories(ModelMap model) {
+		ArrayList<CategoryResponseDto> tmpCategories = newsDao.selectAllNewsCategory();
+		ArrayList<CategoryResponseDto> categories = new ArrayList<>();
+		for(CategoryResponseDto cat:tmpCategories) {
+			CategoryResponseDto tmpCat = new CategoryResponseDto();
+			tmpCat.setNews_category_id(cat.getNews_category_id());
+			tmpCat.setNews_category_name(cat.getNews_category_name());
+			tmpCat.setNews_count(newsDao.getNewsCountByCatId(cat.getNews_category_id()));
+			categories.add(tmpCat);
+		}
+		model.addAttribute("categories", categories);
+		return "adminCategories";
+	}
+	
+	@GetMapping("/deleteCategory/{catId}")
+	public String delCat(@PathVariable long catId, ModelMap model) {
+		try {
+			int i = newsDao.deleteCategory(catId);
+			if (i > 0) {
+				model.addAttribute("err", "Successfully Deleted.");
+			} else {
+				model.addAttribute("err", "Delete Failed!");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/hexa/admin/manageCategories";
+	}
 
 	@GetMapping("/create_news")
 	public ModelAndView setupCreateNews(ModelMap model) {
@@ -201,10 +234,8 @@ public class AdminController {
 		int i = interactionDao.deleteComment(cmtId);
 		if (i > 0) {
 			model.addAttribute("err", "Successfully Deleted.");
-			System.out.println("successfully deleted");
 		} else {
 			model.addAttribute("err", "Delete Failed!");
-			System.out.println("deleting fail!!!");
 		}
 		return "redirect:/hexa/admin/comments/" + newsId;
 	}

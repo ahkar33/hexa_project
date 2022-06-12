@@ -80,7 +80,7 @@ public class UserDao {
 	}
 
 	public UserResponseDto selectByEmail(String user_email) {
-		String sql = "select * from user_account where user_email=?";
+		String sql = "select * from user_account join user_role on user_account.user_role = user_role.user_role_id where user_email=?";
 		UserResponseDto res = new UserResponseDto();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -92,6 +92,7 @@ public class UserDao {
 				res.setUser_role(rs.getInt("user_role"));
 				res.setUser_email(rs.getString("user_email"));
 				res.setUser_password(rs.getString("user_password"));
+				res.setUser_role_name(rs.getString("user_role_name"));
 				res.setUser_status(rs.getInt("user_status"));
 			}
 		} catch (Exception e) {
