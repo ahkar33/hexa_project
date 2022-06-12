@@ -55,12 +55,15 @@ public class AdminController {
 
 	@GetMapping("/users")
 	public String showUsers(ModelMap model, HttpSession ses) {
-		ArrayList<UserResponseDto> users = userDao.selectAllUsers();
-		model.addAttribute("users", users);
+		ArrayList<UserResponseDto> users = new ArrayList<>();
 		if (((UserResponseDto) ses.getAttribute("userInfo")).getUser_role() == 1) {
+			users = userDao.selectAllExceptAdmins();
+			model.addAttribute("users", users);
 			model.addAttribute("roles", userDao.selectAllRole());
 			return "set-reporters";
 		}
+		users = userDao.selectAllUsers();
+		model.addAttribute("users", users);
 		return "users";
 	}
 
@@ -73,9 +76,16 @@ public class AdminController {
 	}
 
 	@GetMapping("/news")
-	public String showNews(ModelMap model) {
-		ArrayList<NewsResponseDto> news = newsDao.selectAllNews();
+	public String showNews(ModelMap model, HttpSession ses) {
+		ArrayList<NewsResponseDto> news = new ArrayList<>();
+		UserResponseDto usr = (UserResponseDto) ses.getAttribute("userInfo");
+		if (usr.getUser_role() == 1) {
+		news = newsDao.selectAllNews();
 		model.addAttribute("news", news);
+		}else {
+		news = newsDao.selectNewsByCreatorId(usr.getUser_id());
+		model.addAttribute("news", news);
+		}
 		return "news";
 	}
 

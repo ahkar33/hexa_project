@@ -103,7 +103,7 @@ public class UserDao {
 
 	public ArrayList<UserResponseDto> selectAllUsers() {
 		ArrayList<UserResponseDto> list = new ArrayList<>();
-		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_account.user_status, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id order by user_account.user_id";
+		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_account.user_status, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id where user_role = 3 order by user_account.user_id";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -122,6 +122,27 @@ public class UserDao {
 		return list;
 	}
 
+	public ArrayList<UserResponseDto> selectAllExceptAdmins() {
+		ArrayList<UserResponseDto> list = new ArrayList<>();
+		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_account.user_status, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id where user_account.user_role <> 1 order by user_account.user_id";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				UserResponseDto res = new UserResponseDto();
+				res.setUser_id(rs.getLong("user_id"));
+				res.setUser_name(rs.getString("user_name"));
+				res.setUser_email(rs.getNString("user_email"));
+				res.setUser_role_name(rs.getString("user_role_name"));
+				res.setUser_status(rs.getInt("user_status"));
+				list.add(res);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return list;
+	}
+	
 	public int insertUser(UserRequestDto dto) {
 		String sql = "insert into user_account (user_name, user_role, user_email, user_password, user_status) values(?, ?, ?, ?, ?)";
 		int i = 0;
