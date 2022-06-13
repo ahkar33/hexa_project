@@ -18,7 +18,7 @@ $(document).ready(() => {
     
         const counter = setInterval(() => {
             let currentVal = Number(count.textContent);
-            currentVal += 10 ;
+            currentVal += 1 ;
             if(currentVal == realVal) clearInterval(counter)
             count.textContent = currentVal;
         },10);

@@ -26,26 +26,34 @@
 <body>
 	<!-- navbar -->
 	<jsp:include page="./layout/public-navbar.jsp" />
+	
+	<!-- categories -->
+	<section id="categories" class="container my-5">
+		<div class="container-fluid d-flex gap-1 justify-content-center align-items-center flex-wrap">
+			<c:forEach var="category" items="${categories}">
+				<a href="/hexa/searchByCategory/${category.news_category_id}" class="btn btn-sm fw-bold p-2 shadow-sm text-danger">${category.news_category_name} </a>
+			</c:forEach>
+		</div>
+	</section>
 
 	<!-- today news -->
 		<c:if test="${todayNews.size() > 0 }">
 		<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
 			News</p>
 		<div id="welcome" class="container w-75 my-3 gap-3 mx-auto">
-			<div class="gap-2 container-fluid row mx-auto">
+			<div class="gap-2 container-fluid row mx-auto d-flex justify-content-center flex-wrap">
 
 				<c:forEach var="news" items="${todayNews}">
 					<div class="new-box my-1 col-lg-5 col-none-12" id="news">
 						<a href="/hexa/details/${news.news_id}"> <img
 							src="/img/${news.news_img}" class="new-img" alt="image" />
 							<div class="new-layer">
-								<span class="new-title"> ${news.news_name} </span> <span
-									class="new-location">|${news.news_location}</span>
+								<span class="new-title text-capitalize fw-bold"> ${news.news_name} </span> <span
+									class="new-location fw-bold">|${news.news_location}</span>
 							</div>
 						</a>
 					</div>
 				</c:forEach>
-
 			</div>
 		</div>
 	</c:if>
@@ -54,16 +62,16 @@
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
 		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
 		<div id="news-wrapper"
-			class="w-100 row d-flex justify-content-around flew-wrap">
+			class="w-100 row d-flex justify-content-center flew-wrap gap-1">
 			<c:forEach var="news" items="${newsList}">
 				<div
-					class="new-box my-1 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
+					class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
 					id="news">
 					<a href="/hexa/details/${news.news_id}"> <img
 						src="/img/${news.news_img}" class="new-img" alt="image" />
 						<div class="new-layer">
-							<span class="new-title"> ${news.news_name} </span> <span
-								class="new-location">|${news.news_location}</span>
+							<span class="new-title text-capitalize"> ${news.news_name} </span> <span
+								class="new-location text-dark text-capitalize">|${news.news_location}</span>
 						</div>
 					</a>
 				</div>

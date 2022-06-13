@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <section id="sidebar" class="dark-bg p-0 m-0 position-relative">
-            <h3 class="h5 text-center text-light py-3" id="dash-title"><a href="/hexa/admin/home">Admin Dashboard</a></h3>
+            <h3 class="h5 text-center text-light py-3" id="dash-title"><a href="/hexa/admin/home">Dashboard</a></h3>
 
             <ul id="sidebar-list" class="list-group  gap-2 w-100">
                <li id="sidebar-item" class="list-item p-2 px-3 m-0 text"><a href="/hexa/admin/users" class="w-100"><i class="fa-solid fa-users"></i><span class="mx-2">Users</span></a></li>

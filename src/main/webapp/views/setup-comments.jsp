@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Users</title>
+<title>Comments</title>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -31,7 +31,7 @@
 </head>
 <body>
 	<%
-	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	if (session.getAttribute("userInfo") == null) {
 		response.sendRedirect("/hexa/home");
 	} else {
@@ -62,23 +62,25 @@
 				<table class="table-fill table table-striped" id="table">
 					<thead class="sticky-top fw-bold ">
 						<tr class="fw-bold">
-							<th>News Id</th>
+							<th>No.</th>
 							<th>News Title</th>
-							<th>No Of Commenters</th>
-							<th>No Of Comments</th>
+							<th>Commnter Count</th>
+							<th>Comment Count</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody class="table-hover">
-					
+
+						<c:set var="count" value="0" scope="page" />
 						<c:forEach var="news" items="${news}">
 							<tr>
-								<td>${news.id}</td>
-								<td>${news.title}</td>
+								<c:set var="count" value="${count + 1}" scope="page" />
+								<td scope="row">${count}</td>
+								<td class="text-capitalize">${news.title}</td>
 								<td>${news.commenters_count}</td>
 								<td>${news.comments_count}</td>
-					
-								<td><a href="/hexa/admin/comments/${news.id}" class="btn btn-light">Detail</a></td>
+								<td><a href="/hexa/admin/comments/${news.id}"
+									class="btn btn-success text-dark btn-sm">Detail</a></td>
 							</tr>
 						</c:forEach>
 

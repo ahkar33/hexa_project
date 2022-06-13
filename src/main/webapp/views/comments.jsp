@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users</title>
+    <title>Comments</title>
      <!-- bootstrap -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" type="text/css">
 
@@ -65,16 +65,18 @@
                             </tr>
                         </thead>
                         <tbody class="table-hover">
+                        <% int id = 1; %>
 						<c:forEach var="interactions" items="${interactions}" varStatus="stus" >
                             <tr>
-                                <td>${interactions.comment_id }</td>
-                                <td>${interactions.comments }</td>
-                                <td>${commenters[stus.index]}</td>
+                                <td><%= id %></td>
+                                <td class="text-capitalize">${interactions.comments }</td>
+                                <td class="text-capitalize">${commenters[stus.index]}</td>
                                 <td>${interactions.commented_date }</td>
                                 <td>
-                                    <a href="/hexa/admin/delete/${interactions.comment_id }" class="btn btn-danger" id="btn-ban">Delete</a>
+                                    <a href="/hexa/admin/delete/${interactions.comment_id }" class="btn btn-danger btn-sm" id="btn-ban" onclick="return confirm('Are you sure to delete?');">Delete</a>
                                 </td>
                             </tr>
+                            <% id++; %>
 						</c:forEach>
                         </tbody>
                     </table>

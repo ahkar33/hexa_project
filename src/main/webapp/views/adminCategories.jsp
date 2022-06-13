@@ -48,7 +48,7 @@
 
 	<!-- main-body start here -->
 	<main id="main-body" class="w-100 p-0 m-0 d-flex">
-			
+
 		<!-- sidebar -->
 		<jsp:include page="./layout/admin-sidebar.jsp" />
 
@@ -75,29 +75,32 @@
 						</tr>
 					</thead>
 					<tbody class="table-hover">
+						<c:set var="count" value="0" scope="page" />
 						<c:forEach var="category" items="${categories}">
 							<tr>
-								<td class="text-capitalize">${category.news_category_id}</td>
+								<c:set var="count" value="${count + 1}" scope="page" />
+								<td class="text-capitalize">${count}</td>
 								<td class="text-capitalize">${category.news_category_name}</td>
 								<td class="text-capitalize">${category.news_count}</td>
-								<td>
-								<c:choose>
+								<td><c:choose>
 										<c:when test="${category.news_count == 0}">
-											<a href="/hexa/admin/deleteCategory/${category.news_category_id}" class="btn btn-sm btn-danger text-dark" onclick="return confirm('Are you sure to delete?');">Delete</a>
-										</c:when>	
+											<a
+												href="/hexa/admin/deleteCategory/${category.news_category_id}"
+												class="btn btn-sm btn-danger text-dark"
+												onclick="return confirm('Are you sure to delete?');">Delete</a>
+										</c:when>
 										<c:otherwise>
 											-
 										</c:otherwise>
-								</c:choose>
-								</td>
+									</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-			
+
 			<!-- footer -->
-            <jsp:include page="./layout/admin-footer.jsp" />
+			<jsp:include page="./layout/admin-footer.jsp" />
 		</section>
 	</main>
 	<!-- main body end here -->

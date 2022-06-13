@@ -32,8 +32,8 @@
 </head>
 <body>
 	<%
-	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-	if(session.getAttribute("userInfo") == null) {
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	if (session.getAttribute("userInfo") == null) {
 		response.sendRedirect("/hexa/home");
 	} else {
 		UserResponseDto dto = (UserResponseDto) session.getAttribute("userInfo");
@@ -42,7 +42,7 @@
 		}
 	}
 	%>
-	
+
 	<!-- navbar -->
 	<jsp:include page="./layout/admin-navbar.jsp" />
 
@@ -51,8 +51,7 @@
 		<!-- sidebar -->
 		<jsp:include page="./layout/admin-sidebar.jsp" />
 
-		
-		<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
+
 		<section id="main-data" class="w-85 position-relative">
 			<div class="table-title my-3">
 				<h3>User Information</h3>
@@ -62,7 +61,7 @@
 				<table class="table-fill table table-striped" id="table">
 					<thead class="sticky-top fw-bold ">
 						<tr class="fw-bold">
-							<th>User ID</th>
+							<th>No.</th>
 							<th>Username</th>
 							<th>Email Address</th>
 							<th>Role</th>
@@ -71,30 +70,34 @@
 						</tr>
 					</thead>
 					<tbody class="table-hover">
+						<c:set var="count" value="0" scope="page" />
 						<c:forEach var="user" items="${users}">
 							<tr>
-								<td>${user.user_id}</td>
+								<c:set var="count" value="${count + 1}" scope="page" />
+								<td class="text-capitalize">${count}</td>
 								<td class="text-capitalize">${user.user_name}</td>
-								<td>${user.user_email}</td>
+								<td class="text-capitablize">${user.user_email}</td>
 								<td class="text-capitalize">${user.user_role_name}</td>
-								<td>
-									<c:choose>
+								<td><c:choose>
 										<c:when test="${user.user_status == 0}">
-											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-danger text-dark" onclick="return confirm('Are you sure to ban?');">Ban</a>
-										</c:when>	
+											<a href="/hexa/admin/status/${user.user_id}"
+												class="btn btn-sm btn-danger text-dark"
+												onclick="return confirm('Are you sure to ban?');">Ban</a>
+										</c:when>
 										<c:otherwise>
-											<a href="/hexa/admin/status/${user.user_id}" class="btn btn-sm btn-warning text-dark" onclick="return confirm('Are you sure to unban?');">Unban</a>
+											<a href="/hexa/admin/status/${user.user_id}"
+												class="btn btn-sm btn-warning text-dark"
+												onclick="return confirm('Are you sure to unban?');">Unban</a>
 										</c:otherwise>
-									</c:choose>
-								</td>
+									</c:choose></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-		
+
 			<!-- footer -->
-            <jsp:include page="./layout/admin-footer.jsp" />
+			<jsp:include page="./layout/admin-footer.jsp" />
 		</section>
 	</main>
 	<!-- main body end here -->
@@ -112,8 +115,10 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 
+
 	<script src="/js/admin-table.js"></script>
 
 	<script src="/js/common.js"></script>
+
 </body>
 </html>

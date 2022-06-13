@@ -55,12 +55,15 @@ public class AdminController {
 
 	@GetMapping("/users")
 	public String showUsers(ModelMap model, HttpSession ses) {
-		ArrayList<UserResponseDto> users = userDao.selectAllUsers();
-		model.addAttribute("users", users);
+		ArrayList<UserResponseDto> users = new ArrayList<>();
 		if (((UserResponseDto) ses.getAttribute("userInfo")).getUser_role() == 1) {
+			users = userDao.selectAllExceptAdmins();
+			model.addAttribute("users", users);
 			model.addAttribute("roles", userDao.selectAllRole());
 			return "set-reporters";
 		}
+		users = userDao.selectAllUsers();
+		model.addAttribute("users", users);
 		return "users";
 	}
 
@@ -73,9 +76,16 @@ public class AdminController {
 	}
 
 	@GetMapping("/news")
-	public String showNews(ModelMap model) {
-		ArrayList<NewsResponseDto> news = newsDao.selectAllNews();
-		model.addAttribute("news", news);
+	public String showNews(ModelMap model, HttpSession ses) {
+		ArrayList<NewsResponseDto> news = new ArrayList<>();
+		UserResponseDto usr = (UserResponseDto) ses.getAttribute("userInfo");
+		if (usr.getUser_role() == 1) {
+			news = newsDao.selectAllNews();
+			model.addAttribute("news", news);
+		} else {
+			news = newsDao.selectNewsByCreatorId(usr.getUser_id());
+			model.addAttribute("news", news);
+		}
 		return "news";
 	}
 
@@ -85,13 +95,13 @@ public class AdminController {
 		model.addAttribute("categories", categories);
 		return "categories";
 	}
-	
-	//for admin.
+
+	// for admin.
 	@GetMapping("/manageCategories")
 	public String manageCategories(ModelMap model) {
 		ArrayList<CategoryResponseDto> tmpCategories = newsDao.selectAllNewsCategory();
 		ArrayList<CategoryResponseDto> categories = new ArrayList<>();
-		for(CategoryResponseDto cat:tmpCategories) {
+		for (CategoryResponseDto cat : tmpCategories) {
 			CategoryResponseDto tmpCat = new CategoryResponseDto();
 			tmpCat.setNews_category_id(cat.getNews_category_id());
 			tmpCat.setNews_category_name(cat.getNews_category_name());
@@ -101,7 +111,7 @@ public class AdminController {
 		model.addAttribute("categories", categories);
 		return "adminCategories";
 	}
-	
+
 	@GetMapping("/deleteCategory/{catId}")
 	public String delCat(@PathVariable long catId, ModelMap model) {
 		try {
@@ -115,7 +125,7 @@ public class AdminController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return "redirect:/hexa/admin/manageCategories";
 	}
 
@@ -142,12 +152,19 @@ public class AdminController {
 	}
 
 	@PostMapping("/add_category")
-	public String addCategory(@RequestParam String category, ModelMap model) {
+	public String addCategory(@RequestParam String category, ModelMap model, HttpSession session) {
+		UserResponseDto userInfo = (UserResponseDto) session.getAttribute("userInfo");
 		if (!newsDao.checkCategory(category)) {
 			CategoryRequestDto dto = new CategoryRequestDto();
 			dto.setNews_category_name(category);
 			newsDao.insertCategory(dto);
+			if (userInfo.getUser_role() == 1) {
+				return "redirect:/hexa/admin/manageCategories";
+			}
 			return "redirect:/hexa/admin/categories";
+		}
+		if (userInfo.getUser_role() == 1) {
+			return "redirect:/hexa/admin/manageCategories";
 		}
 		return "redirect:/hexa/admin/categories";
 	}

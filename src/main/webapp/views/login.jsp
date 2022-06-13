@@ -20,8 +20,6 @@
 	var="css" />
 <link href="${css}" rel="stylesheet" />
 
-
-
 <!-- fontawesome -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -49,10 +47,12 @@
 				<label for="password" class="form-label fw-bold text">Password</label>
 				<form:input type="password" id="password" class="input" required="required"
 					path="user_password" placeholder="Your Password" />
+					<i class="fa-solid fa-lock text"></i>
 			</div>
 			<div class="form-group">
 				<input class="w-100 btn btn-primary" type="submit" value="Login" />
  				<div class="w-100 d-flex justify-content-between my-1">
+					<a href="/hexa/home" class="text-danger">Back</a>
 					 <a href="/hexa/register">Create?</a>
 				</div> 
 			</div>

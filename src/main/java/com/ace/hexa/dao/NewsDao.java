@@ -88,6 +88,33 @@ public class NewsDao {
 		return res;
 	}
 
+	public ArrayList<NewsResponseDto> selectNewsByCreatorId(long id) {
+		ArrayList<NewsResponseDto> list = new ArrayList<>();
+		String sql = "select * from news_project.news JOIN user_account on news.creator_id = user_account.user_id JOIN news_category on news.news_category = news_category.news_category_id where news.creator_id = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				NewsResponseDto res = new NewsResponseDto();
+				res.setNews_id(rs.getLong("news_id"));
+				res.setNews_name(rs.getString("news_name"));
+				res.setDescriptions(rs.getString("descriptions"));
+				res.setNews_img(rs.getString("news_img"));
+				res.setNews_location(rs.getString("news_location"));
+				res.setNews_status(rs.getString("news_status"));
+				res.setCreator_name(rs.getString("user_name"));
+				res.setNews_category_name(rs.getString("news_category_name"));
+				res.setCreated_date(rs.getDate("created_date").toLocalDate());
+				res.setUpdated_date(rs.getDate("updated_date").toLocalDate());
+				list.add(res);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return list;
+	}
+	
 	public ArrayList<CategoryResponseDto> selectAllNewsCategory() {
 		ArrayList<CategoryResponseDto> list = new ArrayList<>();
 		String sql = "select * from news_category";
@@ -192,24 +219,6 @@ public class NewsDao {
 		return list;
 	}
 
-	public ArrayList<NewsResponseDto> selectNewsByCreatorId(long id) {
-		ArrayList<NewsResponseDto> list = new ArrayList<>();
-		String sql = "select news_id, news_name from news where creator_id = ?";
-		try {
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setLong(1, id);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				NewsResponseDto res = new NewsResponseDto();
-				res.setNews_id(rs.getLong("news_id"));
-				res.setNews_name(rs.getString("news_name"));
-				list.add(res);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return list;
-	}
 
 	public long getNewsCount() {
 		String sql = "select count(news_id) as news from news";

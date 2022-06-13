@@ -12,10 +12,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register</title>
 
-<!-- bootstrap -->
+<!-- fontawesome -->
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	type="text/css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+type="text/css">
 
 <c:url value="/node_modules/bootstrap/dist/css/bootstrap.min.css"
 	var="bootStrapCss" />
@@ -38,7 +38,7 @@
 				<label for="username" class="form-label fw-bold text">Username</label>
 				<form:input type="text" class="input" id="username"
 					path="user_name" required="required" placeholder="Your Name" autofocus="true"/>
-				<i class="fa-solid fa-user"></i>
+				<i class="fa-solid fa-user text"></i>
 			</div>
 			<div class="form-group my-3">
 				<label for="email" class="form-label fw-bold text">Email
@@ -57,6 +57,7 @@
 			<div class="form-group">
 				<input class="w-100 btn btn-primary" type="submit" value="Register" />
 				<div class="w-100 d-flex justify-content-between my-1">
+					<a href="/hexa/home" class="text-danger">Back</a>
 					<a href="/hexa/login">Already had?</a>
 				</div>
 			</div>

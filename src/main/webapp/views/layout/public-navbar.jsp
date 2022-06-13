@@ -7,7 +7,6 @@
 			<ul class="navbar-nav gap-4 d-flex align-items-center"
 				id="navbar-nav">
 				<li class="nav-item active fw-bold"><a href="/hexa/home">Home</a></li>
-				<li class="nav-item"><a href="#news">news</a></li>
 				<!-- <li class="nav-item dropdown" id="Categories"><span
 					class="dropdown-toggle" data-bs-toggle="dropdown"
 					data-bs-target="#categories">Categories</span>

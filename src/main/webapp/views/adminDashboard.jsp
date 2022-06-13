@@ -49,7 +49,7 @@
                 <!-- name from session   -->
                 <div class="fw-bold d-flex justify-content-between align-items-center alert-success py-2 px-5 my-3 mx-5">
                     <span class="h3 ">Welcome <span class="text-capitalize">${sessionScope.userInfo.user_name}!</span></span>
-                    <span class="h6"><span id="year" class="mx-1"></span><span id="day-name"  class="mx-1"></span>,<span id="day"  class="mx-1"></span></span>
+                    <span class="h6"><span id="year" class="mx-1"></span><span id="day-name"  class="mx-1"></span>,<span id="day" class="mx-1"></span></span>
                 </div>
                 <div class="container row gap-2 d-flex justify-content-center my-2">
                     <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
@@ -83,6 +83,6 @@
       <!-- jquery -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript"></script>
 
-     <script src="../assets/js/admin-home.js" type="text/javascript"></script>
+     <script src="/js/admin-home.js" type="text/javascript"></script>
 </body>
 </html>

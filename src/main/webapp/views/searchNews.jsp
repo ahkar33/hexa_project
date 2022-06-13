@@ -49,10 +49,10 @@
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
 		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
 		<div id="news-wrapper"
-			class="w-100 row d-flex justify-content-around flew-wrap">
+			class="w-100 row d-flex justify-content-center flew-wrap">
 			<c:forEach var="news" items="${newsLists}">
 				<div
-					class="new-box my-1 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
+					class="mx-1 new-box my-1 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
 					id="news">
 					<a href="/hexa/details/${news.news_id}"> <img
 						src="/img/${news.news_img}" class="new-img" alt="image" />
@@ -67,8 +67,22 @@
 		</div>
 	</div>
 
-	<!-- footer -->
-	<jsp:include page="./layout/public-footer.jsp" />
+	<footer id="footer" class="w-100 p-3 m-0 " style="transform: translateY(500%);">
+		<div
+			class="container d-flex justify-content-center align-items-center mx-auto">
+
+			<div
+				class="col-lg-3 col-md-12 col-none-12 d-flex justify-content-center align-items-center flex-column gap-2">
+				<div class="d-flex gap-2">
+					<a href=""><i class="fa-brands fa-facebook"></i></a> <a href=""><i
+						class="fa-brands fa-github"></i></a> <a href=""><i
+						class="fa-brands fa-discord"></i></a>
+				</div>
+				<span class="h-6 text-center text-light">Created By
+					Hexa_Group(Ace Inspiration)</span>
+			</div>
+		</div>
+	</footer>
 
 	<!-- bootstrap -->
 	<script

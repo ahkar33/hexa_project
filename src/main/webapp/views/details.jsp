@@ -30,6 +30,7 @@
 	<!-- navbar -->
 	<jsp:include page="./layout/public-navbar.jsp" />
 
+
 	<div class="container">
 		<div id="news-wrapper"
 			class="d-flex justify-content-between align-items-center gap-3 row mx-auto">

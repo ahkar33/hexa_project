@@ -10,19 +10,24 @@
                         </div>
                     </form>
                 </li> -->
-                <li class="nav-item" style="color:rgba(0,0,0,0.75);">
+                <li class="nav-item text-capitalize fw-bold mx-2" style="color:rgba(0,0,0,0.75);">
+                  <span class="p-2">${sessionScope.userInfo.user_name}(${sessionScope.userInfo.user_role_name})</span>
+
+
                     <!-- for user account info -->
-                    <div class="dropdown" id="user-info"> 
+                    <!-- <div class="dropdown" id="user-info"> 
                         <i class="fa-solid fa-user h4 toggle" data-bs-toggle="dropdown" data-bs-target="#user-info"></i>
 
                         <ul class="dropdown-menu p-0 m-0" style="transform:translate(-18%)">
                             <li class="dropdown-item text-capitalize">${sessionScope.userInfo.user_name}(${sessionScope.userInfo.user_role_name}) <!-- name--></li>
-                            <li class="dropdown-item "><a href=""><i class="fa-solid fa-user-pen"></i><span class="mx-2">Edit</span></a></li><!-- edit တွေဘာတွေ လုပ်ဖို့အတွက် -->
-                            <li class="dropdown-item bg-danger"><a href="/hexa/logout" onclick="return confirm('Are you sure to logout?');"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Logout</span></a></li>
+                            <!-- <li class="dropdown-item "><a href=""><i class="fa-solid fa-user-pen"></i><span class="mx-2">Edit</span></a></li><!-- edit တွေဘာတွေ လုပ်ဖို့အတွက် -->
+                            <!-- <li class="dropdown-item bg-danger"><a href="/hexa/logout" onclick="return confirm('Are you sure to logout?');"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Logout</span></a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </li>
-                <li class="nav-item"></li>
+
+                <li class="nav-item  fw-bold"><a href="" class="text-warning shadow-sm p-2">Edit Info</a></li>
+                <li class="nav-item fw-bold"><a href="/hexa/logout" class="text-danger shadow-sm p-2" onclick="return confirm('Are you sure to logout?');">Logout</a></li>
             </ul>
         </main>
     </section>

@@ -32,7 +32,9 @@
 <link rel="stylesheet" href="/css/user_role.css" type="text/css">
 <script type="text/javascript">
 	function handleSelect(elm) {
-		window.location = "/hexa/admin/role/" + elm.value;
+		if (confirm("Are you sure to change?")) {
+			window.location = "/hexa/admin/role/" + elm.value;
+		}
 	}
 </script>
 </head>
@@ -49,16 +51,16 @@
 		}
 	}
 	%>
-	
-	 <!-- navbar -->
-    <jsp:include page="./layout/admin-navbar.jsp" />
 
-    <!-- main-body start here -->
-    <main id="main-body" class="w-100 p-0 m-0 d-flex">
-        <!-- sidebar -->
-        <jsp:include page="./layout/admin-sidebar.jsp" />
+	<!-- navbar -->
+	<jsp:include page="./layout/admin-navbar.jsp" />
 
-   
+	<!-- main-body start here -->
+	<main id="main-body" class="w-100 p-0 m-0 d-flex">
+		<!-- sidebar -->
+		<jsp:include page="./layout/admin-sidebar.jsp" />
+
+
 		<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
 		<section id="main-data" class="w-85 position-relative">
 			<div class="table-title my-3">
@@ -69,7 +71,7 @@
 				<table class="table-fill table table-striped" id="table">
 					<thead class="sticky-top fw-bold ">
 						<tr class="fw-bold">
-							<th>User ID</th>
+							<th>No.</th>
 							<th>Username</th>
 							<th>Email Address</th>
 							<th>Role</th>
@@ -78,22 +80,38 @@
 						</tr>
 					</thead>
 					<tbody class="table-hover">
+						<c:set var="count" value="0" scope="page" />
 						<c:forEach var="user" items="${users}">
 							<tr>
-								<td>${user.user_id}</td>
-								<td>${user.user_name}</td>
-								<td>${user.user_name}</td>
-								<td><select onchange="javascript:handleSelect(this)">
-										<option value="${user.user_id}/${user.user_role}">
+								<c:set var="count" value="${count + 1}" scope="page" />
+								<td class="text-capitalize">${count}</td>
+								<td class="text-capitalize">${user.user_name}</td>
+								<td class="text-capitalize">${user.user_email}</td>
+								<!-- <td><select onchange="javascript:handleSelect(this)" class="form-select">
+										<option value="${user.user_id}/${user.user_role}" class="text-capitalize">
 											${user.user_role_name}</option>
 										<c:forEach var="roles" items="${roles}">
 											<c:if test="${roles.name != user.user_role_name}">
-												<option value="${user.user_id}/${roles.id}">
+												<option value="${user.user_id}/${roles.id}" class="text-capitalize">
 													${roles.name}
 												</option>
 											</c:if>
 										</c:forEach>
-								</select></td>
+								</select></td> -->
+								<td class="text-capitalize dropdown" id="dropdown">
+									<button
+										class="btn btn-sm btn-warning dropdown-toggle text-capitalize"
+										data-bs-toggle="dropdown" data-bs-target="#dropdown">${user.user_role_name}</button>
+									<div class="dropdown-menu p-0 m-0">
+										<c:forEach var="roles" items="${roles}">
+											<c:if test="${roles.name != user.user_role_name}">
+												<a href="/hexa/admin/role/${user.user_id}/${roles.id}"
+													class="dropdown-item h6 text-dark"
+													onclick="return confirm('Are you sure to change?');">${roles.name}</a>
+											</c:if>
+										</c:forEach>
+									</div>
+								</td>
 								<td><c:choose>
 										<c:when test="${user.user_status == 0}">
 											<a href="/hexa/admin/status/${user.user_id}"
@@ -109,9 +127,9 @@
 					</tbody>
 				</table>
 			</div>
-			
-               <!-- footer -->
-                <jsp:include page="./layout/admin-footer.jsp" />
+
+			<!-- footer -->
+			<jsp:include page="./layout/admin-footer.jsp" />
 		</section>
 	</main>
 	<!-- main body end here -->
@@ -129,9 +147,9 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 
-	<script src="../assets/js/admin-table.js"></script>
+	<script src="/js/admin-table.js"></script>
 
-	<script src="../assets/js/common.js"></script>
+	<script src="/js/common.js"></script>
 </body>
 
 </html>
