@@ -113,10 +113,10 @@ public class MainController {
 		ArrayList<InteractionResponseDto> interactionDto = interactionDao.selectInteractionByNewsId(id);
 		NewsResponseDto dto = newsDao.selectNewsById(id);
 		ArrayList<NewsResponseDto> newsDto = newsDao.selectAllNews();
-		ArrayList<NewsResponseDto> todayNews = todayNewsService.getTodayNews(newsDto);
+		ArrayList<NewsResponseDto> latestNews = newsDao.selectLatestNews();
 		model.addAttribute("interactions", interactionDto);
 		model.addAttribute("newsDetails", dto);
-		model.addAttribute("todayNews", todayNews);
+		model.addAttribute("latestNews", latestNews);
 		return new ModelAndView("details", "bean", new InteractionBean());
 	}
 
