@@ -33,7 +33,7 @@
 
 	<div class="container">
 		<div id="news-wrapper"
-			class="d-flex justify-content-between align-items-center gap-3 row mx-auto">
+			class="d-flex justify-content-between  gap-3 row mx-auto">
 			<div id="news" class="my-5 col-xl-7   col-md-12 d-flex flex-column ">
 				<h3 class="h3 text-warning fw-bold text-warning mx-auto "
 					id="news-title">"${newsDetails.news_name}"</h3>

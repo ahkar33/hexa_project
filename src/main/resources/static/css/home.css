@@ -126,21 +126,18 @@ body {
   gap: 5px;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
-          justify-content: flex-end;
+      justify-content: flex-end;
+}
+
+#welcome #news{
+  height:250px !important;
 }
 
 #news{
+  height:200px !important;
   padding: 0;
   transition: 0.3s all;
   position: relative;
-}
-
-#news #hover-layer{
-  width:100% !important;
-  height:100%;
-  position: absolute;
-  top:0;
-  left:0;
 }
 
 #news-wrapper .new-layer {
@@ -165,10 +162,6 @@ body {
   text-decoration: none;
 }
 
-#news:hover{
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.95);
-  border-radius: 5px;
-}
 
 #news:hover .news-layer{
   background: none !important;

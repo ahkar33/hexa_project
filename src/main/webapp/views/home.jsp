@@ -23,6 +23,12 @@
 <!-- custom css -->
 <link rel="stylesheet" href="/css/home.css" type="text/css">
 </head>
+<style>
+	#news:hover{
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.95);
+	border-radius: 5px;
+	}
+</style>
 <body>
 	<!-- navbar -->
 	<jsp:include page="./layout/public-navbar.jsp" />
@@ -63,10 +69,9 @@
 		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
 		<div id="news-wrapper"
 			class="w-100 row d-flex justify-content-center flew-wrap gap-1">
-			<c:forEach var="news" items="${newsList}">
-				<div
-					class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
-					id="news">
+			
+			<!-- <c:forEach var="news" items="${newsList}">
+				<div class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold" id="news">
 					<a href="/hexa/details/${news.news_id}"> <img
 						src="/img/${news.news_img}" class="new-img" alt="image" />
 						<div class="new-layer">
@@ -75,8 +80,13 @@
 						</div>
 					</a>
 				</div>
+			</c:forEach> -->
+		</div>
 
-			</c:forEach>
+		<div class="container-fluid d-flex justify-content-center my-3">
+			<ul id="pagination" class="pagination">
+			
+			</ul>
 		</div>
 	</div>
 
@@ -97,5 +107,8 @@
 	<script src="/js/home.js" type="text/javascript" defer></script>
 
 	<script src="/js/view-detail.js" type="text/javascript"></script>
+
+	<!-- pagination -->
+	<script src="/js/pagination.js" type="text/javascript"></script>
 </body>
 </html>
