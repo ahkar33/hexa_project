@@ -68,7 +68,7 @@
 				<table class="table-fill table table-striped" id="table">
 					<thead class="sticky-top fw-bold ">
 						<tr class="fw-bold">
-							<th>Id</th>
+							<th>No.</th>
 							<th>Category Name</th>
 							<th>No Of News</th>
 							<th>Action</th>

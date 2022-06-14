@@ -51,6 +51,32 @@ public class NewsDao {
 		return list;
 	}
 
+	public ArrayList<NewsResponseDto> selectLatestNews() {
+		ArrayList<NewsResponseDto> list = new ArrayList<>();
+		String sql = "select * from news_project.news JOIN user_account on news.creator_id = user_account.user_id JOIN news_category on news.news_category = news_category.news_category_id order by news_id desc limit 4";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				NewsResponseDto res = new NewsResponseDto();
+				res.setNews_id(rs.getLong("news_id"));
+				res.setNews_name(rs.getString("news_name"));
+				res.setDescriptions(rs.getString("descriptions"));
+				res.setNews_img(rs.getString("news_img"));
+				res.setNews_location(rs.getString("news_location"));
+				res.setNews_status(rs.getString("news_status"));
+				res.setCreator_name(rs.getString("user_name"));
+				res.setNews_category_name(rs.getString("news_category_name"));
+				res.setCreated_date(rs.getDate("created_date").toLocalDate());
+				res.setUpdated_date(rs.getDate("updated_date").toLocalDate());
+				list.add(res);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return list;
+	}
+
 	public NewsResponseDto selectNewsById(long id) {
 		String sql = "select news_name, descriptions, news_location, news_img, created_date from news where news_id = ?";
 		NewsResponseDto res = new NewsResponseDto();
@@ -114,7 +140,7 @@ public class NewsDao {
 		}
 		return list;
 	}
-	
+
 	public ArrayList<CategoryResponseDto> selectAllNewsCategory() {
 		ArrayList<CategoryResponseDto> list = new ArrayList<>();
 		String sql = "select * from news_category";
@@ -180,7 +206,7 @@ public class NewsDao {
 
 		return false;
 	}
-	
+
 	public int deleteCategory(long id) {
 		int result = 0;
 		String sql = "DELETE FROM `news_project`.`news_category` WHERE (`news_category_id` = ?);";
@@ -219,7 +245,6 @@ public class NewsDao {
 		return list;
 	}
 
-
 	public long getNewsCount() {
 		String sql = "select count(news_id) as news from news";
 		long res = 0;
@@ -234,7 +259,7 @@ public class NewsDao {
 		}
 		return res;
 	}
-	
+
 	public long getNewsCountByCatId(long id) {
 		String sql = "select count(news_id) as news from news where news_category=?";
 		long res = 0;
@@ -249,5 +274,53 @@ public class NewsDao {
 			System.out.println(e);
 		}
 		return res;
+	}
+
+	public int updateNewsWithoutImg(NewsRequestDto dto) {
+		int result = 0;
+		String sql = "update news set news_name=?,news_category=?,news_location=?,descriptions=? where news_id=?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getNews_name());
+			ps.setLong(2, dto.getNews_category());
+			ps.setString(3, dto.getNews_location());
+			ps.setString(4, dto.getDescriptions());
+			ps.setLong(5, dto.getNews_id());
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Database error");
+		}
+		return result;
+	}
+
+	public int updateNews(NewsRequestDto dto) {
+		int result = 0;
+		String sql = "update news set news_name=?,news_category=?,news_location=?,descriptions=?,news_img=? where news_id=?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getNews_name());
+			ps.setLong(2, dto.getNews_category());
+			ps.setString(3, dto.getNews_location());
+			ps.setString(4, dto.getDescriptions());
+			ps.setString(5, dto.getNews_img());
+			ps.setLong(6, dto.getNews_id());
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Database error");
+		}
+		return result;
+	}
+
+	public int deleteNews(Long news_id) {
+		int result = 0;
+		String sql = "delete from news where news_id=?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, news_id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Database error");
+		}
+		return result;
 	}
 }

@@ -67,6 +67,7 @@
 							<th>Creater</th>
 							<!-- status ka ban tr twt role user ko pl ban loh ya ml -->
 							<th>Created Date</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody class="table-hover">
@@ -79,6 +80,10 @@
 								<td class="text-capitalize">${news.news_category_name}</td>
 								<td class="text-capitalize">${news.creator_name }</td>
 								<td>${news.created_date}</td>
+								<td>
+                            	 <a href="/hexa/admin/update_news/${news.news_id }" class="btn btn-primary warning btn-sm">Update</a>
+                            	 <a href="/hexa/admin/delete_news/${news.news_id }" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this news?');">Delete</a>
+                        		</td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -35,11 +35,12 @@
 		<div id="news-wrapper"
 			class="d-flex justify-content-between align-items-center gap-3 row mx-auto">
 			<div id="news" class="my-5 col-xl-7   col-md-12 d-flex flex-column ">
-				<h3 class="h3 text-warning fw-bold text-warning mx-auto " id="news-title">
-					"${newsDetails.news_name}"</h3>
+				<h3 class="h3 text-warning fw-bold text-warning mx-auto "
+					id="news-title">"${newsDetails.news_name}"</h3>
 				<div id="news-image" class="my-3 w-100">
 					<img src="/img/${newsDetails.news_img}">
-					<div id="layer" class="d-flex justify-content-end align-items-start flex-column p-3">
+					<div id="layer"
+						class="d-flex justify-content-end align-items-start flex-column p-3">
 						<div id="news-location" class="fw-bold mx-2">
 							<i class="fa-solid fa-location-dot"></i>
 							${newsDetails.news_location}
@@ -52,85 +53,64 @@
 					<p class="w-100">${newsDetails.descriptions}</p>
 				</div>
 			</div>
-			<div id="others" class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
-				<div id="other-news">
-					<img src="../assets/img/main.jpg" alt="">
-					<div id="layer"
-						class="d-flex justify-content-end align-items-start flex-column p-3">
-						<div id="title">Lorem ipsum, dolor sit amet consectetur
-							adipisicing elit. Qui, obcaecati!</div>
-						<div id="location">|Global</div>
+
+			<div id="others"
+				class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
+
+
+				<c:forEach var="news" items="${latestNews}">
+					<div id="other-news">
+						<a href="/hexa/details/${news.news_id}"> <img
+							src="/img/${news.news_img}" alt="">
+							<div id="layer"	class="d-flex justify-content-end align-items-start flex-column p-3">
+								<div id="title">${news.news_name}</div>
+								<div id="location">|${news.news_location}</div>
+							</div>
+						</a>
 					</div>
-				</div>
 
-				<div id="other-news">
-					<img src="../assets/img/img5.jpg" alt="">
-					<div id="layer"
-						class="d-flex justify-content-end align-items-start flex-column p-3">
-						<div id="title">Lorem ipsum, dolor sit amet consectetur
-							adipisicing elit. Qui, obcaecati!</div>
-						<div id="location">|Global</div>
-					</div>
-				</div>
+				</c:forEach>
 
 
-				<div id="other-news">
-					<img src="../assets/img/img2.jpg" alt="">
-					<div id="layer"
-						class="d-flex justify-content-end align-items-start flex-column p-3">
-						<div id="title">Lorem ipsum, dolor sit amet consectetur
-							adipisicing elit. Qui, obcaecati!</div>
-						<div id="location">|Global</div>
-					</div>
-				</div>
-
-
-				<div id="other-news">
-					<img src="../assets/img/img8.jpg" alt="">
-					<div id="layer"
-						class="d-flex justify-content-end align-items-start flex-column p-3">
-						<div id="title">Lorem ipsum, dolor sit amet consectetur
-							adipisicing elit. Qui, obcaecati!</div>
-						<div id="location">|Global</div>
-					</div>
-				</div>
 			</div>
 		</div>
-		<div id="comments-wrapper" class="my-5 d-flex justify-content-center row flex-wrap">
-		
-			<c:if test="${interactions.size() > 0}">	
-			<div id="comments" class="p-3 col-xl-6 col-md-12 my-3">
-				<c:forEach var="interaction" items="${interactions}">
-					<div id="comment" class="my-2">
-						<div id="info" class="d-flex gap-2 align-items-center">
-							<div id="image">
-								<img src="/img/profile.png" alt="">
+		<div id="comments-wrapper"
+			class="my-5 d-flex justify-content-center row flex-wrap">
+
+			<c:if test="${interactions.size() > 0}">
+				<div id="comments" class="p-3 col-xl-6 col-md-12 my-3">
+					<c:forEach var="interaction" items="${interactions}">
+						<div id="comment" class="my-2">
+							<div id="info" class="d-flex gap-2 align-items-center">
+								<div id="image">
+									<img src="/img/profile.png" alt="">
+								</div>
+								<div id="detail">
+									<div id="name">${interaction.user_name}</div>
+									<div id="date">${interaction.commented_date}</div>
+								</div>
 							</div>
-							<div id="detail">
-								<div id="name">${interaction.user_name}</div>
-								<div id="date">${interaction.commented_date}</div>
-							</div>
+							<div id="content">${interaction.comments}</div>
 						</div>
-						<div id="content">${interaction.comments}</div>
-					</div>
-				</c:forEach>
-			</div>
+					</c:forEach>
+				</div>
 			</c:if>
 
 			<%
 			if (session.getAttribute("userInfo") != null) {
-		%>	
+			%>
 
 			<form:form action="/hexa/details/addComment/${newsDetails.news_id}"
 				method="post" class="form col-xl-6 col-md-12" modelAttribute="bean">
 				<form:input type="hidden" path="user_id" value="${userInfo.user_id}" />
-				<form:textarea path="comments" id="" cols="30" rows="10" class="form-control my-1" placeholder="Comment here"></form:textarea>
+				<form:textarea path="comments" id="" cols="30" rows="10"
+					class="form-control my-1" placeholder="Comment here"></form:textarea>
 				<button type="submit" class="btn btn-primary w-100">Comment</button>
 			</form:form>
 
-		<%
-			}	
-		%>	
+			<%
+			}
+			%>
 		</div>
 	</div>
 

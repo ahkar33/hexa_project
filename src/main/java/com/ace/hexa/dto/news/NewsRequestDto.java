@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class NewsRequestDto {
+	private long news_id;
 	private String news_name;
 	private String descriptions;
 	private String news_img;

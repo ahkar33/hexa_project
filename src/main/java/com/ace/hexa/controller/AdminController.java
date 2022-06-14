@@ -257,4 +257,39 @@ public class AdminController {
 		return "redirect:/hexa/admin/comments/" + newsId;
 	}
 
+	@GetMapping("/update_news/{news_id}")
+	public ModelAndView setupUpdateNews(@PathVariable long news_id, ModelMap model) {
+		ArrayList<CategoryResponseDto> updatenews_categories = newsDao.selectAllNewsCategory();
+		model.addAttribute("updatenews_categories", updatenews_categories);
+		NewsResponseDto dto = newsDao.selectNewsById(news_id);
+		return new ModelAndView("setup-news", "newsBean", dto);
+
+	}
+
+	@PostMapping("/update_news")
+	public String updateNews(@ModelAttribute("newsBean") NewsBean bean, ModelMap model)
+			throws IllegalStateException, IOException {
+		NewsRequestDto dto = new NewsRequestDto();
+		dto.setNews_id(bean.getNews_id());
+		dto.setNews_name(bean.getNews_name());
+		dto.setNews_category(bean.getNews_category());
+		dto.setNews_location(bean.getNews_location());
+		dto.setDescriptions(bean.getDescriptions());
+		if (bean.getNews_img().getOriginalFilename().isBlank()) {
+			newsDao.updateNewsWithoutImg(dto);
+			return "redirect:/hexa/admin/news";
+		} else {
+			dto.setNews_img(bean.getNews_img().getOriginalFilename());
+			fileUploadService.fileUpload(bean.getNews_img());
+			newsDao.updateNews(dto);
+			return "redirect:/hexa/admin/news";
+		}
+	}
+
+	@GetMapping("/delete_news/{news_id}")
+	public String deleteNews(@PathVariable("news_id") Long news_id) {
+		newsDao.deleteNews(news_id);
+		return "redirect:/hexa/admin/news";
+	}
+
 }
