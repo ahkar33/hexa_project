@@ -26,18 +26,21 @@
 					<li class="nav-item text-capitalize fw-bold"><a href="/hexa/admin/home">${sessionScope.userInfo.user_name}</a></li>
 					<li class="nav-item"><a href="/hexa/logout" class="text-danger p-1 shadow-sm  fw-bold">Logout</a></li>
 				</c:if>
-				<li class="nav-item"><i
+				<!-- <li class="nav-item"><i
 					class="fa-solid fa-magnifying-glass btn" id="btn-search"
-					data-bs-target="#search" data-bs-toggle="modal"></i></li>
+					data-bs-target="#search" data-bs-toggle="modal"></i></li> -->
 
-			</ul>
+
+					<!-- edited from here -->
+					<li class="nav-item"><i class="fa-solid fa-magnifying-glass btn" id="btn-search" onclick="window.location.href='/hexa/search'"></i></li>
+				</ul>
 			<i class="fa-solid fa-bars" id="btn-menu"></i>
 		</div>
 		<div id="menu-layer" class=""></div>
 	</section>
 
 		<!-- model for search -->
-		<section class="modal fade" id="search">
+		<!-- <section class="modal fade" id="search">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -52,5 +55,5 @@
 					</form>
 				</div>
 			</div>
-		</section>
+		</section> -->
 	

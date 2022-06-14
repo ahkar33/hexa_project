@@ -153,4 +153,9 @@ public class MainController {
 		return "users";
 	}
 
+	// edited from here
+	@GetMapping("/search")
+	public String searchPage(){
+		return "search";	
+	}
 }

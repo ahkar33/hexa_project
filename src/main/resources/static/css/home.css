@@ -131,6 +131,16 @@ body {
 
 #news{
   padding: 0;
+  transition: 0.3s all;
+  position: relative;
+}
+
+#news #hover-layer{
+  width:100% !important;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
 }
 
 #news-wrapper .new-layer {
@@ -153,6 +163,15 @@ body {
 #navbar a {
   color: inherit;
   text-decoration: none;
+}
+
+#news:hover{
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.95);
+  border-radius: 5px;
+}
+
+#news:hover .news-layer{
+  background: none !important;
 }
 
 @media (max-width: 899px) {
