@@ -90,7 +90,6 @@ body {
 .new-img {
   width: 100% !important;
   height: 100%;
-  z-index: 100;
 }
 
 #news-wrapper .new-title, #news-wrapper .new-location {
@@ -115,7 +114,6 @@ body {
   left: 0;
   background: rgba(0, 0, 0, 0.45);
   padding: 10px;
-  z-index: 10;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -126,21 +124,17 @@ body {
   gap: 5px;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
-          justify-content: flex-end;
+      justify-content: flex-end;
+}
+
+#welcome #news{
+  height:250px !important;
 }
 
 #news{
   padding: 0;
   transition: 0.3s all;
   position: relative;
-}
-
-#news #hover-layer{
-  width:100% !important;
-  height:100%;
-  position: absolute;
-  top:0;
-  left:0;
 }
 
 #news-wrapper .new-layer {
@@ -165,10 +159,6 @@ body {
   text-decoration: none;
 }
 
-#news:hover{
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.95);
-  border-radius: 5px;
-}
 
 #news:hover .news-layer{
   background: none !important;

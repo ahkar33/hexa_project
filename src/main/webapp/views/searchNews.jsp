@@ -45,7 +45,20 @@
 		</div>
 	</section>
 
+	<!-- categories -->
+	<section id="categories" class="container my-5">
+		<div
+			class="container-fluid d-flex gap-1 justify-content-center align-items-center flex-wrap">
+			<c:forEach var="category" items="${categories}">
+				<a href="/hexa/searchByCategory/${category.news_category_id}"
+					class="btn btn-sm fw-bold p-2 shadow-sm text-danger">${category.news_category_name}
+				</a>
+			</c:forEach>
+		</div>
+	</section>
+
 	<!-- news -->
+	-
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
 		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
 		<div id="news-wrapper"
@@ -67,7 +80,10 @@
 		</div>
 	</div>
 
-	<footer id="footer" class="w-100 p-3 m-0 " style="transform: translateY(500%);">
+
+
+	<footer id="footer" class="w-100 p-3 m-0 "
+		style="transform: translateY(500%);">
 		<div
 			class="container d-flex justify-content-center align-items-center mx-auto">
 

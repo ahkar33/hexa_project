@@ -200,7 +200,7 @@
 						<!-- for user id , will get from session -->
 						
 
-						<button class="btn btn-success w-100 my-1" type="submit" onclick="alert('successfully created');">Create</button>
+						<button class="btn btn-success w-100 my-1" type="submit" onclick="alert('successfully created');">Update</button>
 					</form:form>
 				</div>
 			</main>

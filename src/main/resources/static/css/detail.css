@@ -2,6 +2,7 @@
 
 #news-wrapper {
   width: 90%;
+  height:auto !important;
 }
 
 #news-image {
@@ -40,10 +41,9 @@
   color: rgba(0, 0, 0, 0.75);
 }
 
-/* #others {
-  width: 45%;
-  height: 100%;
-} */
+#others {
+  height: 100% !important;
+}
 
 #other-news {
   width: 100%;
@@ -51,6 +51,7 @@
   /* -webkit-transform: translate(30%, -25%);
           transform: translate(30%, -25%); */
   position: relative;
+
 }
 
 #other-news img {
@@ -82,9 +83,6 @@
 
 }
 
-/* ::-webkit-scrollbar{
-  width:20px;
-} */
 
 #comment {
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.75);
