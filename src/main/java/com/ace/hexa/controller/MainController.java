@@ -1,5 +1,6 @@
 package com.ace.hexa.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +22,12 @@ import com.ace.hexa.dao.UserDao;
 import com.ace.hexa.dto.category.CategoryResponseDto;
 import com.ace.hexa.dto.interaction.InteractionRequestDto;
 import com.ace.hexa.dto.interaction.InteractionResponseDto;
+import com.ace.hexa.dto.news.NewsRequestDto;
 import com.ace.hexa.dto.news.NewsResponseDto;
 import com.ace.hexa.dto.user.UserRequestDto;
 import com.ace.hexa.dto.user.UserResponseDto;
 import com.ace.hexa.model.InteractionBean;
+import com.ace.hexa.model.NewsBean;
 import com.ace.hexa.model.UserBean;
 import com.ace.hexa.service.TodayNewsService;
 
@@ -45,7 +48,10 @@ public class MainController {
 	private InteractionDao interactionDao;
 
 	@GetMapping("/login")
-	public ModelAndView showLogin(HttpServletRequest request) {
+	public ModelAndView showLogin(HttpServletRequest request, HttpSession ses) {
+		if (ses.getAttribute("userInfo") != null) {
+			return new ModelAndView("redirect:/hexa/home");
+			}
 		return new ModelAndView("login", "bean", new UserBean());
 	}
 
@@ -127,6 +133,22 @@ public class MainController {
 		dto.setComments(bean.getComments());
 		interactionDao.insertComment(dto);
 		return "redirect:/hexa/details/" + news_id;
+	}
+	
+	@GetMapping("/delete_comment/{news_id}/{cmt_id}")
+	public String deleteComment(@PathVariable("cmt_id") Long cmt_id, @PathVariable("news_id") Long news_id) {
+		interactionDao.deleteComment(cmt_id);
+		return "redirect:/hexa/details/"+news_id;
+	}
+	
+	@PostMapping("/editComment/{news_id}")
+	public String updateComment(@PathVariable("news_id") Long news_id, HttpServletRequest req) {
+		InteractionRequestDto dto = new InteractionRequestDto();
+		dto.setComment_id(Long.valueOf(req.getParameter("cmt_id")));
+		dto.setComments(req.getParameter("cmt"));
+		interactionDao.updateComment(dto);
+		return "redirect:/hexa/details/"+news_id;
+		
 	}
 
 	@GetMapping("/searchByCategory/{news_category_id}")

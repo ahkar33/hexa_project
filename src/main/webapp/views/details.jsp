@@ -83,8 +83,8 @@
 									<span id="cmt-control" data-bs-toggle="dropdown" data-bs-target="#dropdown-${interaction.comment_id}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
 
 									<ul class="dropdown-menu p-0 m-0">
-										<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-${interaction.comment_id}"><a href="" class="w-100  text-decoration-none text-dark">Edit</a></li>
-										<li class="dropdown-item"><a href="" class="w-100 text-decoration-none text-dark">Delete</a></li>
+										<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-${interaction.comment_id}"><span class="w-100  text-decoration-none text-dark">Edit</span></li>
+										<li class="dropdown-item"><a href="/hexa/delete_comment/${interaction.news_id}/${interaction.comment_id}" class="w-100 text-decoration-none text-dark">Delete</a></li>
 									</ul>
 								</div>
 							</c:if>
@@ -110,10 +110,10 @@
 											<a href="" class="btn-close" data-bs-dismiss="modal" data-bs-target="modal-${interaction.comment_id}" ></a>
 										</div>
 									</header>
-									<form action="" class="modal-body form p-3">
+									<form action="/hexa/editComment/${interaction.news_id}" class="modal-body form p-3" method="post">
 										<div class="form-group my-1">
-											<input type="text" class="form-control" value="${interaction.comments}" placeholder="Comment">
-											<input type="hidden" class="form-control" value="${interaction.comment_id}">
+											<input type="text" name = "cmt" class="form-control" value="${interaction.comments}" placeholder="Comment">
+											<input type="hidden" name = "cmt_id" class="form-control" value="${interaction.comment_id}">
 										</div>
 										<div class="form-group my-1 d-flex justify-content-end gap-1">
 											<a class="btn btn-warning" data-bs-dismiss="modal" data-bs-target="#modal-${interaction.comment_id}">Cancel</a>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ace.hexa.dto.interaction.InteractionRequestDto;
 import com.ace.hexa.dto.interaction.InteractionResponseDto;
+import com.ace.hexa.dto.news.NewsRequestDto;
 
 @Service
 public class InteractionDao {
@@ -46,6 +47,20 @@ public class InteractionDao {
 		return list;
 	}
 
+	public int updateComment(InteractionRequestDto dto) {
+		int result = 0;
+		String sql = "UPDATE news_project.interaction SET comments = ? WHERE comment_id = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getComments());
+			ps.setLong(2, dto.getComment_id());
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Database error");
+		}
+		return result;
+	}
+	
 	public int insertComment(InteractionRequestDto dto) {
 		String sql = "insert into interaction (news_id, user_id, comments) values(?, ?, ?)";
 		int i = 0;
