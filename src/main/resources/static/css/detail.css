@@ -91,7 +91,20 @@
   font-size: 15px !important;
   color: rgba(0, 0, 0, 0.75);
   /* font-weight: bold; */
+  position: relative;
 }
+
+
+/* edited here for comment control */
+#comment #cmt-control{
+  position: absolute;
+  top:3px;
+  right:10px;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 18px;
+}
+
+/* ended here*/
 
 #comment img {
   width: 40px;
