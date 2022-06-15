@@ -31,10 +31,8 @@
 	<jsp:include page="./layout/public-navbar.jsp" />
 
 
-	<div class="container">
-		<div id="news-wrapper"
-			class="d-flex justify-content-between  gap-3 row mx-auto">
-			<div id="news" class="my-5 col-xl-7   col-md-12 d-flex flex-column ">
+		<div id="news-wrapper" class="container d-flex justify-content-between gap-3 row mx-auto">
+			<div id="news" class="my-5 col-xl-7  col-md-12 d-flex flex-column ">
 				<h3 class="h3 text-warning fw-bold text-warning mx-auto "
 					id="news-title">"${newsDetails.news_name}"</h3>
 				<div id="news-image" class="my-3 w-100">
@@ -48,15 +46,13 @@
 						<div id="news-writer" class="fw-bold">${newsDetails.creator_name}</div>
 					</div>
 				</div>
-				<div id="news-content" class="w-75 fw-bold"
+				<div id="news-content" class="w-100 fw-bold"
 					style="color: rgba(0, 0, 0, 0.75);">
 					<p class="w-100">${newsDetails.descriptions}</p>
 				</div>
 			</div>
 
-			<div id="others"
-				class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
-
+			<div id="others" class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
 
 				<c:forEach var="news" items="${latestNews}">
 					<div id="other-news">
@@ -75,7 +71,7 @@
 			</div>
 		</div>
 		<div id="comments-wrapper"
-			class="my-5 d-flex justify-content-center row flex-wrap">
+			class="my-5 d-flex justify-content-center row flex-wrap w-75 mx-auto">
 
 			<c:if test="${interactions.size() > 0}">
 				<div id="comments" class="p-3 col-xl-6 col-md-12 my-3">
@@ -112,7 +108,6 @@
 			}
 			%>
 		</div>
-	</div>
 
 
 	<!-- footer -->

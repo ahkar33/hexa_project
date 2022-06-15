@@ -39,21 +39,4 @@
 		<div id="menu-layer" class=""></div>
 	</section>
 
-		<!-- model for search -->
-		<!-- <section class="modal fade" id="search">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<span class="btn-close" data-bs-dismiss="modal"></span>
-					</div>
-					<form class="modal-body form">
-						<div class="form-group">
-							<input type="search" class="form-control" name="search"
-								placeholder="Type to search..."/>
-							<button type="submit" class="d-none"></button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</section> -->
 	

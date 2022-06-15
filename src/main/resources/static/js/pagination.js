@@ -55,7 +55,7 @@ function getHTML(datas,pageFrom){
     for(let i = start ; i < end ; i++){
         if(datas[i] == null) break;
         html += `
-        <div class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold" id="news">
+        <div class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold" id="news" style="height:200px !important;">
             <a href="/hexa/details/${datas[i].news_id}"> <img
                 src="/img/${datas[i].news_img}" class="new-img" alt="image" />
                 <div class="new-layer">

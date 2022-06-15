@@ -90,7 +90,6 @@ body {
 .new-img {
   width: 100% !important;
   height: 100%;
-  z-index: 100;
 }
 
 #news-wrapper .new-title, #news-wrapper .new-location {
@@ -115,7 +114,6 @@ body {
   left: 0;
   background: rgba(0, 0, 0, 0.45);
   padding: 10px;
-  z-index: 10;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -134,7 +132,6 @@ body {
 }
 
 #news{
-  height:200px !important;
   padding: 0;
   transition: 0.3s all;
   position: relative;
