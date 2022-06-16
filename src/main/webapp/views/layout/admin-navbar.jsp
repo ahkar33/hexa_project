@@ -21,20 +21,20 @@
                             <span class="btn-close" data-bs-dismiss="modal" data-bs-target="#acc-edit"></span>
                         </div>
                     </header>
-                    <form action="" method="POST" class="modal-body">
+                    <form action="/hexa/editUser" method="POST" class="modal-body">
                         <div class="form-group my-1">
-                            <label for="" class="form-label fw-bold text-danger">Username</label>
-                            <input type="text" class="form-control" value="${sessionScope.userInfo.user_name}" placeholder="Username"/>
                             <!-- for id -->
-                            <input type="hidden" name="" value="${sessionScope.userInfo.user_id}"/>
+                            <input type="hidden" name="id" value="${sessionScope.userInfo.user_id}"/>
+                            <label for="" class="form-label fw-bold text-danger">Username</label>
+                            <input type="text" name="name" class="form-control" value="${sessionScope.userInfo.user_name}" />
                         </div>
                         <div class="form-group my-1">
                             <label for="" class="form-label fw-bold text-danger">Email Address</label>
-                            <input type="email" class="form-control" value="${sessionScope.userInfo.user_email}" placeholder="Username"/>
+                            <input type="email" name="email" class="form-control" value="${sessionScope.userInfo.user_email}" />
                         </div>
                         <div class="form-group my-1">
-                            <label for="" class="form-label fw-bold text-danger">Passwr</label>
-                            <input type="password" class="form-control" value="${sessionScope.userInfo.user_password}" placeholder="Username"/>
+                            <label for="" class="form-label fw-bold text-danger">Password</label>
+                            <input type="password" name="psw" class="form-control" value="${sessionScope.userInfo.user_password}" />
                         </div>
                         <div class="form-group my-1 d-flex justify-content-end align-items-center gap-1">
                             <a href="" class="btn btn-warning text-danger" data-bs-dismiss="modal" data-bs-target="#acc-edit">Cancel</a>
