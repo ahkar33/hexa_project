@@ -70,7 +70,7 @@
 		<div id="news-wrapper"
 			class="w-100 row d-flex justify-content-center flew-wrap gap-1">
 			
-			<!-- <c:forEach var="news" items="${newsList}">
+			 <c:forEach var="news" items="${newsList}">
 				<div class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold" id="news">
 					<a href="/hexa/details/${news.news_id}"> <img
 						src="/img/${news.news_img}" class="new-img" alt="image" />
@@ -80,7 +80,7 @@
 						</div>
 					</a>
 				</div>
-			</c:forEach> -->
+			</c:forEach> 
 		</div>
 
 		<div class="container-fluid d-flex justify-content-center my-3">

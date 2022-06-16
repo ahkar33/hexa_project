@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ace.hexa.dao.InteractionDao;
@@ -138,6 +139,21 @@ public class MainController {
 		return "searchNews";
 	}
 
+	@GetMapping("/searchNewsByTitle")
+	public String searchNewsBywords(@RequestParam("title") String title, ModelMap model) {
+		ArrayList<NewsResponseDto> newsByTitle = newsDao.selectNewsByWords(title);
+		if (newsByTitle.size() > 0) {
+			model.addAttribute("newsByTitle", newsByTitle);
+			for (NewsResponseDto news : newsByTitle) {
+				System.out.println(news.toString());
+			}
+			return "search";
+		} else {
+			return "search";
+		}
+
+	}
+
 	@GetMapping("/dashboard")
 	public String showDashboard() {
 		return "adminDashboard";
@@ -155,7 +171,7 @@ public class MainController {
 
 	// edited from here
 	@GetMapping("/search")
-	public String searchPage(){
-		return "search";	
+	public String searchPage() {
+		return "search";
 	}
 }
