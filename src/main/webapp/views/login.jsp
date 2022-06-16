@@ -12,13 +12,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 
-<c:url value="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+<!-- <c:url value="/node_modules/bootstrap/dist/css/bootstrap.min.css"
 	var="bootStrapCss" />
-<link href="${bootStrapCss}" rel="stylesheet" />
+<link href="${bootStrapCss}" rel="stylesheet" /> -->
 
 <c:url value="/css/login_register.css"
 	var="css" />
 <link href="${css}" rel="stylesheet" />
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	type="text/css">
 
 <!-- fontawesome -->
 <link rel="stylesheet"
@@ -31,7 +35,7 @@
 	class="d-flex  flex-column justify-content-center align-items-center">
 	<section class="card p-3 " id="container">
 		<header class="card-title text-center text">
-			<span class="h3 w-100 text">Hex</span>
+			<span class="h3 w-100 text">Hexa</span>
 		</header>
 		<div class="text-danger text-center">${error}</div>
 		<form:form action="/hexa/login" class="card-body form" name="login"
