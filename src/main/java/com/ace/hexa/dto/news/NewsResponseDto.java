@@ -11,7 +11,6 @@ public class NewsResponseDto {
 	private String descriptions;
 	private String news_img;
 	private String news_location;
-	private String news_status;
 	private String creator_name;
 	private long news_category;
 	private String news_category_name;
