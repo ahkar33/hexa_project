@@ -38,7 +38,6 @@ public class NewsDao {
 				res.setDescriptions(rs.getString("descriptions"));
 				res.setNews_img(rs.getString("news_img"));
 				res.setNews_location(rs.getString("news_location"));
-				res.setNews_status(rs.getString("news_status"));
 				res.setCreator_name(rs.getString("user_name"));
 				res.setNews_category_name(rs.getString("news_category_name"));
 				res.setCreated_date(rs.getDate("created_date").toLocalDate());
@@ -64,7 +63,6 @@ public class NewsDao {
 				res.setDescriptions(rs.getString("descriptions"));
 				res.setNews_img(rs.getString("news_img"));
 				res.setNews_location(rs.getString("news_location"));
-				res.setNews_status(rs.getString("news_status"));
 				res.setCreator_name(rs.getString("user_name"));
 				res.setNews_category_name(rs.getString("news_category_name"));
 				res.setCreated_date(rs.getDate("created_date").toLocalDate());
@@ -128,7 +126,6 @@ public class NewsDao {
 				res.setDescriptions(rs.getString("descriptions"));
 				res.setNews_img(rs.getString("news_img"));
 				res.setNews_location(rs.getString("news_location"));
-				res.setNews_status(rs.getString("news_status"));
 				res.setCreator_name(rs.getString("user_name"));
 				res.setNews_category_name(rs.getString("news_category_name"));
 				res.setCreated_date(rs.getDate("created_date").toLocalDate());
