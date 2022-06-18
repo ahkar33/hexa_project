@@ -27,7 +27,7 @@ public class NewsDao {
 
 	public ArrayList<NewsResponseDto> selectAllNews() {
 		ArrayList<NewsResponseDto> list = new ArrayList<>();
-		String sql = "select * from news_project.news JOIN user_account on news.creator_id = user_account.user_id JOIN news_category on news.news_category = news_category.news_category_id";
+		String sql = "select * from news_project.news JOIN user_account on news.creator_id = user_account.user_id JOIN news_category on news.news_category = news_category.news_category_id order by created_date";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -344,5 +344,22 @@ public class NewsDao {
 			System.out.println(e);
 		}
 		return list;
+	}
+
+	public CategoryResponseDto selectCategoryByNewsId(long news_id) {
+		String sql = "select news_category_name, news_category_id from news_category join news on news_category_id = news.news_category where news.news_id = ?";
+		CategoryResponseDto res = new CategoryResponseDto();
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, news_id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				res.setNews_category_name(rs.getString("news_category_name"));
+				res.setNews_category_id(rs.getLong("news_category_id"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return res;
 	}
 }

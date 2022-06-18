@@ -82,7 +82,7 @@
 								<td>${news.created_date}</td>
 								<td>
                             	 <a href="/hexa/admin/update_news/${news.news_id }" class="btn btn-primary warning btn-sm">Update</a>
-                            	 <a href="/hexa/admin/delete_news/${news.news_id }" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this news?');">Delete</a>
+                            	 <a href="/hexa/admin/delete_news/${news.news_id }/${news.news_img}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this news?');">Delete</a>
                         		</td>
 							</tr>
 						</c:forEach>

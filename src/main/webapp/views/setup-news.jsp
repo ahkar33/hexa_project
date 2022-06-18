@@ -155,6 +155,7 @@
 						<!-- <div class="w-100 text-end">
 							<button class="btn btn-danger text-end" type="reset">Clear</button>
 						</div> -->
+						<input type="hidden" value="${news_img}" name="news_img">
 						<div class="form-group my-2">
 							<label for="" class="form-label my-1 fw-bold">News Title</label>
 							<form:input type="text" class="form-control" path="news_name"
@@ -167,10 +168,11 @@
 								Categories</label>
 							<form:select name="" id="" path="news_category"
 								class="form-select" required="required">
-								<option value="" selected disabled>Choose your news
-									categories</option>
+								<option value="${selectedCategory.news_category_id}">${selectedCategory.news_category_name}</option>
 								<c:forEach var="category" items="${updatenews_categories}">
-									<option value="${category.news_category_id}">${category.news_category_name}</option>
+									<c:if test="${category.news_category_name != selectedCategory.news_category_name}">
+										<option value="${category.news_category_id}">${category.news_category_name}</option>
+									</c:if>
 								</c:forEach>
 							</form:select>
 						</div>

@@ -7,12 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class FileUploadService {
+public class FileService {
 
-	public void fileUpload(MultipartFile file) throws IllegalStateException, IOException {
+	public void uploadFile(MultipartFile file) throws IllegalStateException, IOException {
 		file.transferTo(
 				new File("C:\\Users\\Ahkar Toe Maw\\eclipse-workspace\\hexaProject\\src\\main\\resources\\static\\img\\"
 						+ file.getOriginalFilename()));
+	}
+
+	public boolean deleteFile(String news_img) {
+		File fileToDelete = new File(
+				"C:\\Users\\Ahkar Toe Maw\\eclipse-workspace\\hexaProject\\src\\main\\resources\\static\\img\\"
+						+ news_img);
+		return fileToDelete.delete();
 	}
 
 }

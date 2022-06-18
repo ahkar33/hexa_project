@@ -3,6 +3,7 @@ package com.ace.hexa.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import com.ace.hexa.dto.news.NewsResponseDto;
 import com.ace.hexa.dto.user.UserResponseDto;
 import com.ace.hexa.model.NewsBean;
 import com.ace.hexa.model.TempNewsBean;
-import com.ace.hexa.service.FileUploadService;
+import com.ace.hexa.service.FileService;
 
 @Controller
 @RequestMapping("/hexa/admin")
@@ -43,7 +44,7 @@ public class AdminController {
 	private UserDao userDao;
 
 	@Autowired
-	private FileUploadService fileUploadService;
+	private FileService fileService;
 
 	@GetMapping("/home")
 	public String showDashboard(ModelMap model) {
@@ -146,7 +147,7 @@ public class AdminController {
 		dto.setNews_location(bean.getNews_location());
 		dto.setCreator_id(bean.getCreator_id());
 		dto.setNews_img(bean.getNews_img().getOriginalFilename());
-		fileUploadService.fileUpload(bean.getNews_img());
+		fileService.uploadFile(bean.getNews_img());
 		newsDao.insertNews(dto);
 		return "redirect:/hexa/admin/create_news";
 	}
@@ -258,17 +259,21 @@ public class AdminController {
 	}
 
 	@GetMapping("/update_news/{news_id}")
-	public ModelAndView setupUpdateNews(@PathVariable long news_id, ModelMap model) {
+	public ModelAndView setupUpdateNews(@PathVariable long news_id, ModelMap model, HttpServletRequest request) {
 		ArrayList<CategoryResponseDto> updatenews_categories = newsDao.selectAllNewsCategory();
 		model.addAttribute("updatenews_categories", updatenews_categories);
 		NewsResponseDto dto = newsDao.selectNewsById(news_id);
+		CategoryResponseDto selectedCategory = newsDao.selectCategoryByNewsId(news_id);
+		request.setAttribute("selectedCategory", selectedCategory);
+		request.setAttribute("news_img", dto.getNews_img());
 		return new ModelAndView("setup-news", "newsBean", dto);
 
 	}
 
 	@PostMapping("/update_news")
-	public String updateNews(@ModelAttribute("newsBean") NewsBean bean, ModelMap model)
+	public String updateNews(@ModelAttribute("newsBean") NewsBean bean, ModelMap model, HttpServletRequest request)
 			throws IllegalStateException, IOException {
+		String news_img = request.getParameter("news_img");
 		NewsRequestDto dto = new NewsRequestDto();
 		dto.setNews_id(bean.getNews_id());
 		dto.setNews_name(bean.getNews_name());
@@ -280,14 +285,16 @@ public class AdminController {
 			return "redirect:/hexa/admin/news";
 		} else {
 			dto.setNews_img(bean.getNews_img().getOriginalFilename());
-			fileUploadService.fileUpload(bean.getNews_img());
+			fileService.deleteFile(news_img);
+			fileService.uploadFile(bean.getNews_img());
 			newsDao.updateNews(dto);
 			return "redirect:/hexa/admin/news";
 		}
 	}
 
-	@GetMapping("/delete_news/{news_id}")
-	public String deleteNews(@PathVariable("news_id") Long news_id) {
+	@GetMapping("/delete_news/{news_id}/{news_img}")
+	public String deleteNews(@PathVariable("news_id") Long news_id, @PathVariable("news_img") String news_img) {
+		fileService.deleteFile(news_img);
 		newsDao.deleteNews(news_id);
 		return "redirect:/hexa/admin/news";
 	}
