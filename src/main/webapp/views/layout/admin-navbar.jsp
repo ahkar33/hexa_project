@@ -2,32 +2,47 @@
         <main class="container px-2">
             <h3 class="navbar-brand" style="color:rgba(0,0,0,0.75);"><a href="/hexa/admin/home">Hexa</a></h3>
             <ul class="navbar-nav d-flex gap-3 align-items-center">
-                <!-- <li class="nav-item">
-                    <form action="" class="form  p-0 m-0">
-                        <div class="form-group d-flex align-items-center gap-2">
-                            <input type="search" class="form-control p-1 px-1" placeholder="Search you want...">
-                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </form>
-                </li> -->
+    
                 <li class="nav-item text-capitalize fw-bold mx-2" style="color:rgba(0,0,0,0.75);">
-                  <span class="p-2">${sessionScope.userInfo.user_name}(${sessionScope.userInfo.user_role_name})</span>
-
-
-                    <!-- for user account info -->
-                    <!-- <div class="dropdown" id="user-info"> 
-                        <i class="fa-solid fa-user h4 toggle" data-bs-toggle="dropdown" data-bs-target="#user-info"></i>
-
-                        <ul class="dropdown-menu p-0 m-0" style="transform:translate(-18%)">
-                            <li class="dropdown-item text-capitalize">${sessionScope.userInfo.user_name}(${sessionScope.userInfo.user_role_name}) <!-- name--></li>
-                            <!-- <li class="dropdown-item "><a href=""><i class="fa-solid fa-user-pen"></i><span class="mx-2">Edit</span></a></li><!-- edit တွေဘာတွေ လုပ်ဖို့အတွက် -->
-                            <!-- <li class="dropdown-item bg-danger"><a href="/hexa/logout" onclick="return confirm('Are you sure to logout?');"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="mx-2">Logout</span></a></li>
-                        </ul>
-                    </div> -->
+                  <span class="p-2" data-bs-toggle="modal" data-bs-target="#acc-edit" >${sessionScope.userInfo.user_name}(${sessionScope.userInfo.user_role_name})</span>
                 </li>
 
-                <li class="nav-item  fw-bold"><a href="" class="text-warning shadow-sm p-2">Edit Info</a></li>
                 <li class="nav-item fw-bold"><a href="/hexa/logout" class="text-danger shadow-sm p-2" onclick="return confirm('Are you sure to logout?');">Logout</a></li>
             </ul>
         </main>
+
+         <!-- for account edit -->
+         <div class="modal fade" id="acc-edit">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <header class="modal-header">
+                        <div class="w-100 d-flex justify-content-between">
+                            <h6 class="h4 text-danger">Edit Info</h6>
+                            <span class="btn-close" data-bs-dismiss="modal" data-bs-target="#acc-edit"></span>
+                        </div>
+                    </header>
+                    <form action="/hexa/editUser" method="POST" class="modal-body">
+                        <div class="form-group my-1">
+                            <!-- for id -->
+                            <input type="hidden" name="id" value="${sessionScope.userInfo.user_id}"/>
+                            <label for="" class="form-label fw-bold text-danger">Username</label>
+                            <input type="text" name="name" class="form-control" value="${sessionScope.userInfo.user_name}" />
+                        </div>
+                        <div class="form-group my-1">
+                            <label for="" class="form-label fw-bold text-danger">Email Address</label>
+                            <input type="email" name="email" class="form-control" value="${sessionScope.userInfo.user_email}" />
+                        </div>
+                        <div class="form-group my-1">
+                            <label for="" class="form-label fw-bold text-danger">Password</label>
+                            <input type="password" name="psw" class="form-control" value="${sessionScope.userInfo.user_password}" />
+                        </div>
+                        <div class="form-group my-1 d-flex justify-content-end align-items-center gap-1">
+                            <a href="" class="btn btn-warning text-danger" data-bs-dismiss="modal" data-bs-target="#acc-edit">Cancel</a>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
+

@@ -159,7 +159,23 @@ public class UserDao {
 		}
 		return i;
 	}
-
+	
+	public int updateUser(UserRequestDto dto) {
+		String sql = "update user_account set user_name = ?, user_email = ?, user_password = ? where user_id = ?";
+		int i = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getUser_name());
+			ps.setString(2, dto.getUser_email());
+			ps.setString(3, dto.getUser_password());
+			ps.setLong(4, dto.getUser_id());
+			i = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return i;
+	}
+	
 	public int updateUserStatusById(int user_status, long user_id) {
 		String sql = "update user_account set user_status = ? where user_id = ?";
 		int i = 0;

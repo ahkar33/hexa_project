@@ -46,7 +46,10 @@ public class MainController {
 	private InteractionDao interactionDao;
 
 	@GetMapping("/login")
-	public ModelAndView showLogin(HttpServletRequest request) {
+	public ModelAndView showLogin(HttpServletRequest request, HttpSession ses) {
+		if (ses.getAttribute("userInfo") != null) {
+			return new ModelAndView("redirect:/hexa/home");
+			}
 		return new ModelAndView("login", "bean", new UserBean());
 	}
 
@@ -94,10 +97,27 @@ public class MainController {
 			return "redirect:/hexa/login";
 		}
 		request.setAttribute("error", "<h3>A user with that email already exists !!</h3>");
-//		model.addAttribute("error", "<h3>A user with that email already exists !!</h3>");
 		return "register";
 	}
-
+	
+	@PostMapping("/editUser")
+	public String updateUser(@RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("psw") String psw,HttpSession ses) {
+		UserRequestDto dto = new UserRequestDto();
+		UserResponseDto tmp = new UserResponseDto();
+		dto.setUser_id(Long.valueOf(id));
+		dto.setUser_name(name);
+		dto.setUser_email(email);
+		dto.setUser_password(psw);
+		if(userDao.updateUser(dto)>0) {
+			tmp = userDao.selectByEmail(email);
+			ses.setAttribute("userInfo", tmp);
+		}
+		if(tmp.getUser_role()<3) {
+			return "redirect:/hexa/admin/home";	
+		}
+		return "redirect:/hexa/home";
+	}
+	
 	@GetMapping("/home")
 	public String showNews(ModelMap model) {
 		ArrayList<NewsResponseDto> newsDto = newsDao.selectAllNews();
@@ -128,6 +148,21 @@ public class MainController {
 		dto.setComments(bean.getComments());
 		interactionDao.insertComment(dto);
 		return "redirect:/hexa/details/" + news_id;
+	}
+	
+	@PostMapping("/editComment/{news_id}")
+	public String updateComment(@RequestParam("cmt_id") String cmt_id, @RequestParam("cmt") String cmt, @PathVariable("news_id") Long news_id) {
+		InteractionRequestDto dto = new InteractionRequestDto();
+		dto.setComment_id(Long.valueOf(cmt_id));
+		dto.setComments(cmt);
+		interactionDao.updateComment(dto);
+		return "redirect:/hexa/details/"+news_id;
+	}
+	
+	@GetMapping("/delete_comment/{news_id}/{cmt_id}")
+	public String deleteComment(@PathVariable("cmt_id") Long cmt_id, @PathVariable("news_id") Long news_id) {
+		interactionDao.deleteComment(cmt_id);
+		return "redirect:/hexa/details/"+news_id;
 	}
 
 	@GetMapping("/searchByCategory/{news_category_id}")

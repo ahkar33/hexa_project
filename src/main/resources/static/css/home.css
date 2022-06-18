@@ -195,9 +195,9 @@ body {
     top: 0;
     left: 0;
     padding: 80px 0 0 20px;
-    -webkit-box-pack: flex-star !important;
-        -ms-flex-pack: flex-star !important;
-            justify-content: flex-star !important;
+    -webkit-box-pack: flex-start !important;
+        -ms-flex-pack: flex-start !important;
+            justify-content: flex-start !important;
     -webkit-box-align: start !important;
         -ms-flex-align: start !important;
             align-items: flex-start !important;

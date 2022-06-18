@@ -60,6 +60,20 @@ public class InteractionDao {
 		}
 		return i;
 	}
+	
+	public int updateComment(InteractionRequestDto dto) {
+		int result = 0;
+		String sql = "UPDATE news_project.interaction SET comments = ? WHERE comment_id = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getComments());
+			ps.setLong(2, dto.getComment_id());
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Database error");
+		}
+		return result;
+	}
 
 	public long getUniqueUserCount(long id) {
 		ArrayList<InteractionResponseDto> list = new ArrayList<>();

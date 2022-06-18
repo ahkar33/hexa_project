@@ -52,6 +52,11 @@ a:visited {
   height: 8vh;
 }
 
+#navbar:hover{
+  cursor: pointer;
+}
+
+
 #main-body {
   height: 92vh;
 }

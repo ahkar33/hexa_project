@@ -32,7 +32,7 @@
 		<form action="/hexa/searchNewsByTitle" method="GET"
 			class="form col-xl-8 col-md-12 mx-auto d-flex -justify-content-start align-items-center gap-1">
 			<input type="search" class="form-control" id="search-val"
-				placeholder="Search you want " name="title" />
+				placeholder="Search you want " name="title" autofocus/>
 			<button type="submit" class="btn btn-primary btn-sm">
 				<i class="fa-solid fa-magnifying-glass btn"></i>
 			</button>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
+<title>Details</title>
 
 <!-- bootstrap -->
 <link rel="stylesheet"
@@ -53,7 +53,7 @@
 			</div>
 
 			<div id="others" class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
-
+				<h3 class="h3 text-danger fw-bold text-start">Related News</h3>
 				<c:forEach var="news" items="${latestNews}">
 					<div id="other-news">
 						<a href="/hexa/details/${news.news_id}"> <img
@@ -73,75 +73,30 @@
 		<div id="comments-wrapper"
 			class="my-5 d-flex justify-content-center row flex-wrap w-75 mx-auto">
 
-			<c:if test="${interactions.size() > 0}">
-				<div id="comments" class="p-3 col-xl-6 col-md-12 my-3">
-					<c:forEach var="interaction" items="${interactions}">
-						<div id="comment" class="my-2">
-							<c:if test="${interaction.user_id == sessionScope.userInfo.user_id && sessionScope.userInfo != null}">
-								<!-- dropdown for comment control -->
-								<div class="dropdown" id="dropdown-${interaction.comment_id}">
-									<span id="cmt-control" data-bs-toggle="dropdown" data-bs-target="#dropdown-${interaction.comment_id}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
-
-									<ul class="dropdown-menu p-0 m-0">
-										<li class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-${interaction.comment_id}"><a href="" class="w-100  text-decoration-none text-dark">Edit</a></li>
-										<li class="dropdown-item"><a href="" class="w-100 text-decoration-none text-dark">Delete</a></li>
-									</ul>
-								</div>
-							</c:if>
-							<div id="info" class="d-flex gap-2 align-items-center">
-								<div id="image">
-									<img src="/img/profile.png" alt="">
-								</div>
-								<div id="detail">
-									<div id="name" class="text-capitalize">${interaction.user_name}</div>
-									<div id="date">${interaction.commented_date}</div>
-								</div>
-							</div>
-							<div id="content">${interaction.comments}</div>
-						</div>
-
-						<!-- modal box -->
-						<div class="modal fade" id="modal-${interaction.comment_id}">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content p-3">
-									<header class="modal-header p-1">
-										<div class="w-100 d-flex justify-content-center">
-											<h3 class="h6">Edit Comment</h3>
-											<a href="" class="btn-close" data-bs-dismiss="modal" data-bs-target="modal-${interaction.comment_id}" ></a>
-										</div>
-									</header>
-									<form action="" class="modal-body form p-3">
-										<div class="form-group my-1">
-											<input type="text" class="form-control" value="${interaction.comments}" placeholder="Comment">
-											<input type="hidden" class="form-control" value="${interaction.comment_id}">
-										</div>
-										<div class="form-group my-1 d-flex justify-content-end gap-1">
-											<a class="btn btn-warning" data-bs-dismiss="modal" data-bs-target="#modal-${interaction.comment_id}">Cancel</a>
-											<button type="submit" class="btn btn-success">Update</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</c:if>
-
 			<%
-				if (session.getAttribute("userInfo") != null) {
+			if (session.getAttribute("userInfo") != null) {
 			%>
 
-			<form:form action="/hexa/details/addComment/${newsDetails.news_id}"
-				method="post" class="form col-xl-6 col-md-12" modelAttribute="bean">
-				<form:input type="hidden" path="user_id" value="${userInfo.user_id}" />
-				<form:textarea path="comments" id="" cols="30" rows="10"
-					class="form-control my-1" placeholder="Comment here"></form:textarea>
+			<form id="comment-form" class="form col-xl-6 col-md-12">
+				<input type="hidden" id="user-id" value="${userInfo.user_id}" />
+				<textarea id="comment"  cols="30" rows="10"
+					class="form-control my-1" placeholder="Comment here"></textarea>
 				<button type="submit" class="btn btn-primary w-100">Comment</button>
-			</form:form>
+			</form>
 
 			<%
 			}
 			%>
+
+			<!-- <c:if test="${interactions.size() > 0}"> -->
+				<div id="comments-container" class="p-3 col-xl-6 col-md-12 my-3">
+					<div id="comments" class="w-100">
+
+					</div>
+					<span class="text-decoration-underline" id="btn-view"></span>
+				</div>
+
+			<!-- </c:if> -->
 		</div>
 
 
@@ -162,5 +117,8 @@
 	<script src="/js/home.js" type="text/javascript" defer></script>
 
 	<script src="/js/view-detail.js" type="text/javascript"></script>
+
+	<!-- comment_script.js -->
+	<script src="/js/comment_script.js" type="text/javascript"></script>
 </body>
 </html>

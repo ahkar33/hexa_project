@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
+<title>Search News</title>
 
 <!-- bootstrap -->
 <link rel="stylesheet"
@@ -66,7 +66,7 @@
 			<c:forEach var="news" items="${newsLists}">
 				<div
 					class="mx-1 new-box my-1 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
-					id="news">
+					id="news" style="height:250px !important;">
 					<a href="/hexa/details/${news.news_id}"> <img
 						src="/img/${news.news_img}" class="new-img" alt="image" />
 						<div class="new-layer">
