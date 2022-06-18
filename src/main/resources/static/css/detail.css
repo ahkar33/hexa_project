@@ -77,12 +77,6 @@
   color: #f5c57d;
 }
 
-#comments {
-  height: 300px;
-  overflow-y: scroll;
-
-}
-
 
 #comment {
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.75);
@@ -92,6 +86,10 @@
   color: rgba(0, 0, 0, 0.75);
   /* font-weight: bold; */
   position: relative;
+}
+
+#comment.hide{
+  display: none;
 }
 
 
@@ -127,4 +125,8 @@
 
 #news-content *{
   color:rgba(0, 0, 0, 0.75) !important;
+}
+
+#btn-view:hover{
+  cursor: pointer;
 }

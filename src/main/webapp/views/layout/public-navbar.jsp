@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <section id="navbar" class="navbar navbar-expand sticky-top">
-	<div class="container">
+	<div class="container justify-content-between">
 		<div class="navbar-brand fw-bold h2">
 			<a href="/hexa/home">Hexa</a>
 		</div>
@@ -17,16 +17,16 @@
 
 			<c:if test="${sessionScope.userInfo != null}">
 				<li class="nav-item text-capitalize fw-bold"><span
-					data-bs-toggle="modal" data-bs-target="#acc-edit">${sessionScope.userInfo.user_name}</span></li>
-				<li class="nav-item"><a href="/hexa/logout"
-					class="text-danger p-1 shadow-sm  fw-bold">Logout</a></li>
+					data-bs-toggle="modal" id="user-name" data-bs-target="#acc-edit">${sessionScope.userInfo.user_name}</span></li>
+				<li class="nav-item d-none" id="user-id">${sessionScope.userInfo.user_id}</li>
+				<li class="nav-item"><a href="/hexa/logout" class="text-danger p-1 shadow-sm  fw-bold">Logout</a></li>
 			</c:if>
 
 			<!-- edited from here -->
 			<li class="nav-item"><i class="fa-solid fa-magnifying-glass btn"
 				id="btn-search" onclick="window.location.href='/hexa/search'"></i></li>
 		</ul>
-		<i class="fa-solid fa-bars" id="btn-menu"></i>
+		<i class="fa-solid fa-bars" id="btn-menu" style="transform:translateX(600%)"></i>
 		<div id="menu-layer" class=""></div>
 </section>
 

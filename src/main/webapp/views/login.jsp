@@ -67,7 +67,6 @@
 		<div
 			class="container d-flex justify-content-between align-items-center"
 			id="wrapper">
-			<div class="fw-bold text">Terms | Service</div>
 			<div class=" fw-bold text">Created By Hexa_Group(Ace
 				Inspiration)</div>
 			<div class="">
