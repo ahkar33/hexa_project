@@ -1,0 +1,24 @@
+
+#search-news #news-wrapper #news{
+    width:100%;
+    height:auto;
+    overflow: hidden;
+}
+
+#news-wrapper #image{
+    position: relative;
+    overflow: hidden;
+}
+
+#news{
+    box-shadow: 0 0 1.5px rgba(0,0,0,0.75);
+}
+
+
+#news-wrapper #content{
+    padding: 20px;
+}
+
+#content p{
+    color:rgba(0,0,0,0.75);
+}

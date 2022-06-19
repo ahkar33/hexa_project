@@ -5,7 +5,11 @@
             <h3 class="h5 text-center text-light py-3" id="dash-title"><a href="/hexa/admin/home">Dashboard</a></h3>
 
             <ul id="sidebar-list" class="list-group  gap-2 w-100">
-               <li id="sidebar-item" class="list-item p-2 px-3 m-0 text"><a href="/hexa/admin/users" class="w-100"><i class="fa-solid fa-users"></i><span class="mx-2">Users</span></a></li>
+
+             	<c:if test="${userInfo.user_role == 1 }">
+	               <li id="sidebar-item" class="list-item p-2 px-3 m-0 text"><a href="/hexa/admin/users" class="w-100"><i class="fa-solid fa-users"></i><span class="mx-2">Users</span></a></li>
+             	</c:if> 
+
                <li id="sidebar-item" class="list-item p-2 px-3 m-0" ><a href="/hexa/admin/news"  class="w-100"><i class="fa-brands fa-neos"></i><span class="mx-2">News</span></a></li>
 
                <li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/create_news"  class="w-100"><i class="fa-solid fa-circle-plus"></i><span class="mx-2">Create News</span></a></li>

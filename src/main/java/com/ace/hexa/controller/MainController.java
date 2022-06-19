@@ -179,9 +179,9 @@ public class MainController {
 		ArrayList<NewsResponseDto> newsByTitle = newsDao.selectNewsByWords(title);
 		if (newsByTitle.size() > 0) {
 			model.addAttribute("newsByTitle", newsByTitle);
-			for (NewsResponseDto news : newsByTitle) {
-				System.out.println(news.toString());
-			}
+			// for (NewsResponseDto news : newsByTitle) {
+			// 	System.out.println(news.toString());
+			// }
 			return "search";
 		} else {
 			return "search";
