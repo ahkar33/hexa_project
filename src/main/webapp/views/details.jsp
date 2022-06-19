@@ -33,7 +33,7 @@
 
 		<div id="news-wrapper" class="container d-flex justify-content-between gap-3 row mx-auto">
 			<div id="news" class="my-5 col-xl-7  col-md-12 d-flex flex-column ">
-				<h3 class="h3 text-warning fw-bold text-warning mx-auto "
+				<h3 class="h3 text-warning fw-bold text-warning mx-auto text-capitalize "
 					id="news-title">"${newsDetails.news_name}"</h3>
 				<div id="news-image" class="my-3 w-100">
 					<img src="/img/${newsDetails.news_img}">
@@ -76,27 +76,23 @@
 			<%
 			if (session.getAttribute("userInfo") != null) {
 			%>
-
-			<form id="comment-form" class="form col-xl-6 col-md-12">
-				<input type="hidden" id="user-id" value="${userInfo.user_id}" />
-				<textarea id="comment"  cols="30" rows="10"
-					class="form-control my-1" placeholder="Comment here"></textarea>
-				<button type="submit" class="btn btn-primary w-100">Comment</button>
-			</form>
+				<form id="comment-form" class="form col-xl-6 col-md-12">
+					<input type="hidden" id="user-id" value="${userInfo.user_id}" />
+					<textarea id="comment"  cols="30" rows="10"
+						class="form-control my-1" placeholder="Comment here"></textarea>
+					<button type="submit" class="btn btn-primary w-100">Comment</button>
+				</form>
 
 			<%
-			}
+				}
 			%>
 
-			<!-- <c:if test="${interactions.size() > 0}"> -->
-				<div id="comments-container" class="p-3 col-xl-6 col-md-12 my-3">
-					<div id="comments" class="w-100">
+			<div id="comments-container" class="p-3 col-xl-6 col-md-12 my-3">
+				<div id="comments" class="w-100">
 
-					</div>
-					<span class="text-decoration-underline" id="btn-view"></span>
 				</div>
-
-			<!-- </c:if> -->
+				<span class="text-decoration-underline" id="btn-view"></span>
+			</div>
 		</div>
 
 

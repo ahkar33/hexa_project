@@ -22,6 +22,9 @@
 
 <!-- custom css -->
 <link rel="stylesheet" href="/css/home.css" type="text/css">
+
+<!-- searchPage -->
+<link rel="stylesheet" href="/css/searchPage.css" type="text/css">
 </head>
 <body>
 	<!-- navbar -->
@@ -38,21 +41,24 @@
 			</button>
 		</form>
 	</section>
-	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
-		<div id="news-wrapper"
-			class="w-100 row d-flex justify-content-center flew-wrap gap-1">
+	<div class="container w-75 my-5 mx-auto gap-2 row text-start" id="search-news">
+		<div id="news-wrapper" class="w-100 row d-flex align-items-center flex-column gap-1">
 			<c:forEach var="news" items="${newsByTitle}">
-				<div
-					class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
+				<a href="/hexa/details/${news.news_id}" class="new-box row my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold d-flex justify-content-start flex-wrap"
 					id="news">
-					<a href="/hexa/details/${news.news_id}"> <img
-						src="/img/${news.news_img}" class="new-img" alt="image" />
+					<div id="image" class="col-xl-3 col-md-5 p-0"> 
+						<img src="/img/${news.news_img}" class="new-img" alt="image" />
 						<div class="new-layer">
 							<span class="new-title text-capitalize"> ${news.news_name}
 							</span> <span class="new-location text-dark text-capitalize">|${news.news_location}</span>
 						</div>
-					</a>
-				</div>
+					</div>
+					<div id="content" class="d-flex justify-content-center align-items-center col-xl-9 col-md-7">
+						<p id="news-content">
+							${news.descriptions}
+						</p>
+					</div>
+				</a>
 			</c:forEach>
 		</div>
 	</div>
@@ -88,30 +94,7 @@
 	<script src="/js/home.js" type="text/javascript" defer></script>
 
 	<script src="/js/view-detail.js" type="text/javascript"></script>
+
+	<script src="/js/search_page.js" type="text/javascript"></script>
 </body>
 </html>
-
-<!-- <div id="news-wrapper"
-		class="container d-flex justify-content-between gap-3 row mx-auto">
-		<c:forEach var="news" items="${newsbywords}">
-		<div id="news" class="my-5 col-xl-7  col-md-12 d-flex flex-column ">
-			<h3 class="h3 text-warning fw-bold text-warning mx-auto "
-				id="news-title">"${newsbywords.news_name}"</h3>
-			<div id="news-image" class="my-3 w-100">
-				<img src="/img/${newsbywords.news_img}">
-				<div id="layer"
-					class="d-flex justify-content-end align-items-start flex-column p-3">
-					<div id="news-location" class="fw-bold mx-2">
-						<i class="fa-solid fa-location-dot"></i>
-						${newsbywords.news_location}
-					</div>
-					<div id="news-writer" class="fw-bold">${newsbywords.creator_name}</div>
-				</div>
-			</div>
-			<div id="news-content" class="w-100 fw-bold"
-				style="color: rgba(0, 0, 0, 0.75);">
-				<p class="w-100">${newsbywords.descriptions}</p>
-			</div>
-		</div>
-		</c:forEach>
-		</div> -->

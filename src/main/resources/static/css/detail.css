@@ -130,3 +130,7 @@
 #btn-view:hover{
   cursor: pointer;
 }
+
+#comment .dropdown a:hover{
+  cursor:pointer;
+}

@@ -8,7 +8,7 @@ $(document).ready(() => {
 
     $("#year").html(date.getFullYear());
     $("#day-name").html(getDayName(date.getDay()));
-    $("#day").html(date.getDay());
+    $("#day").html(date.getDate());
 
     
     counts.forEach(count => {
