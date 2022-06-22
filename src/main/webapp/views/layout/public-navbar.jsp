@@ -2,7 +2,7 @@
 <section id="navbar" class="navbar navbar-expand sticky-top">
 	<div class="container justify-content-between">
 		<div class="navbar-brand fw-bold h2">
-			<a href="/hexa/home">Hexa</a>
+			<a href="/hexa/home">HEXA</a>
 		</div>
 		<ul class="navbar-nav gap-4 d-flex align-items-center" id="navbar-nav">
 			<li class="nav-item active fw-bold"><a href="/hexa/home">Home</a></li>
@@ -16,8 +16,16 @@
 
 
 			<c:if test="${sessionScope.userInfo != null}">
-				<li class="nav-item text-capitalize fw-bold"><span
-					data-bs-toggle="modal" id="user-name" data-bs-target="#acc-edit">${sessionScope.userInfo.user_name}</span></li>
+				<li class="nav-item text-capitalize fw-bold">
+				
+				<c:if test="${sessionScope.userInfo.user_role == 3 }">
+				<span data-bs-toggle="modal" id="user-name" data-bs-target="#acc-edit">${sessionScope.userInfo.user_name}</span>				
+				</c:if>				
+				<c:if test="${sessionScope.userInfo.user_role < 3 }">
+				<a href="/hexa/admin/home">${sessionScope.userInfo.user_name}</a>
+				</c:if>
+				
+				</li>
 				<li class="nav-item d-none" id="user-id">${sessionScope.userInfo.user_id}</li>
 				<li class="nav-item"><a href="/hexa/logout" class="text-danger p-1 shadow-sm  fw-bold">Logout</a></li>
 			</c:if>
