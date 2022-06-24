@@ -25,8 +25,8 @@
 </head>
 <style>
 	#news:hover{
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.95);
-	border-radius: 5px;
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.75);
+		border-radius: 5px;
 	}
 </style>
 <body>
@@ -37,13 +37,13 @@
 	<section id="categories" class="container my-5">
 		<div class="container-fluid d-flex gap-1 justify-content-center align-items-center flex-wrap">
 			<c:forEach var="category" items="${categories}">
-				<a href="/hexa/searchByCategory/${category.news_category_id}" class="btn btn-sm fw-bold p-2 shadow-sm text-danger">${category.news_category_name} </a>
+				<a href="/hexa/searchByCategory/${category.news_category_id}" class="btn btn-sm fw-bold p-2 shadow-sm text-danger text-capitalize">${category.news_category_name} </a>
 			</c:forEach>
 		</div>
 	</section>
 
 	<!-- today news -->
-		<c:if test="${todayNews.size() > 0 }">
+	<c:if test="${todayNews.size() > 0 }">
 		<p class="h2  text-danger p-2 w-75 m-auto my-5 fw-bold">Today's
 			News</p>
 		<div id="welcome" class="container w-75 my-3 gap-3 mx-auto">

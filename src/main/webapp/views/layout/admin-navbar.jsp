@@ -1,6 +1,6 @@
     <section id="navbar" class="navbar navbar-expand fw-bold text shadow-sm sticy-top">
         <main class="container px-2">
-            <h3 class="navbar-brand" style="color:rgba(0,0,0,0.75);"><a href="/hexa/admin/home">Hexa</a></h3>
+            <h3 class="navbar-brand" style="color:rgba(0,0,0,0.75);"><a href="/hexa/admin/home" class="text-dark">HEXA</a></h3>
             <ul class="navbar-nav d-flex gap-3 align-items-center">
     
                 <li class="nav-item text-capitalize fw-bold mx-2" style="color:rgba(0,0,0,0.75);">
