@@ -58,7 +58,7 @@ public class MainController {
 		if (userDao.check(user.getUser_email(), user.getUser_password())) {
 			UserResponseDto dto = userDao.selectByEmail(user.getUser_email());
 			if (dto.getUser_status() == 1) {
-				request.setAttribute("error", "<h3>You have been banned !!</h3>");
+				request.setAttribute("error", "You have been banned !!");
 				return "login";
 			}
 			session.setAttribute("userInfo", dto);
@@ -70,7 +70,7 @@ public class MainController {
 				return "redirect:/hexa/home";
 			}
 		}
-		request.setAttribute("error", "<h3>email and password do not match !!</h3>");
+		request.setAttribute("error", "Email and password do not match !!");
 		return "login";
 	}
 
