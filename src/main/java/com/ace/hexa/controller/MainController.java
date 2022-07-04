@@ -65,7 +65,7 @@ public class MainController {
 			if (dto.getUser_role() == 1) {
 				return "redirect:/hexa/admin/home";
 			} else if (dto.getUser_role() == 2) {
-				return "redirect:/hexa/admin/home";
+				return "redirect:/hexa/admin/news";
 			} else {
 				return "redirect:/hexa/home";
 			}
