@@ -11,19 +11,22 @@ $(document).ready(() => {
     $("#day").html(date.getDate());
 
     
-    counts.forEach(count => {
-        let realVal = Number(count.textContent);//real value
-        let start = 0;
-        count.textContent = start;
-    
-        const counter = setInterval(() => {
-            let currentVal = Number(count.textContent);
-            currentVal += 1 ;
-            if(currentVal == realVal) clearInterval(counter)
-            count.textContent = currentVal;
-        },10);
+    if(!localStorage.getItem("countDone") || localStorage.getItem("countDone") == null){
+        counts.forEach(count => {
+            let realVal = Number(count.textContent);//real value
+            let start = 0;
+            count.textContent = start;
         
-    })    
+            const counter = setInterval(() => {
+                let currentVal = Number(count.textContent);
+                currentVal += 1 ;
+                if(currentVal == realVal) clearInterval(counter)
+                count.textContent = currentVal;
+            },10);
+            
+        })    
+    }
+    localStorage.setItem("countDone",true);
 })
 
 function getDayName(day){

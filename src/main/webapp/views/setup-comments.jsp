@@ -42,18 +42,15 @@
 	}
 	%>
 
-	<!-- navbar -->
-	<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
-
-
-	<!-- main-body start here -->
-	<!-- ဘေးနား ဘားနဲ့ အလယ် က ဒေတာတွေ ပြဖို့အတွက် ကို မိန်းဘော်ဒီထဲထည့်ထားသလို့စဥ်းစားထားတာ -->
-	<main id="main-body" class="w-100 p-0 m-0 d-flex">
+	<div class="container-fluid p-0 m-0 d-flex">
 		<!-- sidebar -->
 		<jsp:include page="/views/layout/admin-sidebar.jsp"></jsp:include>
 
 		<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
 		<section id="main-data" class="w-85 position-relative">
+			<!-- navbar -->
+			<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
+
 			<div class="table-title my-3">
 				<h3>Interaction</h3>
 			</div>
@@ -80,7 +77,7 @@
 								<td>${news.commenters_count}</td>
 								<td>${news.comments_count}</td>
 								<td><a href="/hexa/admin/comments/${news.id}"
-									class="btn btn-success text-dark btn-sm">Detail</a></td>
+									class="btn btn-success text-light btn-sm">Detail</a></td>
 							</tr>
 						</c:forEach>
 
@@ -88,11 +85,10 @@
 				</table>
 			</div>
 
-			<!-- footer -->
-			<jsp:include page="/views/layout/admin-footer.jsp"></jsp:include>
 		</section>
-	</main>
-	<!-- main body end here -->
+	</div>
+	<!-- acc edit modal -->
+	<jsp:include page="./layout/admin-accedit-modal.jsp" />
 
 	<!-- bootstrap -->
 	<script

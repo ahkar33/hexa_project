@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -30,6 +30,10 @@
 	<!-- navbar -->
 	<jsp:include page="./layout/public-navbar.jsp" />
 
+		<div class="container py-3 d-flex justify-content-end">
+			<span id="google-ele"></span>
+		</div>
+
 
 		<div id="news-wrapper" class="container d-flex justify-content-between gap-3 row mx-auto">
 			<div id="news" class="my-5 col-xl-7  col-md-12 d-flex flex-column ">
@@ -48,23 +52,24 @@
 				</div>
 				<div id="news-content" class="w-100 fw-bold"
 					style="color: rgba(0, 0, 0, 0.75);">
-					<p class="w-100">${newsDetails.descriptions}</p>
+					<p class="w-100" style="letter-spacing: 1.3px;line-height:1.5;">${newsDetails.descriptions}</p>
 				</div>
 			</div>
 
 			<div id="others" class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
-				<h3 class="h3 text-danger fw-bold text-start">Related News</h3>
+				<h3 class="h3 text-danger fw-bold text-start">Latest News</h3>
 				<c:forEach var="news" items="${latestNews}">
-					<div id="other-news">
-						<a href="/hexa/details/${news.news_id}"> <img
-							src="/img/${news.news_img}" alt="">
-							<div id="layer"	class="d-flex justify-content-end align-items-start flex-column p-3">
-								<div id="title">${news.news_name}</div>
-								<div id="location">|${news.news_location}</div>
-							</div>
-						</a>
-					</div>
-
+					<c:if test="${news.news_id != newsDetails.news_id}">
+						<div id="other-news">
+							<a href="/hexa/details/${news.news_id}"> <img
+								src="/img/${news.news_img}" alt="">
+								<div id="layer"	class="d-flex justify-content-end align-items-start flex-column p-3">
+									<div id="title">${news.news_name}</div>
+									<div id="location">|${news.news_location}</div>
+								</div>
+							</a>
+						</div>
+					</c:if>
 				</c:forEach>
 
 
@@ -91,14 +96,13 @@
 				<div id="comments" class="w-100">
 
 				</div>
-				<span class="text-decoration-underline" id="btn-view"></span>
+				<span class="text-decoration-underline" id="btn-view" data-show=false></span>
 			</div>
 		</div>
 
 
 	<!-- footer -->
 	<jsp:include page="./layout/public-footer.jsp" />
-
 
 
 	<!-- bootstrap -->
@@ -113,6 +117,16 @@
 	<script src="/js/home.js" type="text/javascript" defer></script>
 
 	<script src="/js/view-detail.js" type="text/javascript"></script>
+
+	<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate">
+	</script>
+
+	<!-- google translate -->
+	<script>
+		function loadGoogleTranslate(){
+			new google.translate.TranslateElement("google-ele");
+		}
+	</script>
 
 	<!-- comment_script.js -->
 	<script src="/js/comment_script.js" type="text/javascript"></script>

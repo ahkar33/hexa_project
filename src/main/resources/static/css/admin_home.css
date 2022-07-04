@@ -4,6 +4,18 @@
   --light-dark:rgba(0,0,0,0.75);
 }
 
+.bg-snow{
+  background-color: rgba(255,255,255,1) !important;
+}
+
+.w-85{
+  width:85% !important;
+}
+
+.w-15{
+  width:15% !important;
+}
+
 .text {
   color: var(--text) !important;
 }
@@ -23,12 +35,7 @@
 * {
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
-}
-
-body {
-  width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
+  box-sizing: border-box;
 }
 
 .dropdown-menu:hover {
@@ -48,12 +55,12 @@ a:visited {
   color: var(--text);
 }
 
-#navbar {
-  height: 8vh;
-}
-
 #navbar:hover{
   cursor: pointer;
+}
+
+#main-data{
+  margin-left:15% !important ;
 }
 
 
@@ -72,6 +79,7 @@ a:visited {
 }
 
 #sidebar {
+  height:100vh !important;
   color: var(--text-light);
 }
 
@@ -85,15 +93,6 @@ a:visited {
           box-shadow: 0 0 5px var(--text);
 }
 
-#dash-title {
-  border-bottom: 0.2px solid var(--text-light);
-  -webkit-transition: 1s all;
-  transition: 1s all;
-}
-
-#dash-title:hover {
-  border-bottom: 0.5px dashed var(--text-light);
-}
 
 ul {
   list-style-type: none;
@@ -106,14 +105,13 @@ ul {
 
 #sidebar-list li#sidebar-item {
   color: var(--text-light) !important;
-  padding: px;
-  border-radius: 50px;
+  margin:0 5px !important;
   z-index: 10;
-  border-bottom: 0.3px solid var(--text);
+  transition: 0.3s all;
 }
 
 #sidebar-list li#sidebar-item:hover {
-  border-bottom: 0.5px dashed var(--text);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 #footer * {
@@ -135,3 +133,22 @@ ul {
   background-color: rgba(0, 0, 0, 0.75);
 }
 /*# sourceMappingURL=admin_home.css.map */
+
+.year-btn{
+  box-shadow:0 0 3px rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+  border:none;
+}
+
+.year-btn.active{
+   color:rgba(255,255,255,0.75);
+    background-color:rgb(13,110,253) ;
+}
+
+#newsPerMonthChart{
+  max-height:400px !important;
+}
+
+#chart-wrapper{
+  margin-bottom:150px !important;
+}
