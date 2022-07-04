@@ -37,56 +37,51 @@
 	}
 	%>
 
-	<!-- navbar -->
-	<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
-	
-	
-    <!-- main-body start here -->
-     <!-- ဘေးနား ဘားနဲ့ အလယ် က ဒေတာတွေ ပြဖို့အတွက် ကို မိန်းဘော်ဒီထဲထည့်ထားသလို့စဥ်းစားထားတာ -->
-    <main id="main-body" class="w-100 p-0 m-0 d-flex">
-        <!-- sidebar -->
-        <jsp:include page="/views/layout/admin-sidebar.jsp"></jsp:include>
+	<div class="container-fluid p-0 m-0 d-flex">
+            <jsp:include page="/views/layout/admin-sidebar.jsp"></jsp:include>
 
-        <!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
-        <section id="main-data" class="w-85 position-relative">
-            <div class="table-title my-3">
-                <h3>Interaction</h3>
-            </div>
-                <!-- edited here -->
-               <div id="table-wrapper">
-                    <table class="table-fill table table-striped" id="table">
-                        <thead class="sticky-top fw-bold ">
-                            <tr class="fw-bold">
-                              <th>Id</th>
-                              <th>Comment</th>
-                              <th>Commented User</th>
-                              <th>Commented Date</th>
-                              <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-hover">
-                        <% int id = 1; %>
-						<c:forEach var="interactions" items="${interactions}" varStatus="stus" >
-                            <tr>
-                                <td><%= id %></td>
-                                <td class="text-capitalize">${interactions.comments }</td>
-                                <td class="text-capitalize">${commenters[stus.index]}</td>
-                                <td>${interactions.commented_date }</td>
-                                <td>
-                                    <a href="/hexa/admin/delete/${interactions.comment_id }" class="btn btn-danger btn-sm" id="btn-ban" onclick="return confirm('Are you sure to delete?');">Delete</a>
-                                </td>
-                            </tr>
-                            <% id++; %>
-						</c:forEach>
-                        </tbody>
-                    </table>
-               </div>
-                
-               <!-- footer -->
- 				<jsp:include page="/views/layout/admin-footer.jsp"></jsp:include>
-        </section>
-    </main>
-    <!-- main body end here -->
+            <!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
+            <section id="main-data" class="w-85 position-relative">
+                 <!-- navbar -->
+                 <jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
+        
+        
+                <div class="table-title my-3">
+                    <h3>Interaction</h3>
+                </div>
+                    <!-- edited here -->
+                <div id="table-wrapper">
+                        <table class="table-fill table table-striped" id="table">
+                            <thead class="sticky-top fw-bold ">
+                                <tr class="fw-bold">
+                                <th>Id</th>
+                                <th>Comment</th>
+                                <th>Commented User</th>
+                                <th>Commented Date</th>
+                                <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-hover">
+                            <% int id = 1; %>
+                            <c:forEach var="interactions" items="${interactions}" varStatus="stus" >
+                                <tr>
+                                    <td><%= id %></td>
+                                    <td class="text-capitalize">${interactions.comments }</td>
+                                    <td class="text-capitalize">${commenters[stus.index]}</td>
+                                    <td>${interactions.commented_date }</td>
+                                    <td>
+                                        <a href="/hexa/admin/delete/${interactions.comment_id }" class="btn btn-danger btn-sm" id="btn-ban" onclick="return confirm('Are you sure to delete?');">Delete</a>
+                                    </td>
+                                </tr>
+                                <% id++; %>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                </div>
+            </section>
+    </div>
+    <!-- acc edit modal -->
+		<jsp:include page="./layout/admin-accedit-modal.jsp" />
 
      <!-- bootstrap -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>

@@ -11,7 +11,7 @@ public class FileService {
 
 	public void uploadFile(MultipartFile file) throws IllegalStateException, IOException {
 		file.transferTo(
-				new File("C:\\Users\\Ahkar Toe Maw\\eclipse-workspace\\hexaProject\\src\\main\\resources\\static\\img\\"
+				new File("D:\\boot_projects\\hexa_project\\src\\main\\resources\\static\\img\\"
 						+ file.getOriginalFilename()));
 	}
 

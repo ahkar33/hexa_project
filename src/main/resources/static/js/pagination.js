@@ -10,11 +10,11 @@ $(document).ready(() => {
 
         let container = $("#news-wrapper");
         let pagination = $("#pagination");
-        let page = 1;
+        let page = localStorage.getItem("curPage") == null ? 1 : localStorage.getItem("curPage");
         let totalPage = Math.ceil(newsList.length/max);
 
 
-        container.html(getHTML(newsList,1));
+        container.html(getHTML(newsList,page));
         pagination.html(getBtns(newsList));
 
         let btns = $(".page-link");
@@ -22,6 +22,7 @@ $(document).ready(() => {
            btn.addEventListener("click",(e) => {
                 let pg = Number(e.target.innerText);
                 page = pg;
+                localStorage.setItem("curPage",page);
                 container.html(getHTML(newsList,page));
                 showCurrentPage(page);
            });
@@ -89,6 +90,7 @@ function getPrevPage(now,total){
     let result ;
 
     page <= 1 ? result = Number(total) : result = page - 1 ;
+    localStorage.setItem("curpage",result);
     return result;
 }
 
@@ -97,7 +99,7 @@ function getNextPage(now,total){
     let result;
 
     page >= Number(total) ? result = 1 : result = page + 1;
-
+    localStorage.setItem("curpage",result);
     return result;
 }
 

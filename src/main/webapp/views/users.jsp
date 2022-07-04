@@ -43,16 +43,14 @@
 	}
 	%>
 
-	<!-- navbar -->
-	<jsp:include page="./layout/admin-navbar.jsp" />
-
-	<!-- main-body start here -->
-	<main id="main-body" class="w-100 p-0 m-0 d-flex">
+	<div class="container-fluid p-0 m-0 d-flex">
 		<!-- sidebar -->
 		<jsp:include page="./layout/admin-sidebar.jsp" />
 
-
 		<section id="main-data" class="w-85 position-relative">
+			<!-- navbar -->
+			<jsp:include page="./layout/admin-navbar.jsp" />
+
 			<div class="table-title my-3">
 				<h3>User Information</h3>
 			</div>
@@ -76,7 +74,7 @@
 								<c:set var="count" value="${count + 1}" scope="page" />
 								<td class="text-capitalize">${count}</td>
 								<td class="text-capitalize">${user.user_name}</td>
-								<td class="text-capitablize">${user.user_email}</td>
+								<td class="text-lowercase">${user.user_email}</td>
 								<td class="text-capitalize">${user.user_role_name}</td>
 								<td><c:choose>
 										<c:when test="${user.user_status == 0}">
@@ -95,12 +93,11 @@
 					</tbody>
 				</table>
 			</div>
-
-			<!-- footer -->
-			<jsp:include page="./layout/admin-footer.jsp" />
 		</section>
-	</main>
-	<!-- main body end here -->
+
+	</div>
+	<!-- acc edit modal -->
+	<jsp:include page="./layout/admin-accedit-modal.jsp" />
 
 	<!-- bootstrap -->
 	<script

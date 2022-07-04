@@ -26,8 +26,8 @@
 				</c:if>
 				
 				</li>
-				<li class="nav-item d-none" id="user-id">${sessionScope.userInfo.user_id}</li>
-				<li class="nav-item"><a href="/hexa/logout" class="text-danger p-1 shadow-sm  fw-bold">Logout</a></li>
+				<li class="nav-item d-none" id="user-id" data-target="${sessionScope.userInfo.user_id}">${sessionScope.userInfo.user_id}</li>
+				<li class="nav-item"><a href="/hexa/logout" class="text-danger p-1 shadow-sm  fw-bold" onclick="localStorage.removeItem('curPage');">Logout</a></li>
 			</c:if>
 
 			<!-- edited from here -->
@@ -70,9 +70,9 @@
 				</div>
 				<div
 					class="form-group my-1 d-flex justify-content-end align-items-center gap-1">
-					<a href="" class="btn btn-warning text-danger"
+					<a href="" class="btn btn-warning text-light"
 						data-bs-dismiss="modal" data-bs-target="#acc-edit">Cancel</a>
-					<button type="submit" class="btn btn-success">Update</button>
+					<button type="submit" class="btn btn-success text-light">Update</button>
 				</div>
 			</form>
 		</div>

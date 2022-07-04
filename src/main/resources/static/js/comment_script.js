@@ -3,24 +3,26 @@ const  route = window.location.href.split("/");
 const userName = $("#user-name").html();
 const commentForm = $("#comment-form");
 var status = "See More";
+var seeMore = false;
 var comments = [];//to control see more or see less
 
-window.onload = () => {
+
+$(document).ready(() => {
     let newsId = route[route.length -1];
     getComments(newsId);
     $("#btn-view").html(status);
-}
 
-$(document).ready(() => {
     commentForm.on("submit", handleComment);
+    seeMore =  $("#btn-view").attr("data-show") == "true";
 
     $("#btn-view").click(() => {
-       if(status == "See More" && comments.length > 2){
+       if(!seeMore && comments.length > 2){
             $("#comments #comment").each((idx,e) => {
                 e.classList.remove("hide");
             });
             status = "See Less";
-            $("#btn-view").html(status);
+            seeMore = true;
+            $("#btn-view").attr("data-show",seeMore).html(status);
        }else{
         $("#comments #comment").each((idx,e) => {
             if(idx > 1){
@@ -28,7 +30,8 @@ $(document).ready(() => {
             }
         })
         status = "See More";
-        $("#btn-view").html(status);
+        seeMore = false;
+        $("#btn-view").attr("data-show",seeMore).html(status);
        }
     });
 });
@@ -48,9 +51,15 @@ function getComments(newsId){
             let extraHTML = '';
             let hide = "";
 
-            if(i > 1  && $("#btn-view").html() != "See Less" )   hide = "hide" ; 
+            // console.log(seeMore)
 
-            if($("#user-id").html() == data[i].user_id){
+            if(i > 1  && !seeMore){
+                hide = "hide"
+                status = "See More";
+                $("#btn-view").attr("data-view",seeMore).html(status);
+            } ; 
+
+            if($("#user-id").attr("data-target") == data[i].user_id){
                 extraHTML = `
                     <div class="dropdown" id="dropdown-${data[i].comment_id}">
                         <span id="cmt-control" data-bs-toggle="dropdown" data-bs-target="#dropdown-${data[i].comment_id}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
@@ -129,7 +138,7 @@ function handleComment(e){
 
     let params = JSON.stringify({
         "news_id" : news_id,
-        "user_id" : $("#user-id").html(),
+        "user_id" : $("#user-id").attr("data-target"),
         "comments" : $("#comment").val()
     });
     

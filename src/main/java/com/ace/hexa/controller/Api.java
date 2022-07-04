@@ -3,6 +3,7 @@ package com.ace.hexa.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.ace.hexa.dto.news.NewsResponseDto;
 
 @RestController
 @RequestMapping("/hexa/api/")
+@CrossOrigin( origins = "http://localhost:3000" )
 public class Api {
     
     @Autowired
@@ -29,6 +31,7 @@ public class Api {
     InteractionDao interactionDao;
     
 
+    //for allnews or news with year
     @GetMapping(value = "news")
     public ArrayList<NewsResponseDto> news(){
         return newsDao.selectAllNews();

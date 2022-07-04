@@ -155,10 +155,10 @@ tbody * {
 }
 
 /* edited from here!!  */
-#table-wrapper {
+/* #table-wrapper {
   height: 70vh;
   overflow-y: scroll;
-}
+} */
 
 #navbar {
   -webkit-box-shadow: 0 0 10px var(--text) !important;

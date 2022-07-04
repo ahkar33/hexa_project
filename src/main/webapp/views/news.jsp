@@ -43,59 +43,54 @@
 	}
 	%>
 
-	<!-- navbar -->
-	<jsp:include page="./layout/admin-navbar.jsp" />
-
-	<!-- main-body start here -->
-	<main id="main-body" class="w-100 p-0 m-0 d-flex">
+	<div class="container-fluid p-0 m-0">
 		<!-- sidebar -->
 		<jsp:include page="./layout/admin-sidebar.jsp" />
 
-		<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
-		<section id="main-data" class="w-85 position-relative">
-			<div class="table-title my-3">
-				<h3 class="h2">News Information</h3>
-			</div>
-			<!-- edited here -->
-			<div id="table-wrapper">
-				<table class="table-fill table table-striped" id="table">
-					<thead class="sticky-top fw-bold ">
-						<tr class="fw-bold">
-							<th>No.</th>
-							<th>Title</th>
-							<th>Category</th>
-							<th>Creater</th>
-							<!-- status ka ban tr twt role user ko pl ban loh ya ml -->
-							<th>Created Date</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody class="table-hover">
-						<c:set var="count" value="0" scope="page" />
-						<c:forEach var="news" items="${news}">
-							<tr>
-								<c:set var="count" value="${count + 1}" scope="page" />
-								<td scope="row">${count}</td>
-								<td class="text-capitalize">${news.news_name}</td>
-								<td class="text-capitalize">${news.news_category_name}</td>
-								<td class="text-capitalize">${news.creator_name }</td>
-								<td>${news.created_date}</td>
-								<td>
-                            	 <a href="/hexa/admin/update_news/${news.news_id }" class="btn btn-primary warning btn-sm">Update</a>
-                            	 <a href="/hexa/admin/delete_news/${news.news_id }/${news.news_img}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this news?');">Delete</a>
-                        		</td>
+			<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
+			<section id="main-data" class="w-85 position-relative">
+				<!-- navbar -->
+				<jsp:include page="./layout/admin-navbar.jsp" />
+				<div class="table-title my-3">
+					<h3 class="h2">News Information</h3>
+				</div>
+				<!-- edited here -->
+				<div id="table-wrapper">
+					<table class="table-fill table table-striped" id="table">
+						<thead class="fw-bold ">
+							<tr class="fw-bold">
+								<th>No.</th>
+								<th>Title</th>
+								<th>Category</th>
+								<th>Creater</th>
+								<!-- status ka ban tr twt role user ko pl ban loh ya ml -->
+								<th>Created Date</th>
+								<th>Action</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-
-
-			<!-- footer -->
-			<jsp:include page="./layout/admin-footer.jsp" />
-		</section>
-	</main>
-	<!-- main body end here -->
+						</thead>
+						<tbody class="table-hover">
+							<c:set var="count" value="0" scope="page" />
+							<c:forEach var="news" items="${news}">
+								<tr>
+									<c:set var="count" value="${count + 1}" scope="page" />
+									<td scope="row">${count}</td>
+									<td class="text-capitalize">${news.news_name}</td>
+									<td class="text-capitalize">${news.news_category_name}</td>
+									<td class="text-capitalize">${news.creator_name }</td>
+									<td>${news.created_date}</td>
+									<td>
+									<a href="/hexa/admin/update_news/${news.news_id }" class="btn btn-primary warning btn-sm">Update</a>
+									<a href="/hexa/admin/delete_news/${news.news_id }/${news.news_img}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete this news?');">Delete</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</section>
+	</div>
+	<!-- acc edit modal -->
+	<jsp:include page="./layout/admin-accedit-modal.jsp" />
 
 	<!-- bootstrap -->
 	<script
