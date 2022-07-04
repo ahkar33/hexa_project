@@ -1,22 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<section id="sidebar" class="dark-bg p-0 m-0 position-fixed w-15 pb-2 ">
-			<h3 class="h5 text-center text-light py-3" id="dash-title"><a href="/hexa/admin/home">Dashboard</a></h3>
+
+			<!-- <c:if test="${userInfo.user_role == 1 }">
+				<h3 class="h5 text-center text-light py-3" id="dash-title"><a href="/hexa/admin/home">Dashboard</a></h3>
+			</c:if> -->
+
+			<c:choose>
+				<c:when test="${userInfo.user_role == 1}">
+					<h3 class="h5 text-center text-light py-3" id="dash-title">
+						<a href="/hexa/admin/home">Dashboard</a>
+					</h3>
+				</c:when>
+				<c:otherwise>
+					<h3 class="h5 text-center text-light py-3" id="dash-title">
+						<a href="/hexa/admin/news">Dashboard</a>
+					</h3>
+				</c:otherwise>
+			</c:choose>
 
 			<ul id="sidebar-list" class="list-group  gap-2 w-100">
 
-				<c:choose>
-					<c:when test="${userInfo.user_role == 1}">
-						<h3 class="h5 text-center text-light py-3" id="dash-title">
-							<a href="/hexa/admin/home">Dashboard</a>
-						</h3>
-					</c:when>
-					<c:otherwise>
-						<h3 class="h5 text-center text-light py-3" id="dash-title">
-							<a href="/hexa/admin/news">Dashboard</a>
-						</h3>
-					</c:otherwise>
-				</c:choose>
+				<c:if test="${userInfo.user_role == 1 }">
+					<li id="sidebar-item" class="list-item p-2 px-3 m-0 text"><a href="/hexa/admin/users"
+							class="w-100 d-block"><i class="fa-solid fa-users"></i><span class="mx-2">Users</span></a>
+					</li>
+				</c:if>
 
 				<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/news" class="w-100 d-block"><i
 							class="fa-brands fa-neos"></i><span class="mx-2">News</span></a></li>
