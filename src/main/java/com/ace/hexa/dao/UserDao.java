@@ -209,6 +209,25 @@ public class UserDao {
 		return list;
 	}
 
+	public ArrayList<UserResponseDto> selectAllEmails(){
+		ArrayList<UserResponseDto> emails = new ArrayList<>();
+		String sql = "SELECT user_email from user_account";
+		try{
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				UserResponseDto res = new UserResponseDto();
+				res.setUser_email(rs.getString("user_email"));
+				emails.add(res);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		return emails;
+
+	}
+
 	public int updateUserRoleById(int user_role, long user_id) {
 		String sql = "update user_account set user_role = ? where user_id = ?";
 		int i = 0;

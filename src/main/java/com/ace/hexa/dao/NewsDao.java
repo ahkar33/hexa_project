@@ -362,4 +362,35 @@ public class NewsDao {
 		}
 		return res;
 	}
+
+	/*
+	 * to use in chart
+	 */
+	public ArrayList<NewsResponseDto> selectAllNewsByYear( String year ){
+		ArrayList<NewsResponseDto> results = new ArrayList<>();
+
+		String sql = "SELECT * FROM news n WHERE n.created_date like '%' ? '%'";
+		try{
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, year);
+
+			ResultSet rs = ps.executeQuery();
+
+			while( rs.next() ){
+				NewsResponseDto res = new NewsResponseDto();
+				res.setNews_id(rs.getLong("news_id"));
+				res.setNews_name(rs.getString("news_name"));
+				res.setDescriptions(rs.getString("descriptions"));
+				res.setNews_img(rs.getString("news_img"));
+				res.setNews_location(rs.getString("news_location"));
+				res.setNews_category(rs.getInt("news_category"));
+				res.setCreated_date(rs.getDate("created_date").toLocalDate());
+				res.setUpdated_date(rs.getDate("updated_date").toLocalDate());
+				results.add(res);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return results;
+	}
 }

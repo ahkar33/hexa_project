@@ -42,84 +42,82 @@
 		}
 	}
 	%>
-	<!-- top navbar start here -->
-	<jsp:include page="./layout/admin-navbar.jsp" />
-	<!-- top navbar end here -->
-
-	<!-- main-body start here -->
-	<main id="main-body" class="w-100 p-0 m-0 d-flex">
 			
-		<!-- sidebar -->
-		<jsp:include page="./layout/admin-sidebar.jsp" />
+		<div class="container-fluid p-0 m-0">
+			<!-- sidebar -->
+				<jsp:include page="./layout/admin-sidebar.jsp" />
 
-		<section id="main-data" class="w-85 position-relative">
-			<div class="table-title my-3">
-				<h3 class="h2">Categories</h3>
-			</div>
+				<section id="main-data" class="w-85 position-relative">
+					<!-- top navbar start here -->
+					<jsp:include page="./layout/admin-navbar.jsp" />
+					<!-- top navbar end here -->
+					
+					<div class="table-title my-3">
+						<h3 class="h2">Categories</h3>
+					</div>
 
-			<div class="w-100 text-end">
-				<button class="btn btn-success my-2" data-bs-toggle="modal"
-					data-bs-target="#modal" style="transform: translate(-150%)">
-					<i class="fa-solid fa-circle-plus mx-1"></i>Create
-				</button>
-			</div>
-			<!-- edited here -->
-			<div id="table-wrapper">
-				<table class="table-fill table table-striped" id="table">
-					<thead class="sticky-top fw-bold ">
-						<tr class="fw-bold">
-							<th>No.</th>
-							<th>Category Name</th>
-						</tr>
-					</thead>
-					<tbody class="table-hover">
-						<% int id = 1; %>
-						<c:forEach var="category" items="${categories}">
-							<tr>
-								<td><%= id %></td>
-								<td class="text-capitalize">${category.news_category_name}</td>
-							</tr>
-							<% id++; %>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-			
-			<!-- footer -->
-            <jsp:include page="./layout/admin-footer.jsp" />
-		</section>
-	</main>
-	<!-- main body end here -->
+					<div class="w-100 text-end">
+						<button class="btn btn-success my-2" data-bs-toggle="modal"
+							data-bs-target="#modal" style="transform: translate(-150%)">
+							<i class="fa-solid fa-circle-plus mx-1"></i>Create
+						</button>
+					</div>
+					<!-- edited here -->
+					<div id="table-wrapper">
+						<table class="table-fill table table-striped" id="table">
+							<thead class="sticky-top fw-bold ">
+								<tr class="fw-bold">
+									<th>No.</th>
+									<th>Category Name</th>
+								</tr>
+							</thead>
+							<tbody class="table-hover">
+								<% int id = 1; %>
+								<c:forEach var="category" items="${categories}">
+									<tr>
+										<td><%= id %></td>
+										<td class="text-capitalize">${category.news_category_name}</td>
+									</tr>
+									<% id++; %>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</section>
+			<!-- main body end here -->
 
 
-	<!-- modal box -->
-	<section id="modal" class="modal fade">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content p-2">
-				<div class="modal-header">
-					<div class="modal-title w-100 text-end">
-						<span class="btn btn-close" data-bs-dismiss="modal"
-							data-bs-target="#modal"></span>
+			<!-- modal box -->
+			<section id="modal" class="modal fade">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content p-2">
+						<div class="modal-header">
+							<div class="modal-title w-100 text-end">
+								<span class="btn btn-close" data-bs-dismiss="modal"
+									data-bs-target="#modal"></span>
+							</div>
+						</div>
+						<form action="/hexa/admin/add_category" method="POST"
+							class="modal-body">
+							<div class="form-group">
+								<label for="" class="form-label my-1 fw-bold">Category
+									Name</label>
+								<!-- should be unique from this input value -->
+								<input type="text" class="form-control" name="category"
+									placeholder="e.g Sports" required autofocus>
+							</div>
+							<div class="form-group my-2 d-flex justify-content-end gap-2">
+								<button class="btn btn-warning" data-bs-dismiss="modal"
+									data-bs-target="#modal">Cancel</button>
+								<button class="btn btn-success" type="submit">Submit</button>
+							</div>
+						</form>
 					</div>
 				</div>
-				<form action="/hexa/admin/add_category" method="POST"
-					class="modal-body">
-					<div class="form-group">
-						<label for="" class="form-label my-1 fw-bold">Category
-							Name</label>
-						<!-- should be unique from this input value -->
-						<input type="text" class="form-control" name="category"
-							placeholder="e.g Sports" required autofocus>
-					</div>
-					<div class="form-group my-2 d-flex justify-content-end gap-2">
-						<button class="btn btn-warning" data-bs-dismiss="modal"
-							data-bs-target="#modal">Cancel</button>
-						<button class="btn btn-success" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
+			</section>
 		</div>
-	</section>
+		<!-- acc edit modal -->
+		<jsp:include page="./layout/admin-accedit-modal.jsp" />
 
 	<!-- bootstrap -->
 	<script

@@ -26,8 +26,6 @@
 
 <!-- custom css -->
 <link rel="stylesheet" href="/css/admin_home.css" type="text/css">
-
-<link rel="stylesheet" href="/css/create-news.css" type="text/css">
 </head>
 
 <body data-collaboration="false" data-revision-history="false">
@@ -42,25 +40,19 @@
 		}
 	}
 	%>
-	<!-- top navbar start here -->
-	<jsp:include page="./layout/admin-navbar.jsp" />
-	<!-- top navbar end here -->
-
-	<!-- main-body start here -->
-	<!-- ဘေးနား ဘားနဲ့ အလယ် က ဒေတာတွေ ပြဖို့အတွက် ကို မိန်းဘော်ဒီထဲထည့်ထားသလို့စဥ်းစားထားတာ -->
-	<main data-editor="ClassicEditor" id="main-body"
-		class="w-100 p-0 m-0 d-flex">
-		
+	<div class="container-fluid p-0 m-0 d-flex">
 		<!-- sidebar -->
-		<jsp:include page="./layout/admin-sidebar.jsp" />
+		<jsp:include page="./layout/admin-sidebar.jsp" />	
 
 		<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
 		<section id="main-data"
-			class="w-85 position-relative d-flex justify-content-center align-items-center">
+			class="w-85 position-relative p-0">
+				
+			<jsp:include page="./layout/admin-navbar.jsp" />
 
-			<main id="form-wrapper" class="w-100  d-flex justify-content-center">
+			<main id="form-wrapper" class="w-100  d-flex justify-content-center mb-5 p-0">
 				<div class="w-75 ">
-					<h3 class="h2 card-title text-center">CREATE NEWS</h3>
+					<h3 class="h2 card-title text-center my-5">CREATE NEWS</h3>
 					<div class="text-center text-success">
 						<h4>${post_msg}</h4>
 					</div>
@@ -124,11 +116,12 @@
 				</div>
 			</main>
 
-			<!-- footer -->
-            <jsp:include page="./layout/admin-footer.jsp" />
 		</section>
-	</main>
 	<!-- main body end here -->
+	</div>
+
+	<!-- acc edit modal -->
+	<jsp:include page="./layout/admin-accedit-modal.jsp" />
 
 	<!-- bootstrap -->
 	<script

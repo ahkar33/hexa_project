@@ -122,12 +122,11 @@
 					</form:form>
 				</div>
 			</main>
-
-			<!-- for footer -->
-			<jsp:include page="./layout/admin-footer.jsp" />
 		</section>
 	</main>
 	<!-- main body end here -->
+	<!-- acc edit modal -->
+	<jsp:include page="./layout/admin-accedit-modal.jsp" />
 
 	<!-- bootstrap -->
 	<script

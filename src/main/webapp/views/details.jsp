@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -59,16 +59,17 @@
 			<div id="others" class="my-5 d-flex flex-column align-items-center gap-3 col-xl-4 col-md-8 text-center">
 				<h3 class="h3 text-danger fw-bold text-start">Latest News</h3>
 				<c:forEach var="news" items="${latestNews}">
-					<div id="other-news">
-						<a href="/hexa/details/${news.news_id}"> <img
-							src="/img/${news.news_img}" alt="">
-							<div id="layer"	class="d-flex justify-content-end align-items-start flex-column p-3">
-								<div id="title">${news.news_name}</div>
-								<div id="location">|${news.news_location}</div>
-							</div>
-						</a>
-					</div>
-
+					<c:if test="${news.news_id != newsDetails.news_id}">
+						<div id="other-news">
+							<a href="/hexa/details/${news.news_id}"> <img
+								src="/img/${news.news_img}" alt="">
+								<div id="layer"	class="d-flex justify-content-end align-items-start flex-column p-3">
+									<div id="title">${news.news_name}</div>
+									<div id="location">|${news.news_location}</div>
+								</div>
+							</a>
+						</div>
+					</c:if>
 				</c:forEach>
 
 
@@ -95,7 +96,7 @@
 				<div id="comments" class="w-100">
 
 				</div>
-				<span class="text-decoration-underline" id="btn-view"></span>
+				<span class="text-decoration-underline" id="btn-view" data-show=false></span>
 			</div>
 		</div>
 
