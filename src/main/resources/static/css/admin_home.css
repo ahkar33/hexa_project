@@ -4,6 +4,8 @@
   --light-dark:rgba(0,0,0,0.75);
 }
 
+
+
 .bg-snow{
   background-color: rgba(255,255,255,1) !important;
 }
@@ -152,3 +154,18 @@ ul {
 #chart-wrapper{
   margin-bottom:150px !important;
 }
+
+#box{
+  border-radius: 10px !important;
+  box-shadow: -2px 2px 3px rgba(245, 197, 125,1);
+
+  transition: 0.3s all;
+}
+
+#box:hover{
+  cursor: pointer;
+  box-shadow: -5px 5px 3px rgba(245, 197, 125,1);
+  margin-left:5px;
+  margin-bottom: 5px;
+}
+

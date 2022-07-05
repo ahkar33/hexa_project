@@ -22,6 +22,9 @@
 
 <!-- custom css -->
 <link rel="stylesheet" href="/css/home.css" type="text/css">
+
+<!-- searchPage -->
+<link rel="stylesheet" href="/css/searchPage.css" type="text/css">
 </head>
 <body>
 	<!-- navbar -->
@@ -46,7 +49,7 @@
 	</section>
 
 	<!-- categories -->
-	<section id="categories" class="container my-5">
+	<section id="categories" class="container mt-5">
 		<div
 			class="container-fluid d-flex gap-1 justify-content-center align-items-center flex-wrap">
 			<c:forEach var="category" items="${categories}">
@@ -60,35 +63,39 @@
 	<!-- news -->
 	-
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
-		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
-		<div id="news-wrapper"
-			class="w-100 row d-flex justify-content-center flew-wrap">
-			<c:forEach var="news" items="${newsLists}">
-				<div
-					class="mx-1 new-box my-1 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold"
-					id="news" style="height:250px !important;">
-					<a href="/hexa/details/${news.news_id}"> <img
-						src="/img/${news.news_img}" class="new-img" alt="image" />
-						<div class="new-layer">
-							<span class="new-title"> ${news.news_name} </span> <span
-								class="new-location">|${news.news_location}</span>
-						</div>
-					</a>
-				</div>
+		<c:if test="${newsLists != null && newsLists.size() > 0}">
+			<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
+			<div id="news-wrapper" class="w-100 row d-flex align-items-center flex-column gap-1">
+					<c:forEach var="news" items="${newsLists}">
+						<a href="/hexa/details/${news.news_id}" class="w-100 text-light fw-bold d-flex justify-content-start flex-wrap my-2"
+							id="news">
+							<div id="image" class="col-xl-3 col-md-5 p-0"> 
+								<img src="/img/${news.news_img}" class="new-img" alt="image" style="width:100%;height:100%;" />
+								<div class="new-layer">
+									<span class="new-title text-capitalize"> ${news.news_name}
+									</span> <span class="new-location text-dark text-capitalize">|${news.news_location}</span>
+								</div>
+							</div>
+							<div id="content" class="d-flex justify-content-center align-items-center col-xl-9 col-md-7">
+								<p id="news-content">
+									${news.descriptions}
+								</p>
+							</div>
+						</a>
+					</c:forEach>
+			</div>
+		</c:if>
 
-			</c:forEach>
-		</div>
+		<c:if test="${newsLists ==  null || newsLists.size() == 0}">
+			<div class="w-100 row d-flex justify-content-center align-items-center" style="height:500px;">
+				<img src="/img/404.gif" class="col-xl-7 col-none-12 h-100 " alt=""/>
+			</div>
+		</c:if>
 	</div>
 
-
-
-	<footer id="footer" class="w-100 p-3 m-0 "
-		style="transform: translateY(500%);">
-		<div
-			class="container d-flex justify-content-center align-items-center mx-auto">
-
-			<div
-				class="col-lg-3 col-md-12 col-none-12 d-flex justify-content-center align-items-center flex-column gap-2">
+	<footer id="footer" class="w-100 p-3 m-0 "  style="transform:translateY(100%);">
+		<div class="container d-flex justify-content-center align-items-center mx-auto">
+            <div class="col-lg-3 col-md-12 col-none-12 d-flex justify-content-center align-items-center flex-column gap-2">
 				<div class="d-flex gap-2">
 					<a href=""><i class="fa-brands fa-facebook"></i></a> <a href=""><i
 						class="fa-brands fa-github"></i></a> <a href=""><i
@@ -104,13 +111,13 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- jquery  -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-		type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript"></script>
 
 	<!-- custom js -->
-	<script src="../assets/js/home.js" type="text/javascript" defer></script>
+	<script src="/js/home.js" type="text/javascript" defer></script>
 
-	<script src="../assets/js/view-detail.js" type="text/javascript"></script>
+	<script src="/js/view-detail.js" type="text/javascript"></script>
+
+	<script src="/js/search_page.js" type="text/javascript"></script>
 </body>
 </html>
