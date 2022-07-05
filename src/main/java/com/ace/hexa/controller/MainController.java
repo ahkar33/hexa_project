@@ -184,6 +184,7 @@ public class MainController {
 			// }
 			return "search";
 		} else {
+			model.addAttribute("newsByTitle", newsByTitle);
 			return "search";
 		}
 
@@ -209,4 +210,15 @@ public class MainController {
 	public String searchPage() {
 		return "search";
 	}
+
+	@GetMapping( value = "/notfound")
+	public String notFound(){
+		return "404";
+	}
+
+	@GetMapping(value = "/{path:[^\\.]*}")
+    public String redirectNotFound() {
+        return "redirect:/hexa/notfound";
+    }
 }
+

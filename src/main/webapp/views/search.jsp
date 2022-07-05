@@ -43,31 +43,42 @@
 	</section>
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start" id="search-news">
 		<div id="news-wrapper" class="w-100 row d-flex align-items-center flex-column gap-1">
-			<c:forEach var="news" items="${newsByTitle}">
-				<a href="/hexa/details/${news.news_id}" class="new-box row my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold d-flex justify-content-start flex-wrap"
-					id="news">
-					<div id="image" class="col-xl-3 col-md-5 p-0"> 
-						<img src="/img/${news.news_img}" class="new-img" alt="image" />
-						<div class="new-layer">
-							<span class="new-title text-capitalize"> ${news.news_name}
-							</span> <span class="new-location text-dark text-capitalize">|${news.news_location}</span>
+			<c:if test="${newsByTitle != null && newsByTitle.size() > 0 }">
+				<c:forEach var="news" items="${newsByTitle}">
+					<a href="/hexa/details/${news.news_id}" class="new-box row my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold d-flex justify-content-start flex-wrap"
+						id="news">
+						<div id="image" class="col-xl-3 col-md-5 p-0"> 
+							<img src="/img/${news.news_img}" class="new-img" alt="image" style="width:100%;height:100%;" />
+							<div class="new-layer">
+								<span class="new-title text-capitalize"> ${news.news_name}
+								</span> <span class="new-location text-dark text-capitalize">|${news.news_location}</span>
+							</div>
 						</div>
-					</div>
-					<div id="content" class="d-flex justify-content-center align-items-center col-xl-9 col-md-7">
-						<p id="news-content">
-							${news.descriptions}
-						</p>
-					</div>
-				</a>
-			</c:forEach>
+						<div id="content" class="d-flex justify-content-center align-items-center col-xl-9 col-md-7">
+							<p id="news-content">
+								${news.descriptions}
+							</p>
+						</div>
+					</a>
+				</c:forEach>
+			</c:if>
 		</div>
+			<c:if test="${newsByTitle.size() == 0 && newsByTitle != null}">
+				<div class="w-100 row d-flex justify-content-center align-items-center" style="height:500px;">
+					<img src="/img/404.gif" class="col-xl-7 col-none-12 h-100 " alt=""/>
+				</div>
+			</c:if>
+
+			<c:if test="${newsByTitle == null}">
+				<div class="w-100 row d-flex justify-content-center align-items-center" style="height:500px;">
+					<img src="/img/search.jpg" class="col-xl-7 col-none-12 h-100 " alt=""/>
+				</div>
+			</c:if>
 	</div>
 
 	<!-- footer -->
-	<footer id="footer" class="w-100 p-3 m-0 "
-		style="transform: translateY(600%);">
-		<div
-			class="container d-flex justify-content-center align-items-center mx-auto">
+	<footer id="footer" class="w-100 p-3 m-0 " style="transform:translateY(200%);">
+		<div class="container d-flex justify-content-center align-items-center mx-auto">
 			<div
 				class="col-lg-3 col-md-12 col-none-12 d-flex justify-content-center align-items-center flex-column gap-2">
 				<div class="d-flex gap-2">
@@ -76,7 +87,7 @@
 						class="fa-brands fa-discord"></i></a>
 				</div>
 				<span class="h-6 text-center text-light">Created By
-					Hexa_Group(Ace Inspiration)</span>
+					Hexa_Group(Ace Inspiration) ${newsByTitle.size()}</span>
 			</div>
 		</div>
 	</footer>

@@ -66,7 +66,7 @@
 					<h3>User Information</h3>
 				</div>
 				<!-- edited here -->
-				<div id="table-wrapper">
+				<div id="table-wrapper" class="my-5">
 					<table class="table-fill table table-striped" id="table">
 						<thead class="sticky-top fw-bold ">
 							<tr class="fw-bold">

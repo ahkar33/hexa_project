@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
+<title>Not Found</title>
 
 <!-- bootstrap -->
 <link rel="stylesheet"
@@ -27,7 +27,9 @@
 	<!-- navbar -->
 	<jsp:include page="./layout/public-navbar.jsp" />
 	
-	<!-- ---- -->
+	<div class="w-100 row d-flex justify-content-center align-items-center my-2" style="height:600px;">
+		<img src="/img/notfound.gif" class="col-xl-7 col-none-12 h-100 " alt=""/>
+	</div>
 
 	<!-- footer -->
 	<footer id="footer" class="w-100 p-3 m-0 ">

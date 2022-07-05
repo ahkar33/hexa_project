@@ -55,8 +55,8 @@
 				<h3>User Information</h3>
 			</div>
 			<!-- edited here -->
-			<div id="table-wrapper">
-				<table class="table-fill table table-striped" id="table">
+			<div id="table-wrapper" class="">
+				<table class="table-fill table table-striped my-5" id="table">
 					<thead class="sticky-top fw-bold ">
 						<tr class="fw-bold">
 							<th>No.</th>

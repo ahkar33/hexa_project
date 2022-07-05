@@ -46,22 +46,22 @@
    
            <main id="main-contents" class="my-5 w-100">
                <!-- name from session   -->
-               <div class="fw-bold d-flex justify-content-between align-items-center alert-success py-2 px-5 my-3 mx-5">
-                   <span class="h3 ">Welcome <span class="text-capitalize">${sessionScope.userInfo.user_name}!</span></span>
-                   <span class="h6"><span id="year" class="mx-1"></span><span id="day-name"  class="mx-1"></span>,<span id="day" class="mx-1"></span></span>
+               <div class="fw-bold d-flex justify-content-between align-items-center dark py-2 px-5 my-4 mx-5" id="box">
+                   <span class="h3 text-light">Welcome <span class="text-capitalize">${sessionScope.userInfo.user_name}!</span></span>
+                   <span class="h6 text-light"><span id="year" class="mx-1"></span><span id="day-name"  class="mx-1"></span>,<span id="day" class="mx-1"></span></span>
                </div>
-               <div class="container row gap-2 d-flex justify-content-center my-2">
-                   <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
+               <div class="container row gap-2 d-flex justify-content-center my-2" >
+                   <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5" id="box">
                        <span class="h3 fw-bold text-light">Reporters</span>
                        <i class="fa-solid fa-bullhorn text-light" style="font-size:20px !important;"></i>
                        <span class="h6 text" id="count">${reportersCount}</span>
                    </div>
-                   <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
+                   <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5" id="box">
                        <span class="h3 fw-bold text-light">Users</span>
                        <i class="fa-solid fa-users text-light" style="font-size:20px !important;"></i>
                        <span class="h6 text" id="count">${usersCount}</span>
                    </div>
-                   <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5">
+                   <div class="col-3 data-box d-flex justify-content-start align-items-start gap-2 flex-column p-5" id="box">
                        <span class="h3 fw-bold text-light">Total News</span>
                        <i class="fa-solid fa-newspaper text-light" style="font-size:20px !important;"></i>
                        <span class="h6 text" id="count">${newsCount}</span>
