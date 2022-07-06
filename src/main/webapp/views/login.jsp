@@ -35,7 +35,7 @@
 	class="d-flex  flex-column justify-content-center align-items-center">
 	<section class="card p-3 " id="container">
 		<header class="card-title text-center text">
-			<span class="h3 w-100 text">Hexa</span>
+			<span class="h3 w-100 text">HEXA</span>
 		</header>
 		<div class="text-danger fw-bolb text-center"><span style="font-size:18px !important;">${error}</span></div>
 		<form:form action="/hexa/login" class="card-body form" name="login"
