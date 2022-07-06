@@ -77,7 +77,7 @@
 	</div>
 
 	<!-- footer -->
-	<footer id="footer" class="w-100 p-3 m-0 " style="transform:translateY(200%);">
+	<footer id="footer" class="w-100 p-3 m-0 " style="transform:translateY(300%);">
 		<div class="container d-flex justify-content-center align-items-center mx-auto">
 			<div
 				class="col-lg-3 col-md-12 col-none-12 d-flex justify-content-center align-items-center flex-column gap-2">

@@ -1,6 +1,9 @@
 package com.ace.hexa.api;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +23,7 @@ import com.ace.hexa.dto.interaction.InteractionResponseDto;
 import com.ace.hexa.dto.news.NewsResponseDto;
 import com.ace.hexa.dto.user.UserRequestDto;
 import com.ace.hexa.dto.user.UserResponseDto;
+import com.ace.hexa.model.AuthUser;
 import com.ace.hexa.model.TempNewsBean;
 import com.ace.hexa.service.TodayNewsService;
 
@@ -89,6 +93,7 @@ public class API {
         return interactionDao.selectInteractionByNewsId(newsId);
     }
 
+
     //for today news
     @GetMapping( value = "news/today")
     public ArrayList<NewsResponseDto> getTodayNews(){
@@ -115,6 +120,12 @@ public class API {
         return newsDao.selectAllNewsByYear(year);
     }
 
+    //for news with category
+    @GetMapping( value = "news/category" )
+    public ArrayList<NewsResponseDto> getNewsByCategory(@RequestParam("c") long id ){
+        return newsDao.selectNewsByCategoryId(id);
+    }
+
     /*
      * from here , start Auth @about user register &  login
      */
@@ -137,4 +148,31 @@ public class API {
         }
         return status;
      }
+
+     //to login
+     @PostMapping( value = "login" )
+     public AuthUser postLogin(@RequestBody UserRequestDto userRequestDto , HttpSession session ){
+        AuthUser user = new AuthUser();
+        boolean status = userDao.check(userRequestDto.getUser_email(), userRequestDto.getUser_password());
+        UserResponseDto data = new UserResponseDto();
+        int _token = 0;
+        if(status){
+           Random rand = new Random();
+          _token = rand.nextInt(1000000000);
+
+           data = userDao.selectByEmail(userRequestDto.getUser_email());
+
+            user.setUser_id(data.getUser_id());
+            user.setUser_name(data.getUser_name());
+            user.setUser_email(data.getUser_email());
+            user.setUser_password(data.getUser_password());
+            user.set_token(_token);
+            user.setUser_role(data.getUser_role_name());
+
+           session.setAttribute("user", user);
+           session.setAttribute("_token", _token);
+           session.setAttribute("isLogin", true);
+        }
+        return user;
+     } 
 }
