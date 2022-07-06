@@ -299,4 +299,9 @@ public class AdminController {
 		return "redirect:/hexa/admin/news";
 	}
 
+	@GetMapping("/test")
+	public String test(){
+		return "note-test";
+	}
+
 }

@@ -30,6 +30,9 @@
 		if (dto.getUser_role() == 3){
 			response.sendRedirect("/hexa/home");
 		}
+		if (dto.getUser_role() == 2){
+			response.sendRedirect("/hexa/admin/news");
+		}
 	}
 	%>
     

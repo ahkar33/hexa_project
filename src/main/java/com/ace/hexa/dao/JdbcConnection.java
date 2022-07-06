@@ -9,8 +9,8 @@ public class JdbcConnection {
 
 	public static Connection getConnection() throws SQLException {
 		String url = "jdbc:mysql://localhost:3306/news_project";
-		String uname = "root";
-		String pass = "";
+		String uname = "sqluser";
+		String pass = "bazinga||jk";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, uname, pass);
