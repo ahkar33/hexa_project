@@ -47,7 +47,7 @@
 		<!-- sidebar -->
 		<jsp:include page="./layout/admin-sidebar.jsp" />
 
-			<section id="main-data" class="w-100 position-relative p-0">
+			<section id="main-data" class="w-100 position-relative p-0 pb-5">
 				<!-- top navbar start here -->
 				<jsp:include page="./layout/admin-navbar.jsp" />
 				<!-- top navbar end here -->

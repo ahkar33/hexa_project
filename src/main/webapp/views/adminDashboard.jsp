@@ -70,11 +70,11 @@
                        <span class="h6 text" id="count">${newsCount}</span>
                    </div>
 
-                   <div class="p-5 my-5" id="chart-wrapper" style="height:400px;">
+                   <div class="p-5 my-5" id="chart-wrapper" style="height:500px;">
                        <canvas id="newsPerMonthChart" class="w-100" style="height:400px;"></canvas>
 
                        <div class="d-flex justify-content-start align-items-center p-3 gap-3" id="year-btns">
-                           
+                            <!-- chart control button will be here  -->
                        </div>
                    </div>
                </div>

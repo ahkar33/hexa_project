@@ -17,7 +17,7 @@ public class FileService {
 
 	public boolean deleteFile(String news_img) {
 		File fileToDelete = new File(
-				"C:\\Users\\Ahkar Toe Maw\\eclipse-workspace\\hexaProject\\src\\main\\resources\\static\\img\\"
+				"D:\\boot_projects\\hexa_project\\src\\main\\resources\\static\\img\\"
 						+ news_img);
 		return fileToDelete.delete();
 	}

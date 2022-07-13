@@ -98,11 +98,11 @@ body {
 }
 
 #news-wrapper .new-title ,.new-title{
-  color: var(--text);
+  color: rgba(255,255,255,1) !important;
 }
 
 #news-wrapper .new-location,.new-location {
-  color: var(--text-light) !important;
+  color: var(--text) !important;
 
 }
 

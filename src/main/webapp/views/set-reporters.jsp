@@ -114,11 +114,11 @@
 									<td><c:choose>
 											<c:when test="${user.user_status == 0}">
 												<a href="/hexa/admin/status/${user.user_id}"
-													class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to ban?');">Ban</a>
+													class="btn btn-sm btn-danger text-light" onclick="return confirm('Are you sure to ban?');">Ban</a>
 											</c:when>
 											<c:otherwise>
 												<a href="/hexa/admin/status/${user.user_id}"
-													class="btn btn-sm btn-success" onclick="return confirm('Are you sure to unban?');">Unban</a>
+													class="btn btn-sm btn-success text-light" onclick="return confirm('Are you sure to unban?');">Unban</a>
 											</c:otherwise>
 										</c:choose></td>
 								</tr>

@@ -58,8 +58,30 @@ public class UserDao {
 		return false;
 	}
 
+	public Boolean duplicateCheckByIdAndEmail( long id , String email ){
+		boolean status = true;
+		String sql = "SELECT * FROM user_account WHERE user_id != ? AND user_email = ?  ";
+
+		try{
+			PreparedStatement pre = con.prepareStatement(sql);
+			pre.setLong( 1 ,id );
+			pre.setString( 2 , email );
+			ResultSet rs = pre.executeQuery();
+
+
+			if(!rs.next()){
+				status = false;
+			}
+
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		return status;
+	}
+
 	public UserResponseDto selectById(long userId) {
-		String sql = "select * from user_account where user_id=?";
+		String sql = "select * from user_account u join user_role r on u.user_role = r.user_role_id where user_id=?";
 		UserResponseDto res = new UserResponseDto();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -72,6 +94,7 @@ public class UserDao {
 				res.setUser_email(rs.getString("user_email"));
 				res.setUser_password(rs.getString("user_password"));
 				res.setUser_status(rs.getInt("user_status"));
+				res.setUser_role_name(rs.getString("user_role_name"));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -124,7 +147,7 @@ public class UserDao {
 
 	public ArrayList<UserResponseDto> selectAllExceptAdmins() {
 		ArrayList<UserResponseDto> list = new ArrayList<>();
-		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_account.user_status, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id where user_account.user_role <> 1 order by user_account.user_id";
+		String sql = "select user_account.user_id, user_account.user_name, user_account.user_email, user_account.user_role ,  user_account.user_status, user_role.user_role_name from user_account join user_role on user_account.user_role = user_role.user_role_id where user_account.user_role <> 1 order by user_account.user_id";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -133,6 +156,7 @@ public class UserDao {
 				res.setUser_id(rs.getLong("user_id"));
 				res.setUser_name(rs.getString("user_name"));
 				res.setUser_email(rs.getNString("user_email"));
+				res.setUser_role(rs.getInt("user_role"));
 				res.setUser_role_name(rs.getString("user_role_name"));
 				res.setUser_status(rs.getInt("user_status"));
 				list.add(res);

@@ -76,7 +76,7 @@ public class NewsDao {
 	}
 
 	public NewsResponseDto selectNewsById(long id) {
-		String sql = "select news_name, descriptions, news_location, news_img, created_date from news where news_id = ?";
+		String sql = "select news_name, descriptions, news_location, news_img, created_date , news_category from news  where news_id = ?";
 		NewsResponseDto res = new NewsResponseDto();
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -89,6 +89,7 @@ public class NewsDao {
 				res.setNews_location(rs.getString("news_location"));
 				res.setNews_img(rs.getString("news_img"));
 				res.setCreated_date(rs.getDate("created_date").toLocalDate());
+				res.setNews_category(rs.getInt("news_category"));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -188,6 +189,22 @@ public class NewsDao {
 		return i;
 	}
 
+	public int updatecategory(  CategoryRequestDto dto){
+		String sql = "UPDATE news_category SET news_category_name = ? WHERE news_category_id = ? ";
+		int i = 0;
+		try{
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString( 1 ,  dto.getNews_category_name() );
+			ps.setLong( 2 , dto.getNews_category_id());
+
+			i =ps.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		return i;
+	}
+
 	public boolean checkCategory(String category) {
 		String sql = "select * from news_category where news_category_name = ?";
 		try {
@@ -202,6 +219,23 @@ public class NewsDao {
 		}
 
 		return false;
+	}
+
+	public boolean shouldUpdateCategory( long id , String newCategory ) {
+		String sql = "select * from news_category where news_category_id = ?";
+		boolean status = false;
+		try {
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong( 1 , id );
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				if(rs.getString("news_category_name").equals(newCategory)) status = true;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return status;
 	}
 
 	public int deleteCategory(long id) {
@@ -314,7 +348,7 @@ public class NewsDao {
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setLong(1, news_id);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Database error");
 		}

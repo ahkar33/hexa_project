@@ -175,7 +175,6 @@ function handleCommentEdit(e){
     xhr.onload = () => {
         if(xhr.status == 200){
             if(xhr.responseText == "Success"){
-                console.log("h")
                 getComments(newsId)
             }
         }
