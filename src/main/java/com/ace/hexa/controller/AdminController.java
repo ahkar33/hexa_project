@@ -141,6 +141,7 @@ public class AdminController {
 	public String createNews(@ModelAttribute("newsBean") NewsBean bean, ModelMap model)
 			throws IllegalStateException, IOException {
 		NewsRequestDto dto = new NewsRequestDto();
+		System.out.println(bean.getNews_img());
 		dto.setNews_name(bean.getNews_name());
 		dto.setNews_category(bean.getNews_category());
 		dto.setDescriptions(bean.getDescriptions());

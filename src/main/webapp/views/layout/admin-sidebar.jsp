@@ -19,7 +19,7 @@
 				</c:otherwise>
 			</c:choose>
 
-			<ul id="sidebar-list" class="list-group  gap-2 w-100">
+			<ul id="sidebar-list" class="list-group  w-100">
 
 				<c:if test="${userInfo.user_role == 1 }">
 					<li id="sidebar-item" class="list-item p-2 px-3 m-0 text"><a href="/hexa/admin/users"
