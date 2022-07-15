@@ -1,5 +1,5 @@
 var newsList = [];
-var max = 6;//mean 5 news per one page
+var max = 10;//mean 5 news per one page
 
 $(document).ready(() => {
 
@@ -62,6 +62,7 @@ function getHTML(datas,pageFrom){
                 <div class="new-layer">
                     <span class="new-title text-capitalize"> ${datas[i].news_name} </span> <span
                         class="new-location text-dark text-capitalize">|${datas[i].news_location}</span>
+                    <span class="new-location fw-bold created-date">${getPeriod(datas[i].created_date,'yy-mm-dd')}</span>
                 </div>
             </a>
          </div>

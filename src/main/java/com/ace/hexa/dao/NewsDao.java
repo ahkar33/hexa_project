@@ -27,7 +27,7 @@ public class NewsDao {
 
 	public ArrayList<NewsResponseDto> selectAllNews() {
 		ArrayList<NewsResponseDto> list = new ArrayList<>();
-		String sql = "select * from news_project.news JOIN user_account on news.creator_id = user_account.user_id JOIN news_category on news.news_category = news_category.news_category_id order by created_date";
+		String sql = "select * from news_project.news JOIN user_account on news.creator_id = user_account.user_id JOIN news_category on news.news_category = news_category.news_category_id order by created_date desc";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
