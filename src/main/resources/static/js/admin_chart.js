@@ -39,7 +39,7 @@ function renderChart( target ){
        newsChart = new Chart(
             document.getElementById("newsPerMonthChart"),
             {
-                type : 'line',
+                type : 'bar',
                 data : {
                     labels : months,
                     datasets : [

@@ -43,7 +43,7 @@
 					<img src="/img/${newsDetails.news_img}">
 					<div id="layer"
 						class="d-flex justify-content-end align-items-start flex-column p-3">
-						<div id="news-location" class="fw-bold mx-2">
+						<div id="news-location" class="fw-bold mx-2 thm">
 							<i class="fa-solid fa-location-dot"></i>
 							${newsDetails.news_location}
 						</div>
@@ -64,8 +64,9 @@
 							<a href="/hexa/details/${news.news_id}"> <img
 								src="/img/${news.news_img}" alt="">
 								<div id="layer"	class="d-flex justify-content-end align-items-start flex-column p-3">
-									<div id="title">${news.news_name}</div>
+									<div id="title" class="txt-snow">${news.news_name}</div>
 									<div id="location">|${news.news_location}</div>
+									<div class="thm created-date">${news.created_date}</div>
 								</div>
 							</a>
 						</div>
@@ -130,5 +131,10 @@
 
 	<!-- comment_script.js -->
 	<script src="/js/comment_script.js" type="text/javascript"></script>
+
+	<script src="/js/getPeriod.js" type="text/javascript"></script>
+
+	<!-- date_period_dom.js -->
+	<script src="/js/date_period_dom.js" type="text/javascript"></script>
 </body>
 </html>

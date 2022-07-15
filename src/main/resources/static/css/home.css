@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@500;700&display=swap');
 :root {
   --text: rgba(245, 197, 125,1);
   --text-dark: rgba(0,0,0,0.75);
@@ -6,6 +7,7 @@
 
 * {
   scroll-behavior: smooth;
+
 }
 
 body {
@@ -16,15 +18,12 @@ body {
   -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   z-index: 30;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
   background: #fff;
 }
 
 .navbar-nav, .navbar-nav .nav-item.dropdown {
   cursor: pointer;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
+
 }
 
 .navbar-brand, .nav-item.active {
@@ -85,6 +84,7 @@ body {
 
 #news-wrapper #news {
   position: relative;
+  border-radius: 5px;
 }
 
 .new-img {
@@ -129,11 +129,11 @@ body {
 
 #welcome #news{
   height:250px !important;
+  border-radius: 5px;
 }
 
 #news{
   padding: 0;
-  transition: 0.3s all;
   position: relative;
 }
 

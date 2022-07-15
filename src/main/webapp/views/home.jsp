@@ -56,6 +56,7 @@
 							<div class="new-layer">
 								<span class="new-title text-capitalize fw-bold"> ${news.news_name} </span> <span
 									class="new-location fw-bold">|${news.news_location}</span>
+								<span class="new-location fw-bold created-date">${news.created_date}</span>
 							</div>
 						</a>
 					</div>
@@ -67,20 +68,8 @@
 	<!-- news -->
 	<div class="container w-75 my-5 mx-auto gap-2 row text-start">
 		<p class="h2 text-danger p-2 w-75 fw-bold" id="title">News</p>
-		<div id="news-wrapper"
-			class="w-100 row d-flex justify-content-center flew-wrap gap-1">
+		<div id="news-wrapper" class="w-100 row d-flex justify-content-center flew-wrap gap-1">
 			
-			 <c:forEach var="news" items="${newsList}">
-				<div class="new-box my-3 col-xl-3 col-lg-4 col-sm-10 text-light fw-bold" id="news">
-					<a href="/hexa/details/${news.news_id}"> <img
-						src="/img/${news.news_img}" class="new-img" alt="image" />
-						<div class="new-layer">
-							<span class="new-title text-capitalize"> ${news.news_name} </span> <span
-								class="new-location text-dark text-capitalize">|${news.news_location}</span>
-						</div>
-					</a>
-				</div>
-			</c:forEach> 
 		</div>
 
 		<div class="container-fluid d-flex justify-content-center my-3">
@@ -110,5 +99,10 @@
 
 	<!-- pagination -->
 	<script src="/js/pagination.js" type="text/javascript"></script>
+
+	<script src="/js/getPeriod.js" type="text/javascript"></script>
+
+	<!-- date_period_dom.js -->
+	<script src="/js/date_period_dom.js" type="text/javascript"></script>
 </body>
 </html>
