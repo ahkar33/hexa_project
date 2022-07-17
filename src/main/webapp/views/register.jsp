@@ -55,7 +55,7 @@ type="text/css">
 			</div>
 			<div class="form-group my-3">
 				<label for="password" class="form-label fw-bold text">Password</label>
-				<form:input type="password" id="password" class="input"
+				<form:input type="password" id="password" class="input" minlength="6"
 					path="user_password" required="required"
 					placeholder="Your Password" />
 				<i class="fa-solid fa-lock text"></i>

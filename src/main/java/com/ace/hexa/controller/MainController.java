@@ -27,6 +27,7 @@ import com.ace.hexa.dto.user.UserRequestDto;
 import com.ace.hexa.dto.user.UserResponseDto;
 import com.ace.hexa.model.InteractionBean;
 import com.ace.hexa.model.UserBean;
+import com.ace.hexa.service.HashingService;
 import com.ace.hexa.service.TodayNewsService;
 
 @Controller
@@ -49,13 +50,15 @@ public class MainController {
 	public ModelAndView showLogin(HttpServletRequest request, HttpSession ses) {
 		if (ses.getAttribute("userInfo") != null) {
 			return new ModelAndView("redirect:/hexa/home");
-			}
+		}
 		return new ModelAndView("login", "bean", new UserBean());
 	}
 
 	@PostMapping("/login")
 	public String showLogin(@ModelAttribute("bean") UserBean user, HttpSession session, HttpServletRequest request) {
-		if (userDao.check(user.getUser_email(), user.getUser_password())) {
+		HashingService hash = new HashingService();
+		String hashPassword = hash.getHash(user.getUser_password(), user.getUser_password().substring(0, 4));
+		if (userDao.check(user.getUser_email(), hashPassword)) {
 			UserResponseDto dto = userDao.selectByEmail(user.getUser_email());
 			if (dto.getUser_status() == 1) {
 				request.setAttribute("error", "You have been banned !!");
@@ -88,6 +91,9 @@ public class MainController {
 
 	@PostMapping("/register")
 	public String register(@ModelAttribute("bean") UserBean user, HttpSession session, HttpServletRequest request) {
+		HashingService hash = new HashingService();
+		String hashPassword = hash.getHash(user.getUser_password(), user.getUser_password().substring(0, 4));
+		user.setUser_password(hashPassword);
 		if (!userDao.checkByEmail(user.getUser_email())) {
 			UserRequestDto dto = new UserRequestDto();
 			dto.setUser_name(user.getUser_name());
@@ -99,25 +105,26 @@ public class MainController {
 		request.setAttribute("error", "<h3>A user with that email already exists !!</h3>");
 		return "register";
 	}
-	
+
 	@PostMapping("/editUser")
-	public String updateUser(@RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("psw") String psw,HttpSession ses) {
+	public String updateUser(@RequestParam("id") String id, @RequestParam("name") String name,
+			@RequestParam("email") String email, @RequestParam("psw") String psw, HttpSession ses) {
 		UserRequestDto dto = new UserRequestDto();
 		UserResponseDto tmp = new UserResponseDto();
 		dto.setUser_id(Long.valueOf(id));
 		dto.setUser_name(name);
 		dto.setUser_email(email);
 		dto.setUser_password(psw);
-		if(userDao.updateUser(dto)>0) {
+		if (userDao.updateUser(dto) > 0) {
 			tmp = userDao.selectByEmail(email);
 			ses.setAttribute("userInfo", tmp);
 		}
-		if(tmp.getUser_role()<3) {
-			return "redirect:/hexa/admin/home";	
+		if (tmp.getUser_role() < 3) {
+			return "redirect:/hexa/admin/home";
 		}
 		return "redirect:/hexa/home";
 	}
-	
+
 	@GetMapping("/home")
 	public String showNews(ModelMap model) {
 		ArrayList<NewsResponseDto> newsDto = newsDao.selectAllNews();
@@ -149,20 +156,21 @@ public class MainController {
 		interactionDao.insertComment(dto);
 		return "redirect:/hexa/details/" + news_id;
 	}
-	
+
 	@PostMapping("/editComment/{news_id}")
-	public String updateComment(@RequestParam("cmt_id") String cmt_id, @RequestParam("cmt") String cmt, @PathVariable("news_id") Long news_id) {
+	public String updateComment(@RequestParam("cmt_id") String cmt_id, @RequestParam("cmt") String cmt,
+			@PathVariable("news_id") Long news_id) {
 		InteractionRequestDto dto = new InteractionRequestDto();
 		dto.setComment_id(Long.valueOf(cmt_id));
 		dto.setComments(cmt);
 		interactionDao.updateComment(dto);
-		return "redirect:/hexa/details/"+news_id;
+		return "redirect:/hexa/details/" + news_id;
 	}
-	
+
 	@GetMapping("/delete_comment/{news_id}/{cmt_id}")
 	public String deleteComment(@PathVariable("cmt_id") Long cmt_id, @PathVariable("news_id") Long news_id) {
 		interactionDao.deleteComment(cmt_id);
-		return "redirect:/hexa/details/"+news_id;
+		return "redirect:/hexa/details/" + news_id;
 	}
 
 	@GetMapping("/searchByCategory/{news_category_id}")
@@ -180,7 +188,7 @@ public class MainController {
 		if (newsByTitle.size() > 0) {
 			model.addAttribute("newsByTitle", newsByTitle);
 			// for (NewsResponseDto news : newsByTitle) {
-			// 	System.out.println(news.toString());
+			// System.out.println(news.toString());
 			// }
 			return "search";
 		} else {
@@ -211,14 +219,14 @@ public class MainController {
 		return "search";
 	}
 
-	@GetMapping( value = "/notfound")
-	public String notFound(){
+	@GetMapping(value = "/notfound")
+	public String notFound() {
 		return "404";
 	}
 
 	@GetMapping(value = "/{path:[^\\.]*}")
-    public String redirectNotFound() {
-        return "redirect:/hexa/notfound";
-    }
-}
+	public String redirectNotFound() {
+		return "redirect:/hexa/notfound";
+	}
 
+}
