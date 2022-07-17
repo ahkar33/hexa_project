@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group my-1">
                     <label for="" class="form-label fw-bold text-danger">Password</label>
-                    <input type="password" name="psw" class="form-control" value="${sessionScope.userInfo.user_password}" />
+                    <input type="password" name="psw" class="form-control" />
                 </div>
                 <div class="form-group my-1 d-flex justify-content-end align-items-center gap-1">
                     <a href="" class="btn btn-warning text-light" data-bs-dismiss="modal" data-bs-target="#acc-edit">Cancel</a>
