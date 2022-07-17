@@ -3,7 +3,7 @@ package com.ace.hexa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication()
 public class HexaApplication {
 
 	public static void main(String[] args) {
