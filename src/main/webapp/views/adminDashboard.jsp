@@ -35,7 +35,7 @@
 		}
 	}
 	%>
-    
+    <!-- Hi everything -->
    <section class="container-fluid p-0 m-0 d-flex">
     <!-- sidebar -->
     <jsp:include page="./layout/admin-sidebar.jsp" />
