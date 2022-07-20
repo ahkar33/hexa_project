@@ -52,10 +52,10 @@
 			<jsp:include page="./layout/admin-navbar.jsp" />
 
 			<div class="table-title my-3">
-				<h3>User Information</h3>
+				<h3 class="h2 text-center thm">User Information</h3>
 			</div>
 			<!-- edited here -->
-			<div id="table-wrapper" class="">
+			<div  class="">
 				<table class="table-fill table table-striped my-5" id="table">
 					<thead class="sticky-top fw-bold ">
 						<tr class="fw-bold">
@@ -80,7 +80,7 @@
 										<c:when test="${user.user_status == 0}">
 											<a href="/hexa/admin/status/${user.user_id}"
 												class="btn btn-sm btn-danger text-dark"
-												onclick="return confirm('Are you sure to ban?');">Ban</a>
+												onclick="return confirm('Are you sure to ban?');">Ban ${user.user_id}</a>
 										</c:when>
 										<c:otherwise>
 											<a href="/hexa/admin/status/${user.user_id}"

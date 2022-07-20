@@ -47,12 +47,12 @@
         
         
                 <div class="table-title my-3">
-                    <h3>Interaction</h3>
+                    <h3 class="h2 text-center thm">Interaction</h3>
                 </div>
                     <!-- edited here -->
                 <div id="table-wrapper">
                         <table class="table-fill table table-striped" id="table">
-                            <thead class="sticky-top fw-bold ">
+                            <thead class="fw-bold ">
                                 <tr class="fw-bold">
                                 <th>Id</th>
                                 <th>Comment</th>
@@ -70,7 +70,7 @@
                                     <td class="text-capitalize">${commenters[stus.index]}</td>
                                     <td>${interactions.commented_date }</td>
                                     <td>
-                                        <a href="/hexa/admin/delete/${interactions.comment_id }" class="btn btn-danger btn-sm" id="btn-ban" onclick="return confirm('Are you sure to delete?');">Delete</a>
+                                        <span class="btn btn-danger btn-sm" id="comment-del-btn" data-target="${interactions.comment_id}" >Delete </span>
                                     </td>
                                 </tr>
                                 <% id++; %>
@@ -95,5 +95,7 @@
      <script src="/js/admin-table.js"></script>
 
      <script src="/js/common.js"></script>
+
+     <script src="/js/delete_confirm.js" type="text/javascript"></script>
 </body>
 </html>

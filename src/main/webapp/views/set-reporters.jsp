@@ -63,18 +63,17 @@
 				<jsp:include page="./layout/admin-navbar.jsp" />
 				
 				<div class="table-title my-3">
-					<h3>User Information</h3>
+					<h3 class="thm h2">User Information</h3>
 				</div>
 				<!-- edited here -->
-				<div id="table-wrapper" class="my-5">
+				<div  class="my-5">
 					<table class="table-fill table table-striped" id="table">
-						<thead class="sticky-top fw-bold ">
+						<thead class="fw-bold ">
 							<tr class="fw-bold">
 								<th>No.</th>
 								<th>Username</th>
 								<th>Email Address</th>
 								<th>Role</th>
-								<!-- status ka ban tr twt role user ko pl ban loh ya ml -->
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -86,39 +85,28 @@
 									<td class="text-capitalize">${count}</td>
 									<td class="text-capitalize">${user.user_name}</td>
 									<td>${user.user_email}</td>
-									<!-- <td><select onchange="javascript:handleSelect(this)" class="form-select">
-											<option value="${user.user_id}/${user.user_role}" class="text-capitalize">
-												${user.user_role_name}</option>
-											<c:forEach var="roles" items="${roles}">
-												<c:if test="${roles.name != user.user_role_name}">
-													<option value="${user.user_id}/${roles.id}" class="text-capitalize">
-														${roles.name}
-													</option>
-												</c:if>
-											</c:forEach>
-									</select></td> -->
 									<td class="text-capitalize dropdown" id="dropdown">
 										<button
-											class="btn btn-sm btn-primary dropdown-toggle text-capitalize"
+											class="btn btn-sm btn-danger dropdown-toggle text-capitalize"
 											data-bs-toggle="dropdown" data-bs-target="#dropdown">${user.user_role_name}</button>
 										<div class="dropdown-menu p-0 m-0">
 											<c:forEach var="roles" items="${roles}">
 												<c:if test="${roles.name != user.user_role_name}">
-													<a href="/hexa/admin/role/${user.user_id}/${roles.id}"
+													<span 
 														class="dropdown-item h6 text-dark"
-														onclick="return confirm('Are you sure to change?');">${roles.name}</a>
+														id="role-ch-btn" data-target="${user.user_id},${roles.id}">${roles.name}</span>
 												</c:if>
 											</c:forEach>
 										</div>
 									</td>
 									<td><c:choose>
 											<c:when test="${user.user_status == 0}">
-												<a href="/hexa/admin/status/${user.user_id}"
-													class="btn btn-sm btn-danger text-light" onclick="return confirm('Are you sure to ban?');">Ban</a>
+												<p
+													class="btn btn-sm btn-danger px-3" data-target="${user.user_id}" id="ban">Ban</p>
 											</c:when>
 											<c:otherwise>
-												<a href="/hexa/admin/status/${user.user_id}"
-													class="btn btn-sm btn-success text-light" onclick="return confirm('Are you sure to unban?');">Unban</a>
+												<p
+													class="btn btn-sm btn-success "  data-target="${user.user_id}" id="unban">Unban</p>
 											</c:otherwise>
 										</c:choose></td>
 								</tr>
@@ -147,6 +135,10 @@
 	<script src="/js/admin-table.js"></script>
 
 	<script src="/js/common.js"></script>
+
+	<script src="/js/toggle_user_status.js" type="text/javascript"></script>
+
+	<script src="/js/role_change_confirm.js" type="text/javascript"></script>
 </body>
 
 </html>

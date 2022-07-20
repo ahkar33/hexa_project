@@ -13,4 +13,5 @@ public class AuthUser {
     private int role_id;
     private String user_role;
     private int _token;
+    private int status;
 }

@@ -52,12 +52,12 @@
 			<jsp:include page="/views/layout/admin-navbar.jsp"></jsp:include>
 
 			<div class="table-title my-3">
-				<h3>Interaction</h3>
+				<h3 class="h2 text-center thm">Interaction</h3>
 			</div>
 			<!-- edited here -->
 			<div id="table-wrapper">
 				<table class="table-fill table table-striped" id="table">
-					<thead class="sticky-top fw-bold ">
+					<thead class=" fw-bold ">
 						<tr class="fw-bold">
 							<th>No.</th>
 							<th>News Title</th>

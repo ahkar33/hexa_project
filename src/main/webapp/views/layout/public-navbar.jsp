@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<section id="navbar" class="navbar navbar-expand sticky-top">
-		<div class="container justify-content-between">
+		<div class="container justify-content-between align-items-center">
 			<div class="navbar-brand fw-bold h2">
 				<a href="/hexa/home">HEXA</a>
 			</div>
@@ -8,9 +8,9 @@
 				<li class="nav-item active fw-bold"><a href="/hexa/home">Home</a></li>
 
 				<c:if test="${sessionScope.userInfo == null}">
-					<li class="nav-item"><a href="/hexa/login" class="text-primary shadow-sm p-1 fw-bold">Sign In</a>
+					<li class="nav-item"><a href="/hexa/login" class="text-primary shadow-sm p-1 fw-bold bulb">Sign In</a>
 					</li>
-					<li class="nav-item"><a href="/hexa/register" class="text-success  shadow-sm p-1  fw-bold">Sign
+					<li class="nav-item"><a href="/hexa/register" class="text-success  shadow-sm p-1  fw-bold bulb">Sign
 							Up</a></li>
 				</c:if>
 
@@ -32,8 +32,7 @@
 					</li>
 					<li class="nav-item d-none" id="user-id" data-target="${sessionScope.userInfo.user_id}">
 						${sessionScope.userInfo.user_id}</li>
-					<li class="nav-item"><a href="/hexa/logout" class="text-danger p-1 shadow-sm  fw-bold"
-							onclick="localStorage.removeItem('curPage');">Logout</a></li>
+					<li class="nav-item"><p  class="text-danger p-1 shadow-sm  fw-bold d-inline bulb" id="logout">Logout</p></li>
 				</c:if>
 
 				<!-- edited from here -->
@@ -68,14 +67,22 @@
 					</div>
 					<div class="form-group my-1">
 						<label for="" class="form-label fw-bold text-danger">Password</label>
-						<input type="password" name="psw" class="form-control" minlength="6" />
+						<input type="password" name="psw" class="form-control" minlength="6" placeholder="New Password" />
 					</div>
 					<div class="form-group my-1 d-flex justify-content-end align-items-center gap-1">
-						<a href="" class="btn btn-warning text-light" data-bs-dismiss="modal"
-							data-bs-target="#acc-edit">Cancel</a>
-						<button type="submit" class="btn btn-success text-light">Update</button>
+						<!-- <a href="" class="btn btn-warning" data-bs-dismiss="modal"
+							data-bs-target="#acc-edit" style="color:#fff;">Cancel</a> -->
+						<button type="submit" class="btn btn-success" style="color:#fff;">Update</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	<!-- sweet -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- confirm.js -->
+<script src="/js/confirm.js" type="text/javascript"></script>
+
+<script src="/js/logout_confirm.js" type="text/javascript"></script>

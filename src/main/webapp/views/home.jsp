@@ -28,6 +28,10 @@
 		box-shadow: 0 0 15px rgba(0, 0, 0, 0.75);
 		border-radius: 5px;
 	}
+	.bulb{
+		border-radius: 20px !important;
+		padding:5px 10px !important;
+	}
 </style>
 <body>
 	<!-- navbar -->
@@ -37,7 +41,7 @@
 	<section id="categories" class="container my-5">
 		<div class="container-fluid d-flex gap-1 justify-content-center align-items-center flex-wrap">
 			<c:forEach var="category" items="${categories}">
-				<a href="/hexa/searchByCategory/${category.news_category_id}" class="btn btn-sm fw-bold p-2 shadow-sm text-danger text-capitalize">${category.news_category_name} </a>
+				<a href="/hexa/searchByCategory/${category.news_category_id}" class="btn btn-sm fw-bold p-2 shadow-sm text-danger text-capitalize bulb" >${category.news_category_name} </a>
 			</c:forEach>
 		</div>
 	</section>

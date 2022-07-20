@@ -35,6 +35,7 @@ import com.ace.hexa.model.AuthUser;
 import com.ace.hexa.model.Count;
 import com.ace.hexa.model.TempNewsBean;
 import com.ace.hexa.service.FileService;
+import com.ace.hexa.service.HashingService;
 import com.ace.hexa.service.TodayNewsService;
 
 
@@ -208,6 +209,7 @@ public class API {
      @PostMapping( value = "register" )
      public String postRegister(@RequestBody UserRequestDto userRequestDto){
         String status = "";
+
         if(userDao.insertUser(userRequestDto) > 0){
             status = "Success";
         }else{
@@ -219,6 +221,8 @@ public class API {
      //to login
      @PostMapping( value = "login" )
      public AuthUser postLogin(@RequestBody UserRequestDto userRequestDto ){
+
+
         AuthUser authUser = new AuthUser();
         boolean status = userDao.check(userRequestDto.getUser_email(), userRequestDto.getUser_password());
 
@@ -237,6 +241,7 @@ public class API {
           authUser.setUser_password(data.getUser_password());
           authUser.set_token(_token);
           authUser.setUser_role(data.getUser_role_name());
+          authUser.setStatus(data.getUser_status());
 
           authUserDao.insertAuthUser(authUser);
 
@@ -508,6 +513,10 @@ public class API {
       public String  putchangeUserInfo( @PathVariable("userId") long userId  , @RequestBody UserRequestDto dto , @RequestParam("_token") int _token , @RequestParam("email") String email ){
             String status = "";
 
+            HashingService hash = new HashingService();
+            String beforeHash = dto.getUser_password();
+            dto.setUser_password(hash.getHash( beforeHash , beforeHash.substring(0,4) ));
+
             AuthUser authUser = authUserDao.selectAuthUser(email);
 
               if(authUser.getUser_email() != null && authUser.get_token() == _token){
@@ -522,10 +531,9 @@ public class API {
               }else{
                 
                 status = "Failed";
-
+                
               }
     
-
             return status;
       }
 

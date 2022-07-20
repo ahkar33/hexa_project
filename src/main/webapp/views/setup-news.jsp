@@ -46,7 +46,7 @@
 
 									<main id="form-wrapper" class="w-75 mx-auto my-5">
 										<div class="w-75 ">
-											<h3 class="h2 card-title text-center">UPDATE NEWS</h3>
+											<h3 class="h2 card-title text-center thm">UPDATE NEWS</h3>
 											<div class="text-center text-success">
 												<h4>${post_msg}</h4>
 											</div>
@@ -69,7 +69,7 @@
 												<div class="form-group my-2">
 													<label for="" class="form-label my-1 fw-bold">News
 														Categories</label>
-													<form:select name="" id="" path="news_category" class="form-select"
+													<form:select name="" id="" path="news_category" class="form-select text-capitalize"
 														required="required">
 														<option value="${selectedCategory.news_category_id}">
 															${selectedCategory.news_category_name}</option>
