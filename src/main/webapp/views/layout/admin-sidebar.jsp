@@ -65,7 +65,7 @@
 							class="fa-solid fa-globe"></i><span class="mx-2">Public Panel</span></a></li>
 			</ul>
 			<span id="sidebar-tail" class="position-absolute bottom-0 mx-2 my-3" style="font-size:15px ;">
-				Created By Hexa_Group
+				Created By Team Hexa
 			</span>
 		</section>
 

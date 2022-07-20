@@ -6,13 +6,31 @@
 
             <li class="nav-item text-capitalize fw-bold mx-2" style="color:rgba(0,0,0,0.75);">
                 <span class="p-2" data-bs-toggle="modal" data-bs-target="#acc-edit">${sessionScope.userInfo.user_name}
-                    <span class="text-primary p-1 shadow-sm"
+                    <span class="text-primary p-1 shadow-sm bulb"
                         style="font-size:13px;">${sessionScope.userInfo.user_role_name}</span></span>
             </li>
 
-            <li class="nav-item fw-bold"><a href="/hexa/logout" class="text-danger shadow-sm p-2"
-                    onclick="localStorage.removeItem('countDone'); return confirm('Are you sure to logout?');">Logout</a>
+            <li class="nav-item fw-bold"><p class="text-danger shadow-sm p-1 d-inline bulb" id="logout">Logout</p>
             </li>
         </ul>
     </main>
 </section>
+
+<style>
+    .bulb{
+        border-radius: 20px !important;
+		padding:5px 10px !important;
+    }
+
+    .thm{
+        color:rgba(245, 197, 125,1) !important;
+    }
+</style>
+
+<!-- sweet -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- confirm.js -->
+<script src="/js/confirm.js" type="text/javascript"></script>
+
+<script src="/js/logout_confirm.js" type="text/javascript"></script>

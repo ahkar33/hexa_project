@@ -63,7 +63,7 @@ type="text/css">
 			<div class="form-group">
 				<input class="w-100 btn btn-primary" type="submit" value="Register" />
 				<div class="w-100 d-flex justify-content-between my-1">
-					<a href="/hexa/home" class="text-danger">Back</a>
+					<a href="/hexa/home" class="text-danger">Home Page</a>
 					<a href="/hexa/login">Already had?</a>
 				</div>
 			</div>
@@ -74,7 +74,7 @@ type="text/css">
 		<div
 			class="container d-flex justify-content-between align-items-center"
 			id="wrapper">
-			<div class=" fw-bold text">Created By Hexa_Group(Ace
+			<div class=" fw-bold text">Created By Team Hexa(Ace
 				Inspiration)</div>
 			<div class="">
 				<a href="" class="mx-1 h5 text"><i class="fa-brands fa-facebook"></i></a>

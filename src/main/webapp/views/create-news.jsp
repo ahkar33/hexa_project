@@ -36,14 +36,14 @@
 								<!-- sidebar -->
 								<jsp:include page="./layout/admin-sidebar.jsp" />
 
-								<!-- ဒါက နောက် ဂရပ်တွေဘာတွေ ထည့်ဖို့အတွက်  -->
+		
 								<section id="main-data" class="w-85 position-relative p-0">
 
 									<jsp:include page="./layout/admin-navbar.jsp" />
 
 									<main id="form-wrapper" class="w-100  d-flex justify-content-center mb-5 p-0">
 										<div class="w-75 ">
-											<h3 class="h2 card-title text-center my-5">CREATE NEWS</h3>
+											<h3 class="h2 card-title text-center my-5 thm">CREATE NEWS</h3>
 											<div class="text-center text-success">
 												<h4>${post_msg}</h4>
 											</div>
@@ -53,9 +53,7 @@
 											<form:form action="/hexa/admin/create_news" method="post"
 												class="card-body form" modelAttribute="newsBean"
 												enctype="multipart/form-data">
-												<!-- <div class="w-100 text-end">
-							<button class="btn btn-danger text-end" type="reset">Clear</button>
-						</div> -->
+					
 												<div class="form-group my-2">
 													<label for="" class="form-label my-1 fw-bold">News Title</label>
 													<form:input type="text" class="form-control" path="news_name"
@@ -66,7 +64,7 @@
 												<div class="form-group my-2">
 													<label for="" class="form-label my-1 fw-bold">News
 														Categories</label>
-													<form:select name="" id="" path="news_category" class="form-select"
+													<form:select name="" id="" path="news_category" class="form-select text-capitalize"
 														required="required">
 														<option value="" selected disabled>Choose your news
 															categories</option>

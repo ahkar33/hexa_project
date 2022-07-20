@@ -52,7 +52,7 @@
 				<!-- navbar -->
 				<jsp:include page="./layout/admin-navbar.jsp" />
 				<div class="table-title my-3">
-					<h3 class="h2">News Information</h3>
+					<h3 class="h2 thm .text-center">News Information</h3>
 				</div>
 				<!-- edited here -->
 				<div id="table-wrapper" class="my-5">
@@ -79,8 +79,8 @@
 									<td class="text-capitalize">${news.creator_name }</td>
 									<td>${news.created_date}</td>
 									<td>
-									<a href="/hexa/admin/update_news/${news.news_id }" class="btn btn-primary  btn-sm text-light">Update</a>
-									<a href="/hexa/admin/delete_news/${news.news_id }/${news.news_img}" class="btn btn-danger btn-sm text-light" onclick="return confirm('Are you sure to delete this news?');">Delete</a>
+									<a href="/hexa/admin/update_news/${news.news_id }" class="btn btn-primary  btn-sm" style="color:#fff;">Update</a>
+									<span class="btn btn-danger btn-sm " id="news-del-btn" data-target="${news.news_id},${news.news_img}">Delete</span>
 									</td>
 								</tr>
 							</c:forEach>
@@ -106,5 +106,7 @@
 		src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 
 	<script src="/js/admin-table.js"></script>
+
+	<script src="/js/delete_confirm.js" type="text/javascript"></script>
 </body>
 </html>

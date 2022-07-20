@@ -8,7 +8,7 @@
                 <a href="https://discord.com/channels/938994506643173387/938994507226165300"><i  class="fa-brands fa-discord"></i></a>
             </div>
             <span class="h-6 text-center text-light">Created By
-                Hexa_Group(Ace Inspiration)</span>
+                Team Hexa(Ace Inspiration)</span>
         </div>
     </div>
 </footer>

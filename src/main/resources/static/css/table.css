@@ -13,6 +13,7 @@ div.table-title {
   max-width: 300px;
   padding:5px;
   width: 100%;
+  background: rgba(0,0,0,0.75) !important;
 }
 
 .table-title h3 {
@@ -141,10 +142,10 @@ td.text-right {
 }
 
 /* edited from here!!  */
-#table-wrapper{
+/* #table-wrapper{
  height:70vh;
  overflow-y: scroll;
-}
+} */
 /* new added */
 .newstbl{
 	width: 1.3in;

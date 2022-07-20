@@ -136,5 +136,7 @@
 
 	<!-- date_period_dom.js -->
 	<script src="/js/date_period_dom.js" type="text/javascript"></script>
+
+	<script src="/js/delete_confirm.js"></script>
 </body>
 </html>

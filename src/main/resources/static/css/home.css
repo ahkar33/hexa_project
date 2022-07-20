@@ -218,6 +218,11 @@ body {
     color:rgba(255,255,255,0.75);
   }
 
+  .bulb{
+    border-radius: 10px !important;
+    padding:5px 10px !important ;
+  }
+
 
   #welcome {
     width: 98% !important;
@@ -299,4 +304,5 @@ body {
     display: none !important;
   }
 }
+
 /*# sourceMappingURL=home.css.map */

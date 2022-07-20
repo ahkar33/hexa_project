@@ -61,7 +61,8 @@ const getPeriod = ( date = "" , format ) => {
         switch( true ){
             case days == 0 : result = "Today" ; break;
             case days == 1 : result = `1 day ago`;break;
-            case days >= 30 && days < 365 :  result = `${Math.floor(days/30)} months ago`;break;
+            case days == 30 || days < 60 : result = '1 month ago';break;
+            case days > 60 && days < 365 :  result = `${Math.floor(days/30)} months ago`;break;
             case days == 365 : result = `1 year ago`;break;
             case days > 365 : result = `${Math.floor(days/365)} years ago`;break;
             default : result = `${days} days ago`;

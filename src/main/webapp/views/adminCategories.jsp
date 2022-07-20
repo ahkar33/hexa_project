@@ -53,7 +53,7 @@
 				<!-- top navbar end here -->
 
 				<div class="table-title my-3">
-					<h3 class="h2">Categories</h3>
+					<h3 class="h2 thm">Categories</h3>
 				</div>
 
 				<div class="w-100 text-end">
@@ -83,10 +83,7 @@
 									<td class="text-capitalize">${category.news_count}</td>
 									<td><c:choose>
 											<c:when test="${category.news_count == 0}">
-												<a
-													href="/hexa/admin/deleteCategory/${category.news_category_id}"
-													class="btn btn-sm btn-danger text-light"
-													onclick="return confirm('Are you sure to delete?');">Delete</a>
+												<span class="btn btn-sm btn-danger text-light" id="category-del-btn" data-target="${category.news_category_id}">Delete</a>
 											</c:when>
 											<c:otherwise>
 												-
@@ -148,5 +145,7 @@
 		src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 
 	<script src="/js/admin-table.js"></script>
+
+	<script src="/js/delete_confirm.js" type="text/javascript"></script>
 </body>
 </html>

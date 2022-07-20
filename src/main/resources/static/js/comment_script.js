@@ -188,15 +188,23 @@ function handleCommentDelete(comment_id){
    let xhr = new XMLHttpRequest();
    let newsId = route[route.length -1];
 
-   xhr.open("DELETE",`http://localhost:8080/hexa/api/news/newsId/comments/${comment_id}`,true);
+   swal({
+    text : 'Are you sure to delete your comment?',
+    icon : 'warning',
+    buttons : ['No','Yes'] 
+   }).then( yes => {
+    if(yes){
+        xhr.open("DELETE",`http://localhost:8080/hexa/api/news/${newsId}/comments/${comment_id}`,true);
 
-   xhr.onload = () => {
-    if(xhr.status == 200){
-        if(xhr.responseText == "Success"){
-            getComments(newsId);
+        xhr.onload = () => {
+            if(xhr.status == 200){
+                if(xhr.responseText == "Success"){
+                    getComments(newsId);
+                }
+            }
         }
-    }
-   }
 
-   xhr.send();
+        xhr.send();
+    }
+   });
 }
