@@ -183,8 +183,17 @@ public class AdminController {
 
 	// old selectPost Mapping
 	@GetMapping("/allPost")
-	public String setupShowComments(ModelMap model) {
-
+	public String setupShowComments(ModelMap model, HttpSession session) {
+		UserResponseDto dto = (UserResponseDto) session.getAttribute("userInfo");
+		if(dto == null) {
+			return "redirect:/hexa/home";
+		}
+		if(dto.getUser_role() == 3) {
+			return "redirect:/hexa/home";
+		}
+		if(dto.getUser_role() == 2) {
+			return "redirect:/hexa/admin/selectPost";
+		}
 		ArrayList<TempNewsBean> bean = new ArrayList<TempNewsBean>();
 		long comments_count = 0;
 		long commenters_count = 0;
@@ -202,7 +211,6 @@ public class AdminController {
 			newsBean.setComments_count(comments_count);
 			bean.add(newsBean);
 		}
-
 		model.addAttribute("news", bean);
 		return "setup-comments";
 	}
@@ -211,6 +219,10 @@ public class AdminController {
 	@GetMapping("/selectPost")
 	public String setupShowComments4Reporter(ModelMap model, HttpSession ses) {
 
+		UserResponseDto dto = (UserResponseDto) ses.getAttribute("userInfo");
+		if(dto == null) {
+			return "redirect:/hexa/home";
+		}
 		ArrayList<TempNewsBean> bean = new ArrayList<TempNewsBean>();
 		long comments_count = 0;
 		long commenters_count = 0;

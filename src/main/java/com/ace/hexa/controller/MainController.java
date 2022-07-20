@@ -91,6 +91,7 @@ public class MainController {
 
 	@PostMapping("/register")
 	public String register(@ModelAttribute("bean") UserBean user, HttpSession session, HttpServletRequest request) {
+		
 		if (!userDao.checkByEmail(user.getUser_email())) {
 			HashingService hash = new HashingService();
 			String hashPassword = hash.getHash(user.getUser_password(), user.getUser_password().substring(0, 4));
