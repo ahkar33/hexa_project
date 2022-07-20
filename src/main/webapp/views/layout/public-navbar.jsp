@@ -67,12 +67,12 @@
 					</div>
 					<div class="form-group my-1">
 						<label for="" class="form-label fw-bold text-danger">Password</label>
-						<input type="password" name="psw" class="form-control" minlength="6" />
+						<input type="password" name="psw" class="form-control" minlength="6" placeholder="New Password" />
 					</div>
 					<div class="form-group my-1 d-flex justify-content-end align-items-center gap-1">
-						<a href="" class="btn btn-warning text-light" data-bs-dismiss="modal"
-							data-bs-target="#acc-edit">Cancel</a>
-						<button type="submit" class="btn btn-success text-light">Update</button>
+						<!-- <a href="" class="btn btn-warning" data-bs-dismiss="modal"
+							data-bs-target="#acc-edit" style="color:#fff;">Cancel</a> -->
+						<button type="submit" class="btn btn-success" style="color:#fff;">Update</button>
 					</div>
 				</form>
 			</div>
