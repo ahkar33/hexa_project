@@ -123,7 +123,6 @@ public class AdminController {
 				model.addAttribute("err", "Delete Failed!");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
