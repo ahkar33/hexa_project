@@ -91,10 +91,10 @@ public class MainController {
 
 	@PostMapping("/register")
 	public String register(@ModelAttribute("bean") UserBean user, HttpSession session, HttpServletRequest request) {
-		HashingService hash = new HashingService();
-		String hashPassword = hash.getHash(user.getUser_password(), user.getUser_password().substring(0, 4));
-		user.setUser_password(hashPassword);
 		if (!userDao.checkByEmail(user.getUser_email())) {
+			HashingService hash = new HashingService();
+			String hashPassword = hash.getHash(user.getUser_password(), user.getUser_password().substring(0, 4));
+			user.setUser_password(hashPassword);
 			UserRequestDto dto = new UserRequestDto();
 			dto.setUser_name(user.getUser_name());
 			dto.setUser_email(user.getUser_email());
