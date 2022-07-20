@@ -46,17 +46,26 @@
 								class="mx-2">Categories</span></a></li>
 				</c:if>
 
-				<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/selectPost"
-						class="w-100 d-block"><i class="fa-solid fa-comments"></i><span class="mx-2">Comments</span></a>
-				</li>
+				<c:choose>
+					<c:when test="${userInfo.user_role == 1}">
+						<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/allPost"
+								class="w-100 d-block"><i class="fa-solid fa-comments"></i><span
+									class="mx-2">Comments</span></a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/admin/selectPost"
+								class="w-100 d-block"><i class="fa-solid fa-comments"></i><span
+									class="mx-2">Comments</span></a>
+						</li>
+					</c:otherwise>
+				</c:choose>
 
 				<li id="sidebar-item" class="list-item p-2 px-3 m-0"><a href="/hexa/home" class="w-100 d-block"><i
 							class="fa-solid fa-globe"></i><span class="mx-2">Public Panel</span></a></li>
 			</ul>
-
-
-
 			<span id="sidebar-tail" class="position-absolute bottom-0 mx-2 my-3" style="font-size:15px ;">
 				Created By Hexa_Group
 			</span>
 		</section>
+
