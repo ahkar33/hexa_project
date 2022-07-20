@@ -100,7 +100,7 @@
 								<div class="form-group my-2" data-editor="ClassicEditor">
 									<label for="" class="form-label my-1 fw-bold">News
 										Content</label>
-									<form:textarea name="" cols="30" rows="4" class="form-control"
+									<form:textarea name="" cols="30" rows="15" class="form-control"
 										id="editor" placeholder="e.g details about something happened"
 										path="descriptions" required="required"></form:textarea>
 								</div>
