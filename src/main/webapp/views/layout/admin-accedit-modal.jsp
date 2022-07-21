@@ -13,11 +13,11 @@
                     <!-- for id -->
                     <input type="hidden" name="id" value="${sessionScope.userInfo.user_id}"/>
                     <label for="" class="form-label fw-bold text-danger">Username</label>
-                    <input type="text" name="name" class="form-control" value="${sessionScope.userInfo.user_name}" />
+                    <input type="text" name="name" class="form-control" value="${sessionScope.userInfo.user_name}" required="required"/>
                 </div>
                 <div class="form-group my-1">
                     <label for="" class="form-label fw-bold text-danger">Email Address</label>
-                    <input type="email" name="email" class="form-control" value="${sessionScope.userInfo.user_email}" />
+                    <input type="email" name="email" class="form-control" value="${sessionScope.userInfo.user_email}" required="required"/>
                 </div>
                 <div class="form-group my-1">
                     <label for="" class="form-label fw-bold text-danger">Password</label>

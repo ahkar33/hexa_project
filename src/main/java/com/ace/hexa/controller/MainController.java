@@ -111,13 +111,18 @@ public class MainController {
 	public String updateUser(@RequestParam("id") String id, @RequestParam("name") String name,
 			@RequestParam("email") String email, @RequestParam("psw") String psw, HttpSession ses) {
 		HashingService hash = new HashingService();
-		String hashPassword = hash.getHash(psw, psw.substring(0, 4));
+		if(psw.isBlank()) {
+			UserResponseDto userDto = userDao.selectById(Long.valueOf(id));
+			psw = userDto.getUser_password();
+		} else {
+			psw = hash.getHash(psw, psw.substring(0, 4));
+		}
 		UserRequestDto dto = new UserRequestDto();
 		UserResponseDto tmp = new UserResponseDto();
 		dto.setUser_id(Long.valueOf(id));
 		dto.setUser_name(name);
 		dto.setUser_email(email);
-		dto.setUser_password(hashPassword);
+		dto.setUser_password(psw);
 		if (userDao.updateUser(dto) > 0) {
 			tmp = userDao.selectByEmail(email);
 			ses.setAttribute("userInfo", tmp);
