@@ -61,7 +61,7 @@
 						<tr class="fw-bold">
 							<th>No.</th>
 							<th>News Title</th>
-							<th>Commnter Count</th>
+							<th>Commenter Count</th>
 							<th>Comment Count</th>
 							<th>Action</th>
 						</tr>

@@ -227,7 +227,6 @@ public class UserDao {
 				list.add(res);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -282,7 +281,7 @@ public class UserDao {
 	}
 
 	public long getUsersCount() {
-		String sql = "select count(user_id) as users from user_account";
+		String sql = "select count(user_id) as users from user_account where user_role = 3";
 		long res = 0;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
