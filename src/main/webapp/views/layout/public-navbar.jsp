@@ -80,7 +80,9 @@
 	</div>
 
 	<!-- sweet -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+ <script src="/js/sweet-alert.js"></script> 
+
 
 <!-- confirm.js -->
 <script src="/js/confirm.js" type="text/javascript"></script>
