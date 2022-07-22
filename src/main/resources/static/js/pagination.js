@@ -1,5 +1,5 @@
 var newsList = [];
-var max = 10;//mean 5 news per one page
+var max = 9;//mean 5 news per one page
 
 $(document).ready(() => {
 

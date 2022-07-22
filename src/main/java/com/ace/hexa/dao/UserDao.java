@@ -227,7 +227,6 @@ public class UserDao {
 				list.add(res);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
