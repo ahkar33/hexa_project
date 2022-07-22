@@ -28,3 +28,8 @@
 #content p{
     color:rgba(0,0,0,0.75);
 }
+
+.bulb{
+    border-radius: 10px !important;
+    padding:5px 10px !important ;
+}

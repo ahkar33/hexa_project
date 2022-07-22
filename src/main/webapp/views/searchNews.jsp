@@ -50,11 +50,10 @@
 
 	<!-- categories -->
 	<section id="categories" class="container mt-5">
-		<div
-			class="container-fluid d-flex gap-1 justify-content-center align-items-center flex-wrap">
+		<div class="container-fluid d-flex gap-1 justify-content-center align-items-center flex-wrap">
 			<c:forEach var="category" items="${categories}">
 				<a href="/hexa/searchByCategory/${category.news_category_id}"
-					class="btn btn-sm fw-bold p-2 shadow-sm text-danger">${category.news_category_name}
+					class="btn btn-sm fw-bold p-2 shadow-sm text-danger text-capitalize bulb">${category.news_category_name}
 				</a>
 			</c:forEach>
 		</div>
